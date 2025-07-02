@@ -10,5 +10,6 @@ I use this site to show off what I am currently working on, and some of my inter
 5. run `npm run build && npm run start`
 
 *or just use vercel*
+* website is hosted using vercel*
 
-Presence system requires https://github.com/aidendotgg/aiden.gg_presence
+-- Visit : https://raj-gg.vercel.app
