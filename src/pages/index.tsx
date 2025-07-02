@@ -3,7 +3,6 @@ import { useInView } from 'react-intersection-observer';
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/sections/index/Hero";
 import About from "@/components/sections/index/About";
-import Experience from "@/components/sections/index/Experience";
 import Projects from "@/components/sections/index/Projects";
 import Footer from "@/components/sections/index/Footer";
 import { GridPattern } from "@/components/GridPattern";
@@ -28,7 +27,6 @@ export default function Home() {
         />
         <Hero inView={inView} descRef={ref} />
         <About />
-        <Experience />
         <Projects />
         <Footer />
       </main>
