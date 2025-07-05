@@ -7,29 +7,19 @@ import Projects from "@/components/sections/index/Projects";
 import Footer from "@/components/sections/index/Footer";
 import { GridPattern } from "@/components/GridPattern";
 
-export default function Home() {
-
-  const [ref, inView] = useInView({
-    threshold: 0.1,
-    triggerOnce: true,
-  });
+export default function IndexPage() {
+  const { ref: descRef, inView } = useInView({ triggerOnce: true, threshold: 0.1 });
 
   return (
-    <>
+    <div className="relative min-h-screen">
       <Navbar />
-      <main className="relative min-h-screen overflow-x-hidden px-6">
-        <GridPattern
-          width={50}
-          height={50}
-          x={-1}
-          y={-1}
-          className='z-[-5]'
-        />
-        <Hero inView={inView} descRef={ref} />
+      <main>
+        <Hero inView={inView} descRef={descRef} />
         <About />
         <Projects />
-        <Footer />
       </main>
-    </>
+      <Footer />
+      <GridPattern width={50} height={50} x={-1} y={-1} className="z-[-5]" />
+    </div>
   );
 }
