@@ -39,7 +39,7 @@ export default function About() {
         <ul className="grid grid-cols-2 gap-4 mt-4">
           <AboutCard
             title="Machine Learning Journey"
-            description="I'm a machine learning engineer passionate about building intelligent systems. My journey began with Python and evolved into deep learning, model optimization, and deploying ML APIs. I love solving real-world problems using data-driven approaches."
+            description="I'm a machine learning engineer passionate about machine learning and artificial intelligence. My journey began with Python and evolved into deep learning, model optimization, and deploying ML APIs. I love solving real-world problems using data-driven approaches."
             direction="top"
             span={2}
             delay={0.1}
