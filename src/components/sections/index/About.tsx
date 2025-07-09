@@ -47,7 +47,7 @@ export default function About() {
           />
           <AboutCard
             title="Core ML Stack"
-            description="Technologies I use frequently in ML model development and data analysis."
+            description="Technologies I use for ML model development and data analysis."
             tech={mlTech}
             direction="left"
             span={1}
