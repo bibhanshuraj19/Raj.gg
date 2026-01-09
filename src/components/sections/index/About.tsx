@@ -1,4 +1,5 @@
 import AboutCard from "@/components/AboutCard";
+import ExperienceCard, { Experience } from "@/components/ExperienceCard";
 import type { Tech } from "../../../../typings";
 import { motion } from "framer-motion";
 
@@ -42,6 +43,20 @@ export default function About() {
     { title: "MongoDB", icon: <img alt="" draggable={false} className="h-6" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" />, link: "https://www.mongodb.com/" },
     { title: "Redis", icon: <img alt="" draggable={false} className="h-6" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/redis/redis-original.svg" />, link: "https://redis.io/" },
     { title: "Kubernetes", icon: <img alt="" draggable={false} className="h-6" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/kubernetes/kubernetes-plain.svg" />, link: "https://kubernetes.io/" }
+  ]
+
+  const experiences: Experience[] = [
+    {
+      company: "SmartLink Holdings",
+      location: "Goa, Verna",
+      role: "Intern",
+      startDate: "May 2024",
+      endDate: "Jul 2024",
+      achievements: [
+        "Engineered a warehouse inventory system using Python and PostgreSQL, replacing manual Excel sheets and reducing parts logging time by an estimated 40%",
+        "Tested and validated a computer vision-based PCB error detection tool using live camera feeds, improving accuracy and reliability of automated defect identification"
+      ]
+    }
   ]
 
   return (
@@ -93,6 +108,22 @@ export default function About() {
             gradient="bg-gradient-to-tr"
           />
         </ul>
+
+        {/* Work Experience Section */}
+        <motion.h2
+          className="text-center font-bold text-4xl mt-16 mb-8"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+          viewport={{ amount: 0.3, once: true }}
+        >
+          Work Experience
+        </motion.h2>
+        <div className="max-w-3xl mx-auto">
+          {experiences.map((experience, index) => (
+            <ExperienceCard key={index} experience={experience} index={index} />
+          ))}
+        </div>
       </section>
     </>
   );
