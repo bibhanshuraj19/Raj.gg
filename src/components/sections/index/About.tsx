@@ -1,9 +1,14 @@
 import AboutCard from "@/components/AboutCard";
 import ExperienceCard, { Experience } from "@/components/ExperienceCard";
+import EducationCard, { Education } from "@/components/EducationCard";
 import type { Tech } from "../../../../typings";
 import { motion } from "framer-motion";
+import { useState } from "react";
+
+type TabType = "experience" | "education" | "extracurricular";
 
 export default function About() {
+  const [activeTab, setActiveTab] = useState<TabType>("experience");
   let mlTech: Tech[] = [
     { title: "Python", icon: <img alt="" draggable={false} className="h-6" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" />, link: "https://www.python.org/" },
     { title: "TensorFlow", icon: <img alt="" draggable={false} className="h-6" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg" />, link: "https://www.tensorflow.org/" },
@@ -59,6 +64,26 @@ export default function About() {
     }
   ]
 
+  const education: Education[] = [
+    {
+      institution: "BITS Pilani",
+      location: "Pilani, India",
+      degree: "Bachelor of Computer Science and Information Technology",
+      major: "Computer Science and Information Technology",
+      graduationDate: "Aug 2022 - Present",
+      courses: [
+        "Artificial Intelligence",
+        "Machine Learning",
+        "Operating Systems",
+        "Computer Architecture",
+        "Foundation of Data Science",
+        "Data Structures and Algorithms",
+        "Database Systems",
+        "Object-Oriented Programming"
+      ]
+    }
+  ]
+
   return (
     <>
       <section id='about' className="max-w-4xl w-full flex flex-col mx-auto">
@@ -109,20 +134,85 @@ export default function About() {
           />
         </ul>
 
-        {/* Work Experience Section */}
-        <motion.h2
-          className="text-center font-bold text-4xl mt-16 mb-8"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.1 }}
-          viewport={{ amount: 0.3, once: true }}
-        >
-          Work Experience
-        </motion.h2>
-        <div className="max-w-3xl mx-auto">
-          {experiences.map((experience, index) => (
-            <ExperienceCard key={index} experience={experience} index={index} />
-          ))}
+        {/* Tab Section */}
+        <div id="experience" className="mt-16">
+          {/* Tab Buttons */}
+          <div className="flex justify-center gap-4 mb-8 flex-wrap">
+            <button
+              onClick={() => setActiveTab("experience")}
+              className={`px-6 py-3 rounded-lg font-semibold text-lg transition-all duration-300 ${
+                activeTab === "experience"
+                  ? "bg-gradient-to-r from-primary to-secondary text-foreground shadow-lg scale-105"
+                  : "bg-background/50 text-foreground/60 hover:text-foreground/80 hover:bg-background/70"
+              }`}
+            >
+              Experience
+            </button>
+            <button
+              onClick={() => setActiveTab("education")}
+              className={`px-6 py-3 rounded-lg font-semibold text-lg transition-all duration-300 ${
+                activeTab === "education"
+                  ? "bg-gradient-to-r from-primary to-secondary text-foreground shadow-lg scale-105"
+                  : "bg-background/50 text-foreground/60 hover:text-foreground/80 hover:bg-background/70"
+              }`}
+            >
+              Education
+            </button>
+            <button
+              onClick={() => setActiveTab("extracurricular")}
+              className={`px-6 py-3 rounded-lg font-semibold text-lg transition-all duration-300 ${
+                activeTab === "extracurricular"
+                  ? "bg-gradient-to-r from-primary to-secondary text-foreground shadow-lg scale-105"
+                  : "bg-background/50 text-foreground/60 hover:text-foreground/80 hover:bg-background/70"
+              }`}
+            >
+              Extracurricular
+            </button>
+          </div>
+
+          {/* Tab Content */}
+          <div className="max-w-3xl mx-auto">
+            {activeTab === "experience" && (
+              <motion.div
+                key="experience"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.3 }}
+              >
+                {experiences.map((experience, index) => (
+                  <ExperienceCard key={index} experience={experience} index={index} />
+                ))}
+              </motion.div>
+            )}
+
+            {activeTab === "education" && (
+              <motion.div
+                key="education"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.3 }}
+              >
+                {education.map((edu, index) => (
+                  <EducationCard key={index} education={edu} index={index} />
+                ))}
+              </motion.div>
+            )}
+
+            {activeTab === "extracurricular" && (
+              <motion.div
+                key="extracurricular"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.3 }}
+                className="text-center py-12"
+              >
+                <p className="text-xl text-foreground/60">Coming soon...</p>
+              </motion.div>
+            )}
+          </div>
         </div>
       </section>
     </>
