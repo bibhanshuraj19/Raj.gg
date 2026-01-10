@@ -35,7 +35,6 @@ export default function About() {
     { title: "Git", icon: <img alt="" draggable={false} className="h-6" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" />, link: "https://git-scm.com/" },
     { title: "GitHub", icon: <img alt="" draggable={false} className="h-6" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" />, link: "https://github.com/" },
     { title: "FastAPI", icon: <img alt="" draggable={false} className="h-6" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/fastapi/fastapi-original.svg" />, link: "https://fastapi.tiangolo.com/" },
-    { title: "MLflow", icon: <img alt="" draggable={false} className="h-6" src="https://www.mlflow.org/docs/latest/_static/MLflow-logo-final-black.png" />, link: "https://mlflow.org/" },
     { title: "Cursor", icon: <img alt="" draggable={false} className="h-6" src="https://www.cursor.com/brand/icon.svg" />, link: "https://www.cursor.com/" },
     { title: "Claude", icon: <img alt="" draggable={false} className="h-6" src="https://www.anthropic.com/_next/static/media/claude-icon.2f97c85e.svg" />, link: "https://www.anthropic.com/claude" },
     { title: "VS Code", icon: <img alt="" draggable={false} className="h-6" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" />, link: "https://code.visualstudio.com/" },
