@@ -4,7 +4,7 @@ import Link from "next/link";
 export default function Hero({ inView, descRef }: { inView: boolean, descRef: any }) {
   return (
     <>
-      <section className="max-w-4xl w-full flex flex-col mx-auto pt-44" ref={descRef}>
+      <section className="max-w-4xl w-full flex flex-col mx-auto pt-24" ref={descRef}>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
