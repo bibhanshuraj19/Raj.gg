@@ -19,29 +19,19 @@ export default function ProjectCard({ project, delay }: { project: Project; dela
       viewport={{ amount: 0.3, once: true }}
     >
       <Link href={project.link}>
-        <div className={`${project.gradient} from-primary to-secondary p-6 rounded-lg border border-accent shadow-xl shadow-background hover:scale-105 transition-transform duration-300 cursor-pointer h-full flex flex-col group`}>
-          {/* Header */}
-          <div className="flex items-start justify-between gap-2 mb-3">
-            <h3 className="text-xl md:text-2xl font-bold text-foreground group-hover:text-accent transition-colors">
-              {project.title}
-            </h3>
-            <ExternalLink className="w-5 h-5 text-foreground/60 group-hover:text-accent transition-colors flex-shrink-0" />
-          </div>
+        <div className={`${project.gradient} from-primary to-secondary p-6 rounded-lg border border-accent shadow-xl shadow-background hover:scale-105 transition-transform duration-300 cursor-pointer h-full flex flex-col justify-center items-center text-center group min-h-[200px]`}>
+          {/* Project Title */}
+          <h3 className="text-xl md:text-2xl font-bold text-foreground group-hover:text-accent transition-colors mb-3">
+            {project.title}
+          </h3>
 
           {/* Technologies */}
-          <p className="text-sm font-semibold text-foreground/80 mb-3">
+          <p className="text-sm font-semibold text-foreground/80">
             {project.technologies}
           </p>
 
-          {/* Description */}
-          <p className="text-base text-foreground/90 leading-relaxed flex-1">
-            {project.description}
-          </p>
-
-          {/* View More Link */}
-          <div className="mt-4 text-base text-accent font-semibold group-hover:underline">
-            View Details →
-          </div>
+          {/* Subtle indicator */}
+          <ExternalLink className="w-5 h-5 text-foreground/40 group-hover:text-accent transition-colors mt-4" />
         </div>
       </Link>
     </motion.div>

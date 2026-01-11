@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
+import { Download } from "lucide-react";
 
 export default function Navbar() {
 
@@ -59,6 +60,10 @@ export default function Navbar() {
                             </button>
                         </div>
                         <div className="min-[330px]:flex hidden flex-row gap-2 items-center">
+                            <Link draggable={false} href="/Resume.pdf" download="Raj_Resume.pdf" className="p-2 duration-300 text-base font-medium hover:bg-secondary rounded-md flex items-center gap-1.5">
+                                <Download className="w-4 h-4" />
+                                Resume
+                            </Link>
                             <Link draggable={false} href="https://github.com/bibhanshuraj19/raj.gg" target="_blank" className="p-2 duration-300 text-base font-medium hover:bg-secondary rounded-md">
                                 Source
                             </Link>
