@@ -26,10 +26,10 @@ export default function LearningAgent() {
           transition={{ duration: 0.5 }}
           className="mb-8"
         >
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">
+          <h1 className="text-3xl md:text-4xl font-bold mb-3">
             LLM Powered Student Learning Agent
           </h1>
-          <p className="text-xl text-foreground/80 mb-4">Python | LangChain | RAG</p>
+          <p className="text-lg text-foreground/80">Python | LangChain | RAG</p>
         </motion.div>
 
         {/* Project Content */}
@@ -39,16 +39,16 @@ export default function LearningAgent() {
           transition={{ duration: 0.5, delay: 0.1 }}
           className="bg-gradient-to-br from-primary to-secondary p-8 rounded-lg border border-accent shadow-xl"
         >
-          <h2 className="text-2xl font-bold mb-4">Project Overview</h2>
-          <p className="text-foreground/90 leading-relaxed mb-6">
+          <h2 className="text-xl font-bold mb-3">Project Overview</h2>
+          <p className="text-base text-foreground/90 leading-relaxed mb-6">
             Developed an AI-driven chatbot leveraging Python, LangChain, and RAG architecture to provide students with precise, context-aware answers sourced directly from research papers, significantly improving information retrieval and understanding.
           </p>
 
-          <h2 className="text-2xl font-bold mb-4 mt-8">Key Achievements</h2>
+          <h2 className="text-xl font-bold mb-3 mt-8">Key Achievements</h2>
           <ul className="space-y-4">
             <li className="flex items-start gap-3">
-              <span className="text-accent font-bold text-xl mt-1">•</span>
-              <span className="text-foreground/90">
+              <span className="text-accent font-bold text-lg mt-1">•</span>
+              <span className="text-base text-foreground/90">
                 <strong>Context-Aware AI System:</strong> Engineered an AI-driven chatbot with Python, LangChain and RAG architecture to provide users with precise, context-aware answers sourced directly from research papers, improving information retrieval and understanding.
               </span>
             </li>
@@ -66,14 +66,14 @@ export default function LearningAgent() {
             </li>
           </ul>
 
-          <h2 className="text-2xl font-bold mb-4 mt-8">Technologies Used</h2>
+          <h2 className="text-xl font-bold mb-3 mt-8">Technologies Used</h2>
           <div className="flex flex-wrap gap-3">
-            <span className="px-4 py-2 bg-background rounded-lg border border-accent">Python</span>
-            <span className="px-4 py-2 bg-background rounded-lg border border-accent">LangChain</span>
-            <span className="px-4 py-2 bg-background rounded-lg border border-accent">RAG</span>
-            <span className="px-4 py-2 bg-background rounded-lg border border-accent">NVIDIA NeMo</span>
-            <span className="px-4 py-2 bg-background rounded-lg border border-accent">RAGAS</span>
-            <span className="px-4 py-2 bg-background rounded-lg border border-accent">LLM</span>
+            <span className="px-3 py-2 text-sm bg-background rounded-lg border border-accent">Python</span>
+            <span className="px-3 py-2 text-sm bg-background rounded-lg border border-accent">LangChain</span>
+            <span className="px-3 py-2 text-sm bg-background rounded-lg border border-accent">RAG</span>
+            <span className="px-3 py-2 text-sm bg-background rounded-lg border border-accent">NVIDIA NeMo</span>
+            <span className="px-3 py-2 text-sm bg-background rounded-lg border border-accent">RAGAS</span>
+            <span className="px-3 py-2 text-sm bg-background rounded-lg border border-accent">LLM</span>
           </div>
         </motion.div>
       </main>

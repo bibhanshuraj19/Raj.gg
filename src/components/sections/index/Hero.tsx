@@ -15,10 +15,10 @@ export default function Hero({ inView, descRef }: { inView: boolean, descRef: an
           viewport={{ amount: 0.1, once: true }}
           ref={descRef}
         >
-          <h1 className="font-bold lg:text-7xl md:text-6xl sm:text-5xl text-4xl">
+          <h1 className="font-bold text-4xl md:text-5xl lg:text-6xl">
             Hey, I&apos;m Raj<span className="sm:hidden inline-block animate-wave ml-2">👋</span><span className="sm:inline-block hidden animate-wave ml-2">👋</span>
           </h1>
-          <p className="font-semibold lg:text-3xl md:text-2xl sm:text-xl text-lg">
+          <p className="font-semibold text-lg md:text-xl lg:text-2xl">
             {inView &&
               <Typewriter
                 options={{

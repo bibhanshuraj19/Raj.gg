@@ -30,11 +30,11 @@ export default function ExperienceCard({ experience, index }: { experience: Expe
         {/* Header */}
         <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-3">
           <div>
-            <h3 className="text-2xl font-bold text-foreground flex items-center gap-2">
+            <h3 className="text-xl md:text-2xl font-bold text-foreground flex items-center gap-2">
               <Briefcase className="w-5 h-5" />
               {experience.role}
             </h3>
-            <p className="text-lg font-semibold text-foreground/90 mt-1">
+            <p className="text-base md:text-lg font-semibold text-foreground/90 mt-1">
               {experience.company}
             </p>
           </div>
@@ -57,7 +57,7 @@ export default function ExperienceCard({ experience, index }: { experience: Expe
         {/* Achievements */}
         <ul className="space-y-2">
           {experience.achievements.map((achievement, idx) => (
-            <li key={idx} className="flex items-start gap-2 text-foreground/90">
+            <li key={idx} className="flex items-start gap-2 text-base text-foreground/90">
               <span className="text-accent font-bold mt-1">•</span>
               <span className="flex-1">{achievement}</span>
             </li>

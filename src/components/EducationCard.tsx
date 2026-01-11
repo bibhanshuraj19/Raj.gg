@@ -30,7 +30,7 @@ export default function EducationCard({ education, index }: { education: Educati
         {/* Header */}
         <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-3">
           <div>
-            <h3 className="text-2xl font-bold text-foreground flex items-center gap-2">
+            <h3 className="text-xl md:text-2xl font-bold text-foreground flex items-center gap-2">
               <GraduationCap className="w-5 h-5" />
               {education.degree}
             </h3>
@@ -54,9 +54,9 @@ export default function EducationCard({ education, index }: { education: Educati
           <div className="mt-3">
             <div className="flex items-center gap-2 mb-2">
               <BookOpen className="w-4 h-4 text-foreground/80" />
-              <span className="font-semibold text-foreground/90">Relevant Courses:</span>
+              <span className="font-semibold text-sm text-foreground/90">Relevant Courses:</span>
             </div>
-            <p className="text-foreground/80 leading-relaxed">
+            <p className="text-sm text-foreground/80 leading-relaxed">
               {education.courses.join(", ")}
             </p>
           </div>

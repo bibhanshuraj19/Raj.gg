@@ -26,10 +26,10 @@ export default function RAGChatbot() {
           transition={{ duration: 0.5 }}
           className="mb-8"
         >
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">
+          <h1 className="text-3xl md:text-4xl font-bold mb-3">
             Multi-Document RAG Chatbot with Claim Validation
           </h1>
-          <p className="text-xl text-foreground/80 mb-4">LangChain | GPT-3.5 | Python</p>
+          <p className="text-lg text-foreground/80">LangChain | GPT-3.5 | Python</p>
         </motion.div>
 
         {/* Project Content */}
@@ -39,16 +39,16 @@ export default function RAGChatbot() {
           transition={{ duration: 0.5, delay: 0.1 }}
           className="bg-gradient-to-br from-primary to-secondary p-8 rounded-lg border border-accent shadow-xl"
         >
-          <h2 className="text-2xl font-bold mb-4">Project Overview</h2>
-          <p className="text-foreground/90 leading-relaxed mb-6">
+          <h2 className="text-xl font-bold mb-3">Project Overview</h2>
+          <p className="text-base text-foreground/90 leading-relaxed mb-6">
             Built a sophisticated retrieval-augmented generation (RAG) chatbot using LangChain and GPT-3.5 that enables contextual question-answering over 500+ academic documents with a claim validation engine for enhanced accuracy and reliability.
           </p>
 
-          <h2 className="text-2xl font-bold mb-4 mt-8">Key Achievements</h2>
+          <h2 className="text-xl font-bold mb-3 mt-8">Key Achievements</h2>
           <ul className="space-y-4">
             <li className="flex items-start gap-3">
-              <span className="text-accent font-bold text-xl mt-1">•</span>
-              <span className="text-foreground/90">
+              <span className="text-accent font-bold text-lg mt-1">•</span>
+              <span className="text-base text-foreground/90">
                 <strong>95% Answer Accuracy:</strong> Engineered a retrieval-augmented generation (RAG) chatbot using LangChain and GPT-3.5, enabling contextual Q&A over 500+ academic documents with 95% accuracy in source-grounded answers.
               </span>
             </li>
@@ -66,13 +66,13 @@ export default function RAGChatbot() {
             </li>
           </ul>
 
-          <h2 className="text-2xl font-bold mb-4 mt-8">Technologies Used</h2>
+          <h2 className="text-xl font-bold mb-3 mt-8">Technologies Used</h2>
           <div className="flex flex-wrap gap-3">
-            <span className="px-4 py-2 bg-background rounded-lg border border-accent">LangChain</span>
-            <span className="px-4 py-2 bg-background rounded-lg border border-accent">GPT-3.5</span>
-            <span className="px-4 py-2 bg-background rounded-lg border border-accent">Python</span>
-            <span className="px-4 py-2 bg-background rounded-lg border border-accent">RAG</span>
-            <span className="px-4 py-2 bg-background rounded-lg border border-accent">Vector DB</span>
+            <span className="px-3 py-2 text-sm bg-background rounded-lg border border-accent">LangChain</span>
+            <span className="px-3 py-2 text-sm bg-background rounded-lg border border-accent">GPT-3.5</span>
+            <span className="px-3 py-2 text-sm bg-background rounded-lg border border-accent">Python</span>
+            <span className="px-3 py-2 text-sm bg-background rounded-lg border border-accent">RAG</span>
+            <span className="px-3 py-2 text-sm bg-background rounded-lg border border-accent">Vector DB</span>
           </div>
         </motion.div>
       </main>

@@ -30,7 +30,7 @@ export default function Projects() {
     <>
       <section id='projects' className="max-w-4xl w-full flex flex-col mx-auto mb-16">
         <motion.h1
-          className="text-center font-bold text-5xl mt-16 mb-8"
+          className="text-center font-bold text-3xl md:text-4xl mt-16 mb-8"
           initial={{ transform: 'translateY(-30px)', opacity: 0 }}
           whileInView={{ transform: 'translateY(0px)', opacity: 100 }}
           transition={{ duration: 0.5, delay: 0.1, ease: [0.39, 0.21, 0.12, 0.96] }}

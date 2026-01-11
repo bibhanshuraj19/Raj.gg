@@ -15,10 +15,10 @@ export default function AboutCard({ title, description, tech, direction, span, g
                 viewport={{ amount: 0.1, once: true }}
             >
                 <div className={`${gradient} from-primary to-secondary p-4 flex flex-col rounded-lg border-1 border-accent shadow-2xl shadow-background`}>
-                    <h2 className="text-center font-semibold text-4xl">
+                    <h2 className="text-center font-semibold text-xl md:text-2xl">
                         {title}
                     </h2>
-                    <p className="text-center text-xl mb-2">
+                    <p className="text-center text-base mb-2">
                         {description}
                     </p>
                     {tech &&

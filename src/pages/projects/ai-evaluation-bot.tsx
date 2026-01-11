@@ -26,10 +26,10 @@ export default function AIEvaluationBot() {
           transition={{ duration: 0.5 }}
           className="mb-8"
         >
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">
+          <h1 className="text-3xl md:text-4xl font-bold mb-3">
             AI-Powered Evaluation Bot
           </h1>
-          <p className="text-xl text-foreground/80 mb-4">Python | OpenAI API</p>
+          <p className="text-lg text-foreground/80">Python | OpenAI API</p>
         </motion.div>
 
         {/* Project Content */}
@@ -39,16 +39,16 @@ export default function AIEvaluationBot() {
           transition={{ duration: 0.5, delay: 0.1 }}
           className="bg-gradient-to-br from-primary to-secondary p-8 rounded-lg border border-accent shadow-xl"
         >
-          <h2 className="text-2xl font-bold mb-4">Project Overview</h2>
-          <p className="text-foreground/90 leading-relaxed mb-6">
+          <h2 className="text-xl font-bold mb-3">Project Overview</h2>
+          <p className="text-base text-foreground/90 leading-relaxed mb-6">
             Developed an intelligent evaluation system that leverages the OpenAI API to automatically grade student code submissions, assess logic, syntax, and efficiency while providing personalized feedback.
           </p>
 
-          <h2 className="text-2xl font-bold mb-4 mt-8">Key Achievements</h2>
+          <h2 className="text-xl font-bold mb-3 mt-8">Key Achievements</h2>
           <ul className="space-y-4">
             <li className="flex items-start gap-3">
-              <span className="text-accent font-bold text-xl mt-1">•</span>
-              <span className="text-foreground/90">
+              <span className="text-accent font-bold text-lg mt-1">•</span>
+              <span className="text-base text-foreground/90">
                 <strong>95% Grading Accuracy:</strong> Attained exceptional accuracy across 200+ student submissions by engineering an AI evaluation bot using Python and the OpenAI API to assess code logic, syntax, and efficiency.
               </span>
             </li>
@@ -66,12 +66,12 @@ export default function AIEvaluationBot() {
             </li>
           </ul>
 
-          <h2 className="text-2xl font-bold mb-4 mt-8">Technologies Used</h2>
+          <h2 className="text-xl font-bold mb-3 mt-8">Technologies Used</h2>
           <div className="flex flex-wrap gap-3">
-            <span className="px-4 py-2 bg-background rounded-lg border border-accent">Python</span>
-            <span className="px-4 py-2 bg-background rounded-lg border border-accent">OpenAI API</span>
-            <span className="px-4 py-2 bg-background rounded-lg border border-accent">GPT</span>
-            <span className="px-4 py-2 bg-background rounded-lg border border-accent">Automation</span>
+            <span className="px-3 py-2 text-sm bg-background rounded-lg border border-accent">Python</span>
+            <span className="px-3 py-2 text-sm bg-background rounded-lg border border-accent">OpenAI API</span>
+            <span className="px-3 py-2 text-sm bg-background rounded-lg border border-accent">GPT</span>
+            <span className="px-3 py-2 text-sm bg-background rounded-lg border border-accent">Automation</span>
           </div>
         </motion.div>
       </main>

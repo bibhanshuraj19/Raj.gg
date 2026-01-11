@@ -48,18 +48,18 @@ export default function Navbar() {
                     <div className="flex flex-row items-center justify-between w-full">
                         <div className="flex flex-row gap-2 items-center">
                             <img alt="" draggable={false} className="h-10 w-10" src="/me.png" />
-                            <button onClick={handleClickScroll} className="p-2 duration-300 text-lg font-medium hover:bg-secondary rounded-md">
+                            <button onClick={handleClickScroll} className="p-2 duration-300 text-base font-medium hover:bg-secondary rounded-md">
                                 About
                             </button>
-                            <button onClick={handleClickScroll2} className="p-2 duration-300 text-lg font-medium hover:bg-secondary rounded-md">
+                            <button onClick={handleClickScroll2} className="p-2 duration-300 text-base font-medium hover:bg-secondary rounded-md">
                                 Experience
                             </button>
-                            <button onClick={handleClickScroll3} className="p-2 duration-300 text-lg font-medium hover:bg-secondary rounded-md">
+                            <button onClick={handleClickScroll3} className="p-2 duration-300 text-base font-medium hover:bg-secondary rounded-md">
                                 Projects
                             </button>
                         </div>
                         <div className="min-[330px]:flex hidden flex-row gap-2 items-center">
-                            <Link draggable={false} href="https://github.com/bibhanshuraj19/raj.gg" target="_blank" className="p-2 duration-300 text-lg font-medium hover:bg-secondary rounded-md">
+                            <Link draggable={false} href="https://github.com/bibhanshuraj19/raj.gg" target="_blank" className="p-2 duration-300 text-base font-medium hover:bg-secondary rounded-md">
                                 Source
                             </Link>
                         </div>
