@@ -3,10 +3,12 @@ import Divider from "@/components/Divider";
 export default function Footer() {
     return (
         <>
-            <footer className="max-w-4xl w-full flex flex-col mx-auto pt-4 pb-2">
+            <footer className="max-w-4xl w-full flex flex-col mx-auto pt-16 pb-8">
                 <Divider />
-                <p className="text-center font-semibold text-base pt-2">
-                    Made with NextJS, TailwindCSS.
+                
+                {/* Copyright */}
+                <p className="text-center text-sm text-foreground/60 pt-6">
+                    Copyright © 2022-2025 Bibhanshu Raj. All Rights Reserved.
                 </p>
             </footer>
         </>
