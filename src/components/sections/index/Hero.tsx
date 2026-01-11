@@ -31,7 +31,7 @@ export default function Hero({ inView, descRef }: { inView: boolean, descRef: an
                 </span>
               </h2>
               <p className="text-lg md:text-xl text-foreground/90 mb-6">
-                Machine Learning Engineer | Football Enthusiast
+                Machine Learning Engineer
               </p>
 
               <p className="text-base text-foreground/80 mb-6 max-w-2xl">
