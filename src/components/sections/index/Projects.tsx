@@ -77,7 +77,7 @@ export default function Projects() {
       ],
       achievements: [
         "Developed an AI-driven chatbot with RAG architecture for precise answers from research papers.",
-        "Implemented NVIDIA NeMo Guardrail for content safety and quality control.",
+        "Implemented NVIDIA NeMo Guardrails for content safety and quality control.",
         "Created custom RAGAS metrics for evaluating response quality and relevance."
       ],
       logo: "https://cdn.simpleicons.org/nvidia/76B900"
