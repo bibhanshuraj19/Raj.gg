@@ -29,10 +29,10 @@ export default function Projects() {
       shortTitle: "AI Evaluation Bot",
       role: "Machine Learning Developer",
       date: "2024",
-      location: "Personal Project",
+      location: "Academic Project",
       technologies: [
         { name: "Python", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" },
-        { name: "OpenAI", icon: "https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg" },
+        { name: "OpenAI", icon: "https://cdn.simpleicons.org/openai/white" },
         { name: "FastAPI", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/fastapi/fastapi-original.svg" }
       ],
       achievements: [
@@ -40,7 +40,7 @@ export default function Projects() {
         "Automated over 85% of evaluation steps, reducing manual grading time by 60%.",
         "Implemented intelligent rubric matching and feedback generation using OpenAI API."
       ],
-      logo: "https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg"
+      logo: "https://cdn.simpleicons.org/openai/white"
     },
     {
       id: "rag-chatbot",
@@ -51,40 +51,41 @@ export default function Projects() {
       location: "Research Project",
       technologies: [
         { name: "Python", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" },
-        { name: "LangChain", icon: "https://python.langchain.com/img/brand/wordmark.png" },
-        { name: "OpenAI", icon: "https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg" },
-        { name: "Pinecone", icon: "https://avatars.githubusercontent.com/u/54333248?s=200&v=4" }
+        { name: "LangChain", icon: "https://cdn.simpleicons.org/langchain/white" },
+        { name: "OpenAI", icon: "https://cdn.simpleicons.org/openai/white" },
+        { name: "PostgreSQL", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" }
       ],
       achievements: [
         "Built a RAG chatbot enabling contextual Q&A over 500+ academic documents with 95% accuracy.",
         "Improved user satisfaction by 40% through intelligent claim validation.",
         "Implemented vector similarity search for efficient document retrieval."
       ],
-      logo: "https://python.langchain.com/img/brand/wordmark.png"
+      logo: "https://cdn.simpleicons.org/langchain/white"
     },
     {
       id: "learning-agent",
       title: "LLM Powered Learning Agent",
       shortTitle: "Learning Agent",
       role: "ML Engineer",
-      date: "2024",
+      date: "2025",
       location: "Academic Project",
       technologies: [
         { name: "Python", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" },
-        { name: "LangChain", icon: "https://python.langchain.com/img/brand/wordmark.png" },
-        { name: "NVIDIA", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nvidia/nvidia-original.svg" },
-        { name: "Hugging Face", icon: "https://huggingface.co/front/assets/huggingface_logo-noborder.svg" }
+        { name: "LangChain", icon: "https://cdn.simpleicons.org/langchain/white" },
+        { name: "NVIDIA", icon: "https://cdn.simpleicons.org/nvidia/76B900" },
+        { name: "Hugging Face", icon: "https://cdn.simpleicons.org/huggingface" }
       ],
       achievements: [
         "Developed an AI-driven chatbot with RAG architecture for precise answers from research papers.",
         "Implemented NVIDIA NeMo Guardrails for content safety and quality control.",
         "Created custom RAGAS metrics for evaluating response quality and relevance."
       ],
-      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nvidia/nvidia-original.svg"
+      logo: "https://cdn.simpleicons.org/nvidia/76B900"
     }
   ];
 
   const [selectedProject, setSelectedProject] = useState<Project>(projects[0]);
+  const [hoveredProject, setHoveredProject] = useState<string | null>(null);
 
   return (
     <section id="projects" className="max-w-4xl w-full flex flex-col mx-auto px-4">
@@ -107,31 +108,44 @@ export default function Projects() {
       >
         {/* Left Panel - Project List */}
         <div className="md:w-2/5 flex flex-col border-l border-accent/20">
-          {projects.map((project, index) => (
-            <motion.button
-              key={project.id}
-              onClick={() => setSelectedProject(project)}
-              className={`relative py-4 px-5 text-left transition-all duration-300 ${
-                selectedProject.id === project.id
-                  ? "text-foreground"
-                  : "text-foreground/50 hover:text-foreground/80"
-              }`}
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.3, delay: index * 0.1 }}
-            >
-              {/* Active indicator bar */}
-              <div className={`absolute left-0 top-0 bottom-0 w-0.5 transition-colors duration-300 ${
-                selectedProject.id === project.id 
-                  ? "bg-foreground" 
-                  : "bg-transparent"
-              }`} />
-              
-              <span className="font-medium text-base">
-                {project.shortTitle}
-              </span>
-            </motion.button>
-          ))}
+          {projects.map((project, index) => {
+            const isSelected = selectedProject.id === project.id;
+            const isHovered = hoveredProject === project.id;
+            
+            return (
+              <motion.button
+                key={project.id}
+                onClick={() => setSelectedProject(project)}
+                onMouseEnter={() => setHoveredProject(project.id)}
+                onMouseLeave={() => setHoveredProject(null)}
+                className={`relative py-4 px-5 text-left transition-all duration-300 rounded-r-lg ${
+                  isSelected
+                    ? "text-foreground bg-gradient-to-r from-cyan-500/20 to-transparent"
+                    : isHovered
+                    ? "text-foreground/90 bg-accent/15"
+                    : "text-foreground/50 hover:text-foreground/80"
+                }`}
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.3, delay: index * 0.1 }}
+              >
+                {/* Active/Hover indicator bar */}
+                <div className={`absolute left-0 top-0 bottom-0 w-1 transition-all duration-300 rounded-r ${
+                  isSelected 
+                    ? "bg-cyan-400" 
+                    : isHovered
+                    ? "bg-foreground/40"
+                    : "bg-transparent"
+                }`} />
+                
+                <span className={`font-medium text-base transition-colors ${
+                  isSelected ? "text-cyan-400" : ""
+                }`}>
+                  {project.shortTitle}
+                </span>
+              </motion.button>
+            );
+          })}
         </div>
 
         {/* Right Panel - Project Details */}
@@ -144,7 +158,7 @@ export default function Projects() {
         >
           {/* Header with Logo and Title */}
           <div className="flex items-start gap-4 mb-4">
-            <div className="w-14 h-14 rounded-lg bg-white p-2 flex items-center justify-center flex-shrink-0">
+            <div className="w-14 h-14 rounded-xl bg-secondary border border-accent/30 p-2.5 flex items-center justify-center flex-shrink-0">
               <img 
                 src={selectedProject.logo} 
                 alt={selectedProject.title}
@@ -152,7 +166,7 @@ export default function Projects() {
               />
             </div>
             <div className="flex-1">
-              <div className="flex items-center gap-3">
+              <div className="flex items-center gap-3 flex-wrap">
                 <h2 className="text-2xl font-bold text-foreground">
                   {selectedProject.title}
                 </h2>
@@ -197,17 +211,20 @@ export default function Projects() {
               {selectedProject.technologies.map((tech, index) => (
                 <motion.div
                   key={tech.name}
-                  className="w-11 h-11 rounded-lg bg-background border border-accent/40 p-2 flex items-center justify-center hover:border-accent transition-colors"
+                  className="group relative w-12 h-12 rounded-xl bg-secondary border border-accent/30 p-2.5 flex items-center justify-center hover:border-cyan-500/50 transition-all duration-200 hover:scale-105"
                   initial={{ opacity: 0, scale: 0.8 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.2, delay: index * 0.05 }}
-                  title={tech.name}
                 >
                   <img 
                     src={tech.icon} 
                     alt={tech.name}
                     className="w-6 h-6 object-contain"
                   />
+                  {/* Tooltip */}
+                  <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 px-2 py-1 bg-background border border-accent/50 rounded text-xs text-foreground/80 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none z-10">
+                    {tech.name}
+                  </div>
                 </motion.div>
               ))}
             </div>
