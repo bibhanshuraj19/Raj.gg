@@ -16,7 +16,7 @@ export default function Hero({ inView, descRef }: { inView: boolean, descRef: an
             <div className="flex-shrink-0">
               <div className="w-24 h-24 md:w-28 md:h-28 rounded-full overflow-hidden border-4 border-accent shadow-xl">
                 <img 
-                  src="/me.jpeg" 
+                  src="/file_00000000586071f88252a16615da341c.png" 
                   alt="Bibhanshu Raj" 
                   className="w-full h-full object-cover"
                 />
