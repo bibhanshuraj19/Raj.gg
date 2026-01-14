@@ -14,7 +14,7 @@ export default function IndexPage() {
   return (
     <div className="relative min-h-screen">
       <Navbar />
-      <main>
+      <main className="pt-20">
         <Hero inView={inView} descRef={descRef} />
         <About />
         <Projects />

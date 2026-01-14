@@ -89,15 +89,15 @@ export default function Projects() {
 
   return (
     <section id="projects" className="max-w-4xl w-full flex flex-col mx-auto px-4">
-      <motion.h1
-        className="text-center font-bold text-3xl md:text-4xl mt-16 mb-8"
-        initial={{ transform: 'translateY(-30px)', opacity: 0 }}
-        whileInView={{ transform: 'translateY(0px)', opacity: 100 }}
-        transition={{ duration: 0.5, delay: 0.1, ease: [0.39, 0.21, 0.12, 0.96] }}
-        viewport={{ amount: 0.1, once: true }}
-      >
-        Projects
-      </motion.h1>
+        <motion.h1
+          className="text-center font-bold text-3xl md:text-4xl mt-16 mb-8"
+          initial={{ transform: 'translateY(-30px)', opacity: 0 }}
+          whileInView={{ transform: 'translateY(0px)', opacity: 100 }}
+          transition={{ duration: 0.5, delay: 0.1, ease: [0.39, 0.21, 0.12, 0.96] }}
+          viewport={{ amount: 0.1, once: true }}
+        >
+          Projects
+        </motion.h1>
 
       <motion.div
         className="flex flex-col md:flex-row gap-0 min-h-[450px]"
@@ -247,6 +247,6 @@ export default function Projects() {
           </ul>
         </motion.div>
       </motion.div>
-    </section>
+      </section>
   );
 }
