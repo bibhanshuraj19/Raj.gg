@@ -42,7 +42,7 @@ export default function Navbar() {
             <header className="flex justify-center items-center w-full fixed px-4 top-4 z-50">
                 <motion.nav 
                     style={{ boxShadow: '0 0 30px 2.5px #0a0a0a' }} 
-                    className="flex h-14 max-w-[46rem] w-screen bg-gradient-to-br from-primary/90 to to-secondary/90 backdrop-blur-md rounded-lg border-1 border-accent px-4"
+                    className="flex h-14 max-w-[46rem] w-screen bg-gradient-to-br from-primary/90 to-secondary/90 backdrop-blur-md rounded-lg border-1 border-accent px-4"
                     initial={{ opacity: 0, y: -20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, ease: [0.39, 0.21, 0.12, 0.96] }}
