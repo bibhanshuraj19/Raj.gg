@@ -166,7 +166,7 @@ export default function About() {
           </div>
 
           {/* Tab Content */}
-          <div className="max-w-3xl mx-auto">
+          <div className="max-w-4xl mx-auto">
             {activeTab === "experience" && (
               <motion.div
                 key="experience"

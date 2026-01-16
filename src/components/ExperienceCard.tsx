@@ -13,18 +13,12 @@ export interface Experience {
 export default function ExperienceCard({ experience, index }: { experience: Experience; index: number }) {
   return (
     <motion.div
-      className="relative pl-8 pb-8 last:pb-0"
+      className="pb-8 last:pb-0"
       initial={{ opacity: 0, x: -20 }}
       whileInView={{ opacity: 1, x: 0 }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
       viewport={{ amount: 0.3, once: true }}
     >
-      {/* Timeline dot and line */}
-      <div className="absolute left-0 top-0 flex flex-col items-center">
-        <div className="w-4 h-4 rounded-full bg-gradient-to-br from-primary to-secondary border-2 border-accent shadow-lg" />
-        <div className="w-0.5 h-full bg-gradient-to-b from-primary to-transparent mt-1" />
-      </div>
-
       {/* Content card */}
       <div className="bg-gradient-to-br from-primary to-secondary p-4 rounded-lg border border-accent shadow-xl shadow-background hover:shadow-2xl transition-shadow duration-300">
         {/* Header */}
@@ -57,9 +51,8 @@ export default function ExperienceCard({ experience, index }: { experience: Expe
         {/* Achievements */}
         <ul className="space-y-2">
           {experience.achievements.map((achievement, idx) => (
-            <li key={idx} className="flex items-start gap-2 text-base text-foreground/90">
-              <span className="text-accent font-bold mt-1">•</span>
-              <span className="flex-1">{achievement}</span>
+            <li key={idx} className="text-base text-foreground/90">
+              {achievement}
             </li>
           ))}
         </ul>
