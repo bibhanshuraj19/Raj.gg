@@ -20,7 +20,7 @@ export default function About() {
     { title: "TensorFlow", icon: <img alt="" draggable={false} className="h-6" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg" />, link: "https://www.tensorflow.org/" },
     { title: "Scikit-Learn", icon: <img alt="" draggable={false} className="h-6" src="https://upload.wikimedia.org/wikipedia/commons/0/05/Scikit_learn_logo_small.svg" />, link: "https://scikit-learn.org/" },
     { title: "Hugging Face", icon: <img alt="" draggable={false} className="h-6" src="https://huggingface.co/front/assets/huggingface_logo-noborder.svg" />, link: "https://huggingface.co/" },
-    { title: "LangChain", icon: <img alt="" draggable={false} className="h-6" src="https://python.langchain.com/img/brand/wordmark.png" />, link: "https://www.langchain.com/" },
+    { title: "LangChain", icon: <img alt="" draggable={false} className="h-6" src="https://cdn.simpleicons.org/langchain/white" />, link: "https://www.langchain.com/" },
     { title: "OpenAI API", icon: <img alt="" draggable={false} className="h-6" src="https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg" />, link: "https://openai.com/" },
     { title: "NVIDIA NeMo", icon: <img alt="" draggable={false} className="h-6" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nvidia/nvidia-original.svg" />, link: "https://www.nvidia.com/en-us/ai-data-science/products/nemo/" }
   ]
@@ -33,7 +33,6 @@ export default function About() {
     { title: "Docker", icon: <img alt="" draggable={false} className="h-6" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" />, link: "https://www.docker.com/" },
     { title: "Git", icon: <img alt="" draggable={false} className="h-6" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" />, link: "https://git-scm.com/" },
     { title: "GitHub Actions", icon: <img alt="" draggable={false} className="h-6" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" />, link: "https://github.com/features/actions" },
-    { title: "MLflow", icon: <img alt="" draggable={false} className="h-6" src="https://www.mlflow.org/docs/latest/_static/MLflow-logo-final-black.png" />, link: "https://mlflow.org/" },
     { title: "PostgreSQL", icon: <img alt="" draggable={false} className="h-6" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" />, link: "https://www.postgresql.org/" },
     { title: "Flask", icon: <img alt="" draggable={false} className="h-6" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flask/flask-original.svg" />, link: "https://flask.palletsprojects.com/" },
     { title: "FastAPI", icon: <img alt="" draggable={false} className="h-6" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/fastapi/fastapi-original.svg" />, link: "https://fastapi.tiangolo.com/" }
