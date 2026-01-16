@@ -9,40 +9,34 @@ type TabType = "experience" | "education" | "extracurricular";
 
 export default function About() {
   const [activeTab, setActiveTab] = useState<TabType>("experience");
-  let mlTech: Tech[] = [
+  let programmingTech: Tech[] = [
     { title: "Python", icon: <img alt="" draggable={false} className="h-6" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" />, link: "https://www.python.org/" },
-    { title: "TensorFlow", icon: <img alt="" draggable={false} className="h-6" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg" />, link: "https://www.tensorflow.org/" },
+    { title: "C/C++", icon: <img alt="" draggable={false} className="h-6" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg" />, link: "https://isocpp.org/" },
+    { title: "SQL", icon: <img alt="" draggable={false} className="h-6" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" />, link: "https://www.mysql.com/" }
+  ]
+
+  let mlFrameworksTech: Tech[] = [
     { title: "PyTorch", icon: <img alt="" draggable={false} className="h-6" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pytorch/pytorch-original.svg" />, link: "https://pytorch.org/" },
+    { title: "TensorFlow", icon: <img alt="" draggable={false} className="h-6" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg" />, link: "https://www.tensorflow.org/" },
     { title: "Scikit-Learn", icon: <img alt="" draggable={false} className="h-6" src="https://upload.wikimedia.org/wikipedia/commons/0/05/Scikit_learn_logo_small.svg" />, link: "https://scikit-learn.org/" },
-    { title: "Keras", icon: <img alt="" draggable={false} className="h-6" src="https://upload.wikimedia.org/wikipedia/commons/a/ae/Keras_logo.svg" />, link: "https://keras.io/" },
     { title: "Hugging Face", icon: <img alt="" draggable={false} className="h-6" src="https://huggingface.co/front/assets/huggingface_logo-noborder.svg" />, link: "https://huggingface.co/" },
     { title: "LangChain", icon: <img alt="" draggable={false} className="h-6" src="https://python.langchain.com/img/brand/wordmark.png" />, link: "https://www.langchain.com/" },
-    { title: "OpenAI", icon: <img alt="" draggable={false} className="h-6" src="https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg" />, link: "https://openai.com/" },
-    { title: "XGBoost", icon: <img alt="" draggable={false} className="h-6" src="https://upload.wikimedia.org/wikipedia/commons/6/69/XGBoost_logo.png" />, link: "https://xgboost.readthedocs.io/" }
+    { title: "OpenAI API", icon: <img alt="" draggable={false} className="h-6" src="https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg" />, link: "https://openai.com/" },
+    { title: "NVIDIA NeMo", icon: <img alt="" draggable={false} className="h-6" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nvidia/nvidia-original.svg" />, link: "https://www.nvidia.com/en-us/ai-data-science/products/nemo/" }
   ]
 
-  let datascienceTech: Tech[] = [
-    { title: "NumPy", icon: <img alt="" draggable={false} className="h-6" src="https://upload.wikimedia.org/wikipedia/commons/3/31/NumPy_logo_2020.svg" />, link: "https://numpy.org/" },
+  let dataMLOpsTech: Tech[] = [
     { title: "Pandas", icon: <img alt="" draggable={false} className="h-6" src="https://upload.wikimedia.org/wikipedia/commons/e/ed/Pandas_logo.svg" />, link: "https://pandas.pydata.org/" },
+    { title: "NumPy", icon: <img alt="" draggable={false} className="h-6" src="https://upload.wikimedia.org/wikipedia/commons/3/31/NumPy_logo_2020.svg" />, link: "https://numpy.org/" },
+    { title: "OpenCV", icon: <img alt="" draggable={false} className="h-6" src="https://upload.wikimedia.org/wikipedia/commons/3/32/OpenCV_Logo_with_text_svg_version.svg" />, link: "https://opencv.org/" },
     { title: "Matplotlib", icon: <img alt="" draggable={false} className="h-6" src="https://upload.wikimedia.org/wikipedia/commons/8/84/Matplotlib_icon.svg" />, link: "https://matplotlib.org/" },
-    { title: "Seaborn", icon: <img alt="" draggable={false} className="h-6" src="https://seaborn.pydata.org/_static/logo-wide-lightbg.svg" />, link: "https://seaborn.pydata.org/" },
-    { title: "Jupyter", icon: <img alt="" draggable={false} className="h-6" src="https://upload.wikimedia.org/wikipedia/commons/3/38/Jupyter_logo.svg" />, link: "https://jupyter.org/" },
-    { title: "OpenCV", icon: <img alt="" draggable={false} className="h-6" src="https://upload.wikimedia.org/wikipedia/commons/3/32/OpenCV_Logo_with_text_svg_version.svg" />, link: "https://opencv.org/" }
-  ]
-
-  let mlOpsTech: Tech[] = [
     { title: "Docker", icon: <img alt="" draggable={false} className="h-6" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" />, link: "https://www.docker.com/" },
     { title: "Git", icon: <img alt="" draggable={false} className="h-6" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" />, link: "https://git-scm.com/" },
-    { title: "GitHub", icon: <img alt="" draggable={false} className="h-6" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" />, link: "https://github.com/" },
-    { title: "FastAPI", icon: <img alt="" draggable={false} className="h-6" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/fastapi/fastapi-original.svg" />, link: "https://fastapi.tiangolo.com/" },
-    { title: "Cursor", icon: <img alt="" draggable={false} className="h-6" src="https://www.cursor.com/brand/icon.svg" />, link: "https://www.cursor.com/" },
-    { title: "Claude", icon: <img alt="" draggable={false} className="h-6" src="https://www.anthropic.com/_next/static/media/claude-icon.2f97c85e.svg" />, link: "https://www.anthropic.com/claude" },
-    { title: "VS Code", icon: <img alt="" draggable={false} className="h-6" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" />, link: "https://code.visualstudio.com/" },
-    { title: "Antigravity", icon: <img alt="" draggable={false} className="h-6" src="https://images.crunchbase.com/image/upload/c_pad,h_170,w_170,f_auto,b_white,q_auto:eco,dpr_1/ulz8hjyyqdsqvvxnwznj" />, link: "https://antigravity.com/" },
-    { title: "Linux", icon: <img alt="" draggable={false} className="h-6" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg" />, link: "https://www.linux.org/" },
+    { title: "GitHub Actions", icon: <img alt="" draggable={false} className="h-6" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" />, link: "https://github.com/features/actions" },
+    { title: "MLflow", icon: <img alt="" draggable={false} className="h-6" src="https://www.mlflow.org/docs/latest/_static/MLflow-logo-final-black.png" />, link: "https://mlflow.org/" },
     { title: "PostgreSQL", icon: <img alt="" draggable={false} className="h-6" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" />, link: "https://www.postgresql.org/" },
-    { title: "MongoDB", icon: <img alt="" draggable={false} className="h-6" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" />, link: "https://www.mongodb.com/" },
-    { title: "Kubernetes", icon: <img alt="" draggable={false} className="h-6" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/kubernetes/kubernetes-plain.svg" />, link: "https://kubernetes.io/" }
+    { title: "Flask", icon: <img alt="" draggable={false} className="h-6" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flask/flask-original.svg" />, link: "https://flask.palletsprojects.com/" },
+    { title: "FastAPI", icon: <img alt="" draggable={false} className="h-6" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/fastapi/fastapi-original.svg" />, link: "https://fastapi.tiangolo.com/" }
   ]
 
   const experiences: Experience[] = [
@@ -101,27 +95,27 @@ export default function About() {
             gradient="bg-gradient-to-tl"
           />
           <AboutCard
-            title="ML/AI Frameworks"
-            description="Core frameworks and libraries I use for building, training, and deploying machine learning models and AI applications."
-            tech={mlTech}
+            title="Programming & Languages"
+            description="Core programming languages I use for building machine learning applications and data pipelines."
+            tech={programmingTech}
             direction="left"
             span={1}
             delay={0.15}
             gradient="bg-gradient-to-br"
           />
           <AboutCard
-            title="Data Science Stack"
-            description="Tools and libraries I leverage for data analysis, visualization, and scientific computing in ML workflows."
-            tech={datascienceTech}
+            title="ML/DL Frameworks"
+            description="Frameworks and libraries for building, training, and deploying machine learning models, LLMs, and AI applications."
+            tech={mlFrameworksTech}
             direction="right"
             span={1}
             delay={0.2}
             gradient="bg-gradient-to-bl"
           />
           <AboutCard
-            title="MLOps & Infrastructure"
-            description="Technologies I use for ML model deployment, experiment tracking, version control, and production infrastructure."
-            tech={mlOpsTech}
+            title="Data Science & MLOps"
+            description="Tools for data analysis, visualization, ML deployment, CI/CD, experiment tracking, and production infrastructure."
+            tech={dataMLOpsTech}
             direction="bottom"
             span={2}
             delay={0.1}
