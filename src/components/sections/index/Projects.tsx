@@ -19,29 +19,49 @@ interface Project {
   achievements: string[];
   projectUrl?: string;
   githubUrl?: string;
-  logo: string;
 }
 
 export default function Projects() {
   const projects: Project[] = [
     {
+      id: "voice-agent",
+      title: "Production Voice Agent Platform",
+      shortTitle: "Voice Agent",
+      role: "AI Engineer & Lead Developer",
+      date: "2025",
+      location: "Makunai Global",
+      technologies: [
+        { name: "Python", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" },
+        { name: "Deepgram", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" },
+        { name: "OpenAI", icon: "https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg" },
+        { name: "Pinecone", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" },
+        { name: "FastAPI", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/fastapi/fastapi-original.svg" },
+        { name: "Redis", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redis/redis-original.svg" }
+      ],
+      achievements: [
+        "Built a production-grade voice agent platform handling real-time speech-to-text via Deepgram and intelligent response generation through OpenAI.",
+        "Designed a RAG pipeline with Pinecone vector database for context-aware, knowledge-grounded voice conversations.",
+        "Engineered low-latency backend with FastAPI and WebSockets, achieving sub-second voice response times in production.",
+        "Led end-to-end architecture decisions from STT/TTS integration to deployment, serving as lead developer across the voice agent stack."
+      ]
+    },
+    {
       id: "ai-evaluation-bot",
       title: "AI-Powered Evaluation Bot",
-      shortTitle: "AI Evaluation Bot",
+      shortTitle: "AI Eval Bot",
       role: "Machine Learning Developer",
       date: "2024",
       location: "Academic Project",
       technologies: [
         { name: "Python", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" },
-        { name: "OpenAI", icon: "https://cdn.simpleicons.org/openai/white" },
+        { name: "OpenAI", icon: "https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg" },
         { name: "FastAPI", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/fastapi/fastapi-original.svg" }
       ],
       achievements: [
         "Achieved 95% grading accuracy across 200+ student submissions with an AI evaluation bot.",
         "Automated over 85% of evaluation steps, reducing manual grading time by 60%.",
         "Implemented intelligent rubric matching and feedback generation using OpenAI API."
-      ],
-      logo: "https://cdn.simpleicons.org/openai/white"
+      ]
     },
     {
       id: "rag-chatbot",
@@ -52,16 +72,15 @@ export default function Projects() {
       location: "Research Project",
       technologies: [
         { name: "Python", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" },
-        { name: "LangChain", icon: "https://cdn.simpleicons.org/langchain/white" },
-        { name: "OpenAI", icon: "https://cdn.simpleicons.org/openai/white" },
+        { name: "LangChain", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" },
+        { name: "OpenAI", icon: "https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg" },
         { name: "PostgreSQL", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" }
       ],
       achievements: [
         "Built a RAG chatbot enabling contextual Q&A over 500+ academic documents with 95% accuracy.",
         "Improved user satisfaction by 40% through intelligent claim validation.",
         "Implemented vector similarity search for efficient document retrieval."
-      ],
-      logo: "https://cdn.simpleicons.org/langchain/white"
+      ]
     },
     {
       id: "learning-agent",
@@ -72,16 +91,15 @@ export default function Projects() {
       location: "Academic Project",
       technologies: [
         { name: "Python", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" },
-        { name: "LangChain", icon: "https://cdn.simpleicons.org/langchain/white" },
-        { name: "NVIDIA", icon: "https://cdn.simpleicons.org/nvidia/76B900" },
-        { name: "Hugging Face", icon: "https://cdn.simpleicons.org/huggingface" }
+        { name: "LangChain", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" },
+        { name: "NVIDIA NeMo", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nvidia/nvidia-original.svg" },
+        { name: "Hugging Face", icon: "https://huggingface.co/front/assets/huggingface_logo-noborder.svg" }
       ],
       achievements: [
         "Developed an AI-driven chatbot with RAG architecture for precise answers from research papers.",
         "Implemented NVIDIA NeMo Guardrails for content safety and quality control.",
         "Created custom RAGAS metrics for evaluating response quality and relevance."
-      ],
-      logo: "https://cdn.simpleicons.org/nvidia/76B900"
+      ]
     }
   ];
 
@@ -101,14 +119,14 @@ export default function Projects() {
       </motion.h1>
 
       <motion.div
-        className="flex flex-col md:flex-row gap-0"
+        className="flex flex-col md:flex-row"
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.2 }}
         viewport={{ once: true }}
       >
         {/* Left Panel - Project Tabs */}
-        <div className="md:w-[200px] shrink-0 flex md:flex-col flex-row overflow-x-auto md:overflow-x-visible border-b md:border-b-0 md:border-l border-accent/20 gap-0">
+        <div className="md:w-[180px] shrink-0 flex md:flex-col flex-row overflow-x-auto md:overflow-x-visible border-b md:border-b-0 md:border-l border-accent/30">
           {projects.map((project, index) => {
             const isSelected = selectedProject.id === project.id;
             const isHovered = hoveredProject === project.id;
@@ -119,26 +137,24 @@ export default function Projects() {
                 onClick={() => setSelectedProject(project)}
                 onMouseEnter={() => setHoveredProject(project.id)}
                 onMouseLeave={() => setHoveredProject(null)}
-                className={`relative py-4 px-5 text-left transition-all duration-300 md:rounded-r-lg whitespace-nowrap md:whitespace-normal ${
+                className={`relative py-3.5 px-4 text-left transition-all duration-300 md:rounded-r-lg whitespace-nowrap md:whitespace-normal ${
                   isSelected
-                    ? "text-foreground bg-gradient-to-r from-cyan-500/20 to-transparent"
+                    ? "text-foreground bg-gradient-to-r from-cyan-500/15 to-transparent"
                     : isHovered
-                    ? "text-foreground/90 bg-accent/15"
-                    : "text-foreground/50 hover:text-foreground/80"
+                    ? "text-foreground/90 bg-accent/10"
+                    : "text-foreground/45 hover:text-foreground/75"
                 }`}
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.3, delay: index * 0.1 }}
               >
-                {/* Active indicator - left bar on desktop, bottom bar on mobile */}
                 <div
                   className={`absolute transition-all duration-300 rounded-r
-                    md:left-0 md:top-0 md:bottom-0 md:w-1 md:h-auto
-                    left-0 right-0 bottom-0 h-0.5 w-auto
-                    ${isSelected ? "bg-cyan-400" : isHovered ? "bg-foreground/40" : "bg-transparent"}`}
+                    md:left-0 md:top-0 md:bottom-0 md:w-[2px] md:h-auto
+                    left-0 right-0 bottom-0 h-[2px] w-auto
+                    ${isSelected ? "bg-cyan-400" : isHovered ? "bg-foreground/30" : "bg-transparent"}`}
                 />
-
-                <span className={`font-medium text-sm md:text-base transition-colors ${isSelected ? "text-cyan-400" : ""}`}>
+                <span className={`font-medium text-sm transition-colors ${isSelected ? "text-cyan-400" : ""}`}>
                   {project.shortTitle}
                 </span>
               </motion.button>
@@ -147,91 +163,85 @@ export default function Projects() {
         </div>
 
         {/* Right Panel - Project Details */}
-        <div className="flex-1 min-w-0">
+        <div className="flex-1 min-w-0 overflow-hidden">
           <AnimatePresence mode="wait">
             <motion.div
               key={selectedProject.id}
-              className="py-5 px-4 md:px-6"
+              className="py-5 px-4 md:px-8"
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -12 }}
               transition={{ duration: 0.25 }}
             >
-              {/* Header */}
-              <div className="flex items-start gap-3 mb-3">
-                <div className="w-12 h-12 rounded-xl bg-secondary border border-accent/30 p-2 flex items-center justify-center shrink-0">
-                  <img src={selectedProject.logo} alt={selectedProject.title} className="w-full h-full object-contain" />
-                </div>
-                <div className="min-w-0 flex-1">
-                  <div className="flex items-center gap-2 flex-wrap">
-                    <h2 className="text-xl md:text-2xl font-bold text-foreground break-words">
-                      {selectedProject.title}
-                    </h2>
-                    {selectedProject.projectUrl && (
-                      <Link href={selectedProject.projectUrl} target="_blank" className="p-1 rounded-md hover:bg-accent/30 transition-colors text-foreground/60 hover:text-foreground shrink-0">
-                        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
-                        </svg>
-                      </Link>
-                    )}
-                    {selectedProject.githubUrl && (
-                      <Link href={selectedProject.githubUrl} target="_blank" className="p-1 rounded-md hover:bg-accent/30 transition-colors text-foreground/60 hover:text-foreground shrink-0">
-                        <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
-                          <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" />
-                        </svg>
-                      </Link>
-                    )}
-                  </div>
-                  <p className="text-foreground/60 text-sm mt-0.5">{selectedProject.role}</p>
-                </div>
+              {/* Title & Role */}
+              <h2 className="text-xl md:text-2xl font-bold text-foreground leading-tight">
+                {selectedProject.title}
+              </h2>
+              <p className="text-foreground/55 text-sm mt-1">{selectedProject.role}</p>
+
+              {/* Links */}
+              <div className="flex items-center gap-2 mt-2">
+                {selectedProject.projectUrl && (
+                  <Link href={selectedProject.projectUrl} target="_blank" className="p-1 rounded-md hover:bg-accent/30 transition-colors text-foreground/50 hover:text-foreground shrink-0">
+                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
+                    </svg>
+                  </Link>
+                )}
+                {selectedProject.githubUrl && (
+                  <Link href={selectedProject.githubUrl} target="_blank" className="p-1 rounded-md hover:bg-accent/30 transition-colors text-foreground/50 hover:text-foreground shrink-0">
+                    <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                      <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" />
+                    </svg>
+                  </Link>
+                )}
               </div>
 
               {/* Meta row */}
-              <div className="flex items-center gap-4 text-sm text-foreground/50 mb-5">
+              <div className="flex items-center gap-4 text-sm text-foreground/45 mt-4 mb-5">
                 <span className="flex items-center gap-1.5">
-                  <Calendar className="w-3.5 h-3.5" />
+                  <Calendar className="w-3.5 h-3.5 shrink-0" />
                   {selectedProject.date}
                 </span>
                 <span className="flex items-center gap-1.5">
-                  <Tag className="w-3.5 h-3.5" />
+                  <Tag className="w-3.5 h-3.5 shrink-0" />
                   {selectedProject.location}
                 </span>
               </div>
 
               {/* Technologies */}
               <div className="mb-5">
-                <h4 className="text-foreground/60 font-semibold text-xs uppercase tracking-wider mb-2.5">Tech Stack</h4>
+                <h4 className="text-foreground/50 font-semibold text-xs uppercase tracking-wider mb-2.5">Tech Stack</h4>
                 <div className="flex flex-wrap gap-2">
                   {selectedProject.technologies.map((tech, index) => (
-                    <motion.div
+                    <motion.span
                       key={tech.name}
-                      className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-secondary border border-accent/30 hover:border-cyan-500/40 transition-colors"
+                      className="px-3 py-1.5 rounded-md bg-secondary border border-accent/30 text-xs text-foreground/70 hover:border-cyan-500/40 hover:text-foreground/90 transition-colors"
                       initial={{ opacity: 0, scale: 0.9 }}
                       animate={{ opacity: 1, scale: 1 }}
-                      transition={{ duration: 0.2, delay: index * 0.05 }}
+                      transition={{ duration: 0.2, delay: index * 0.04 }}
                     >
-                      <img src={tech.icon} alt={tech.name} className="w-4 h-4 object-contain" />
-                      <span className="text-xs text-foreground/70">{tech.name}</span>
-                    </motion.div>
+                      {tech.name}
+                    </motion.span>
                   ))}
                 </div>
               </div>
 
               {/* Divider */}
-              <div className="h-px bg-accent/30 mb-5" />
+              <div className="h-px bg-accent/25 mb-5" />
 
               {/* Achievements */}
               <ul className="space-y-3">
                 {selectedProject.achievements.map((achievement, index) => (
                   <motion.li
                     key={index}
-                    className="flex items-start gap-2"
+                    className="flex items-start gap-2.5"
                     initial={{ opacity: 0, x: -8 }}
                     animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.2, delay: 0.15 + index * 0.08 }}
+                    transition={{ duration: 0.2, delay: 0.12 + index * 0.06 }}
                   >
-                    <ChevronRight className="w-4 h-4 mt-0.5 shrink-0 text-cyan-400/70" />
-                    <span className="text-sm md:text-base text-foreground/80 leading-relaxed">{achievement}</span>
+                    <ChevronRight className="w-4 h-4 mt-0.5 shrink-0 text-cyan-400/60" />
+                    <span className="text-sm md:text-[15px] text-foreground/75 leading-relaxed">{achievement}</span>
                   </motion.li>
                 ))}
               </ul>
