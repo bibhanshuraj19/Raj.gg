@@ -40,6 +40,18 @@ export default function About() {
 
   const experiences: Experience[] = [
     {
+      company: "Makunai Global",
+      location: "Remote",
+      role: "AI Engineer & Lead Developer — Voice Agents",
+      startDate: "Jan 2025",
+      endDate: "Present",
+      achievements: [
+        "Architecting and leading development of production-grade voice agent systems, overseeing end-to-end pipeline design from speech recognition to response generation",
+        "Building scalable backend infrastructure powering real-time voice AI interactions using FastAPI, WebSockets, and cloud-native services",
+        "Driving technical direction as lead developer, coordinating cross-functional efforts across ML, backend, and product teams to ship reliable voice agent products"
+      ]
+    },
+    {
       company: "SmartLink Holdings",
       location: "Goa, Verna",
       role: "Intern",
