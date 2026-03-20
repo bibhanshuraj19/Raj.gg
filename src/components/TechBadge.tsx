@@ -1,15 +1,17 @@
 import Link from "next/link";
 import { ReactNode } from "react";
 
-export default function TechBadge({ title, icon, link }: { title: string, icon: ReactNode, link: string }) {
+export default function TechBadge({ title, icon, link }: { title: string; icon: ReactNode; link: string }) {
   return (
-    <>
-      <li className="flex">
-        <Link href={link} target="_blank" className="p-2 bg-secondary hover:bg-accent border-1 border-accent rounded-lg flex flex-row gap-2 items-center ml-2 duration-300">
-          {icon}
-          <span className="text-center font-semibold text-base mt-0.5">{title}</span>
-        </Link>
-      </li>
-    </>
+    <Link
+      href={link}
+      target="_blank"
+      className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-bg-tertiary border border-border-subtle hover:border-cyan/25 hover:bg-cyan/5 transition-all duration-300 group/badge shrink-0 hover:shadow-[0_0_12px_-4px_var(--glow-cyan)]"
+    >
+      {icon}
+      <span className="text-[11px] font-mono font-medium text-text-dim group-hover/badge:text-cyan transition-colors whitespace-nowrap">
+        {title}
+      </span>
+    </Link>
   );
 }

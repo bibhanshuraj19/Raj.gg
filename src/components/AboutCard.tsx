@@ -4,38 +4,53 @@ import TechBadge from "@/components/TechBadge";
 import Marquee from "react-fast-marquee";
 import { Tech } from "../../typings";
 
-export default function AboutCard({ title, description, tech, direction, span, gradient, delay }: { title: string, description: string, tech?: Tech[], direction: 'top' | 'bottom' | 'left' | 'right', span: 1 | 2, gradient: string, delay: number }) {
-    return (
-        <>
-            <motion.li
-                className={`${span === 1 ? 'min-[940px]:col-span-1 col-span-2' : 'col-span-2'} `}
-                initial={{ transform: `translate${direction === 'top' || direction === 'bottom' ? 'Y' : 'X'}(${direction === 'top' || direction === 'left' ? '-' : ''}30px)`, opacity: 0 }}
-                whileInView={{ transform: `translate${direction === 'top' || direction === 'bottom' ? 'Y' : 'X'}(0px)`, opacity: 100 }}
-                transition={{ duration: 0.5, delay: delay, ease: [0.39, 0.21, 0.12, 0.96], }}
-                viewport={{ amount: 0.1, once: true }}
-            >
-                <div className={`${gradient} from-primary to-secondary p-4 flex flex-col rounded-lg border-1 border-accent shadow-2xl shadow-background`}>
-                    <h2 className="text-center font-semibold text-xl md:text-2xl">
-                        {title}
-                    </h2>
-                    <p className="text-center text-base mb-2">
-                        {description}
-                    </p>
-                    {tech &&
-                        <>
-                            <Divider />
-                            <Marquee pauseOnHover speed={70} className="my-2">
-                                <ul className="flex flex-row">
-                                    {tech.map((tech: Tech) => (
-                                        <TechBadge key={tech.title} title={tech.title} icon={tech.icon} link={tech.link} />
-                                    ))}
-                                </ul>
-                            </Marquee>
-                            <Divider />
-                        </>
-                    }
-                </div>
-            </motion.li>
-        </>
-    );
+interface AboutCardProps {
+  title: string;
+  description: string;
+  tech?: Tech[];
+  direction: "top" | "bottom" | "left" | "right";
+  span: 1 | 2;
+  delay: number;
+  gradient?: string;
+}
+
+export default function AboutCard({ title, description, tech, direction, span, delay }: AboutCardProps) {
+  const axis = direction === "top" || direction === "bottom" ? "Y" : "X";
+  const sign = direction === "top" || direction === "left" ? "-" : "";
+
+  return (
+    <motion.div
+      initial={{ transform: `translate${axis}(${sign}24px)`, opacity: 0 }}
+      whileInView={{ transform: `translate${axis}(0px)`, opacity: 1 }}
+      transition={{ duration: 0.6, delay, ease: [0.22, 1, 0.36, 1] }}
+      viewport={{ amount: 0.1, once: true }}
+      className="h-full"
+    >
+      <div className="neon-card h-full p-5 rounded-2xl group">
+        <div className="flex items-center gap-2 mb-3">
+          <div className="w-1.5 h-1.5 rounded-full bg-cyan shadow-[0_0_6px_var(--neon-cyan)]" />
+          <h3 className="font-semibold text-sm font-mono text-text group-hover:text-cyan transition-colors duration-300 uppercase tracking-wider">
+            {title}
+          </h3>
+        </div>
+        <p className="text-sm text-text-muted leading-relaxed">
+          {description}
+        </p>
+        {tech && (
+          <>
+            <div className="my-3">
+              <Divider />
+            </div>
+            <Marquee pauseOnHover speed={40} className="py-1">
+              <div className="flex gap-2 pr-2">
+                {tech.map((t) => (
+                  <TechBadge key={t.title} title={t.title} icon={t.icon} link={t.link} />
+                ))}
+              </div>
+            </Marquee>
+          </>
+        )}
+      </div>
+    </motion.div>
+  );
 }

@@ -1,17 +1,13 @@
 import { useId } from "react";
-
 import { cn } from "@/lib/utils";
 
-// MagicUI Component
-// https://magicui.design/docs/components/grid-pattern
-
 interface GridPatternProps {
-  width?: any;
-  height?: any;
-  x?: any;
-  y?: any;
+  width?: number;
+  height?: number;
+  x?: number;
+  y?: number;
   squares?: Array<[x: number, y: number]>;
-  strokeDasharray?: any;
+  strokeDasharray?: number;
   className?: string;
   [key: string]: any;
 }
@@ -32,7 +28,7 @@ export function GridPattern({
     <svg
       aria-hidden="true"
       className={cn(
-        "pointer-events-none absolute inset-0 h-full w-full fill-primary stroke-primary",
+        "pointer-events-none absolute inset-0 h-full w-full fill-bg-secondary stroke-border-subtle/30",
         className,
       )}
       {...props}
