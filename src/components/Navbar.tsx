@@ -86,7 +86,7 @@ export default function Navbar() {
               draggable={false}
               href="https://github.com/bibhanshuraj19/raj.gg"
               target="_blank"
-              className="gradient-cta !py-1.5 !px-4 !text-sm"
+              className="flex items-center gap-1.5 px-3 py-1.5 text-sm font-label text-accent/70 hover:text-accent transition-colors rounded-md hover:bg-accent/5"
             >
               <ExternalLink className="w-3.5 h-3.5" />
               Source

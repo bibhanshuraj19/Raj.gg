@@ -24,52 +24,43 @@ export default function Certifications() {
   ];
 
   return (
-    <section id="certifications" className="max-w-6xl w-full mx-auto px-6 mt-32">
+    <section id="certifications" className="max-w-6xl w-full mx-auto px-6 mt-28">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
         viewport={{ once: true }}
-        className="mb-10"
+        className="mb-8"
       >
-        <span className="section-number">05 // Credentials</span>
-        <h2 className="font-display text-3xl sm:text-4xl font-bold mt-4">
-          <span className="gradient-text-static">Certifications</span>
-        </h2>
+        <span className="section-number">04 // Certifications</span>
       </motion.div>
 
-      <div className="space-y-4">
+      <div className="space-y-3">
         {certifications.map((cert, index) => (
           <motion.div
             key={cert.id}
-            initial={{ opacity: 0, y: 16 }}
+            initial={{ opacity: 0, y: 12 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4, delay: index * 0.1 }}
+            transition={{ duration: 0.3, delay: index * 0.08 }}
             viewport={{ once: true }}
           >
             <Link
               href={cert.credentialUrl}
               target="_blank"
-              className="surface-card flex items-center gap-5 p-5 group"
+              className="surface-card flex items-center gap-4 p-4 group"
             >
-              <div className="w-12 h-12 rounded-xl bg-white/90 p-2.5 flex items-center justify-center shrink-0">
-                <img
-                  src={cert.issuerLogo}
-                  alt={cert.issuer}
-                  className="w-full h-full object-contain"
-                />
+              <div className="w-10 h-10 rounded-lg bg-white/90 p-2 flex items-center justify-center shrink-0">
+                <img src={cert.issuerLogo} alt={cert.issuer} className="w-full h-full object-contain" />
               </div>
-
               <div className="flex-1 min-w-0">
                 <h4 className="text-sm font-semibold text-on-surface group-hover:text-accent transition-colors font-display truncate">
                   {cert.title}
                 </h4>
-                <p className="font-label text-xs text-on-surface-variant mt-1">
+                <p className="font-label text-xs text-on-surface-variant mt-0.5">
                   {cert.issuer} &middot; {cert.issueDate}
                 </p>
               </div>
-
-              <ExternalLink className="w-4 h-4 text-on-surface-variant group-hover:text-accent transition-colors shrink-0" />
+              <ExternalLink className="w-3.5 h-3.5 text-on-surface-variant group-hover:text-accent transition-colors shrink-0" />
             </Link>
           </motion.div>
         ))}

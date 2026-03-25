@@ -5,7 +5,7 @@ import type { Tech } from "../../../../typings";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 
-type TabType = "experience" | "education" | "extracurricular";
+type TabType = "experience" | "education";
 
 export default function About() {
   const [activeTab, setActiveTab] = useState<TabType>("experience");
@@ -30,12 +30,9 @@ export default function About() {
     { title: "Pandas", icon: <img alt="" draggable={false} className="h-5" src="https://upload.wikimedia.org/wikipedia/commons/e/ed/Pandas_logo.svg" />, link: "https://pandas.pydata.org/" },
     { title: "NumPy", icon: <img alt="" draggable={false} className="h-5" src="https://upload.wikimedia.org/wikipedia/commons/3/31/NumPy_logo_2020.svg" />, link: "https://numpy.org/" },
     { title: "OpenCV", icon: <img alt="" draggable={false} className="h-5" src="https://upload.wikimedia.org/wikipedia/commons/3/32/OpenCV_Logo_with_text_svg_version.svg" />, link: "https://opencv.org/" },
-    { title: "Matplotlib", icon: <img alt="" draggable={false} className="h-5" src="https://upload.wikimedia.org/wikipedia/commons/8/84/Matplotlib_icon.svg" />, link: "https://matplotlib.org/" },
     { title: "Docker", icon: <img alt="" draggable={false} className="h-5" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" />, link: "https://www.docker.com/" },
     { title: "Git", icon: <img alt="" draggable={false} className="h-5" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" />, link: "https://git-scm.com/" },
-    { title: "GitHub Actions", icon: <img alt="" draggable={false} className="h-5" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" />, link: "https://github.com/features/actions" },
     { title: "PostgreSQL", icon: <img alt="" draggable={false} className="h-5" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" />, link: "https://www.postgresql.org/" },
-    { title: "Flask", icon: <img alt="" draggable={false} className="h-5" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flask/flask-original.svg" />, link: "https://flask.palletsprojects.com/" },
     { title: "FastAPI", icon: <img alt="" draggable={false} className="h-5" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/fastapi/fastapi-original.svg" />, link: "https://fastapi.tiangolo.com/" },
   ];
 
@@ -88,60 +85,45 @@ export default function About() {
   const tabs: { key: TabType; label: string }[] = [
     { key: "experience", label: "Experience" },
     { key: "education", label: "Education" },
-    { key: "extracurricular", label: "Extra" },
   ];
 
   return (
-    <section id="about" className="max-w-6xl w-full mx-auto px-6">
+    <section id="about" className="max-w-6xl w-full mx-auto px-6 mt-12">
+      {/* Tech Stack */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
         viewport={{ once: true }}
-        className="mb-12"
+        className="mb-10"
       >
-        <span className="section-number">01 // About Me</span>
-        <h2 className="font-display text-4xl sm:text-5xl font-bold mt-4 mb-4">
-          <span className="gradient-text-static">Bridging the gap between</span>
-          <br />
-          <span className="text-on-surface">Logic and Artistry.</span>
+        <span className="section-number">01 // Tech Stack</span>
+        <h2 className="font-display text-3xl sm:text-4xl font-bold mt-3 mb-2">
+          <span className="text-on-surface">Tools I work with</span>
         </h2>
-        <p className="text-lg text-on-surface-variant max-w-2xl leading-relaxed">
-          My journey in tech began with a curiosity about how intelligent systems are built.
-          Today, I specialize in building scalable AI systems, from classical ML to cutting-edge LLMs and voice AI.
-        </p>
       </motion.div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div className="md:col-span-2">
-          <AboutCard
-            title="AI/ML Journey"
-            description="I'm passionate about artificial intelligence and machine learning, with a focus on building intelligent systems that solve real-world problems. My journey spans from classical ML algorithms to cutting-edge deep learning and LLMs. I specialize in developing end-to-end ML pipelines, from data preprocessing to model deployment, with experience in computer vision, NLP, and generative AI."
-            direction="top"
-            span={2}
-            delay={0.1}
-          />
-        </div>
         <AboutCard
           title="Languages"
-          description="Core programming languages for ML applications and data pipelines."
+          description="Core programming languages for ML and data engineering."
           tech={programmingTech}
           direction="left"
           span={1}
-          delay={0.15}
+          delay={0.1}
         />
         <AboutCard
           title="ML / DL Frameworks"
-          description="Frameworks for building, training, and deploying ML models, LLMs, and AI applications."
+          description="Frameworks for building, training, and deploying models and AI applications."
           tech={mlFrameworksTech}
           direction="right"
           span={1}
-          delay={0.2}
+          delay={0.15}
         />
         <div className="md:col-span-2">
           <AboutCard
-            title="Data Science & MLOps"
-            description="Tools for data analysis, visualization, ML deployment, CI/CD, experiment tracking, and production infrastructure."
+            title="Infrastructure & MLOps"
+            description="Tools for data processing, deployment, CI/CD, and production infrastructure."
             tech={dataMLOpsTech}
             direction="bottom"
             span={2}
@@ -150,7 +132,7 @@ export default function About() {
         </div>
       </div>
 
-      {/* Experience / Education tabs */}
+      {/* Experience / Education */}
       <div id="experience" className="mt-28">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -160,15 +142,18 @@ export default function About() {
           className="mb-10"
         >
           <span className="section-number">02 // Background</span>
+          <h2 className="font-display text-3xl sm:text-4xl font-bold mt-3">
+            <span className="text-on-surface">Experience & Education</span>
+          </h2>
         </motion.div>
 
         {/* Tab bar */}
-        <div className="flex gap-1 p-1 rounded-xl bg-surface-container ghost-border mb-10 w-fit">
+        <div className="flex gap-1 p-1 rounded-xl bg-surface-container ghost-border mb-8 w-fit">
           {tabs.map((tab) => (
             <button
               key={tab.key}
               onClick={() => setActiveTab(tab.key)}
-              className={`relative px-5 py-2.5 rounded-lg text-sm font-label font-medium transition-all duration-300 ${
+              className={`relative px-5 py-2 rounded-lg text-sm font-label font-medium transition-all duration-300 ${
                 activeTab === tab.key
                   ? "text-accent"
                   : "text-on-surface-variant hover:text-on-surface"
@@ -213,23 +198,6 @@ export default function About() {
               {education.map((edu, index) => (
                 <EducationCard key={index} education={edu} index={index} />
               ))}
-            </motion.div>
-          )}
-
-          {activeTab === "extracurricular" && (
-            <motion.div
-              key="extracurricular"
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -16 }}
-              transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-              className="flex items-center justify-center py-24"
-            >
-              <div className="text-center">
-                <p className="text-on-surface-variant text-sm font-label">
-                  Coming soon...
-                </p>
-              </div>
             </motion.div>
           )}
         </AnimatePresence>
