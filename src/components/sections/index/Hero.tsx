@@ -30,140 +30,92 @@ const socials = [
   },
 ];
 
-function useTypewriter(text: string, speed = 40, delay = 800) {
-  const [displayed, setDisplayed] = useState("");
-  useEffect(() => {
-    let i = 0;
-    const timeout = setTimeout(() => {
-      const interval = setInterval(() => {
-        if (i < text.length) {
-          setDisplayed(text.slice(0, i + 1));
-          i++;
-        } else {
-          clearInterval(interval);
-        }
-      }, speed);
-      return () => clearInterval(interval);
-    }, delay);
-    return () => clearTimeout(timeout);
-  }, [text, speed, delay]);
-  return displayed;
-}
-
 const container = {
   hidden: { opacity: 0 },
-  show: { opacity: 1, transition: { staggerChildren: 0.1, delayChildren: 0.2 } },
+  show: { opacity: 1, transition: { staggerChildren: 0.12, delayChildren: 0.3 } },
 };
 
 const item = {
-  hidden: { opacity: 0, y: 24 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] } },
+  hidden: { opacity: 0, y: 30 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] } },
 };
 
 export default function Hero({ inView, descRef }: { inView: boolean; descRef: any }) {
-  const tagline = useTypewriter("Building intelligent systems that think, speak, and learn.", 35, 1200);
-
   return (
-    <section className="relative max-w-3xl w-full mx-auto px-6 pt-36 pb-12" ref={descRef}>
-      <div className="absolute inset-0 dot-grid pointer-events-none" />
-
-      {/* Ambient orbs */}
-      <div className="absolute top-20 -left-32 w-64 h-64 bg-cyan/5 rounded-full blur-[100px] pointer-events-none" />
-      <div className="absolute top-40 -right-32 w-64 h-64 bg-purple/5 rounded-full blur-[100px] pointer-events-none" />
-
+    <section className="relative max-w-6xl w-full mx-auto px-6 pt-40 pb-24" ref={descRef}>
       <motion.div
         variants={container}
         initial="hidden"
         animate="show"
-        className="relative flex flex-col items-center text-center"
+        className="relative"
       >
-        {/* Avatar with orbital ring */}
-        <motion.div variants={item} className="mb-8 relative">
-          <div className="relative w-32 h-32">
-            {/* Orbital ring */}
-            <div className="absolute inset-[-8px] rounded-full border border-dashed border-cyan/20 animate-[spin_20s_linear_infinite]" />
-            <div className="absolute inset-[-16px] rounded-full border border-dashed border-purple/10 animate-[spin_30s_linear_infinite_reverse]" />
-
-            {/* Orbital dot */}
-            <div className="absolute inset-[-8px] animate-[spin_20s_linear_infinite]">
-              <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-2 h-2 rounded-full bg-cyan shadow-[0_0_8px_var(--neon-cyan)]" />
-            </div>
-
-            <div className="w-32 h-32 rounded-full overflow-hidden ring-2 ring-cyan/20 animate-pulse-glow relative z-10">
-              <img
-                src="/ChatGPT Image Jan 14, 2026 at 02_44_07 PM.png"
-                alt="Bibhanshu Raj"
-                className="w-full h-full object-cover"
-              />
-            </div>
-            <div className="absolute -bottom-1 -right-1 w-5 h-5 bg-emerald rounded-full border-[3px] border-bg z-20 shadow-[0_0_10px_rgba(52,211,153,0.5)]" />
-          </div>
+        {/* Section label */}
+        <motion.div variants={item} className="mb-8">
+          <span className="section-number">The Luminescent Architect</span>
         </motion.div>
 
-        {/* Status badge */}
-        <motion.div variants={item} className="mb-4">
-          <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-[11px] font-mono font-medium bg-cyan/5 text-cyan border border-cyan/15 tracking-wider uppercase">
-            <span className="w-1.5 h-1.5 rounded-full bg-cyan animate-pulse shadow-[0_0_6px_var(--neon-cyan)]" />
-            Systems Online
-          </span>
+        {/* Main Title — large editorial display */}
+        <motion.div variants={item} className="mb-8">
+          <h1 className="font-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight leading-[1.05]">
+            <span className="text-on-surface">Hi, I&apos;m </span>
+            <span className="gradient-text">Bibhanshu</span>
+            <span className="text-on-surface">.</span>
+            <br />
+            <span className="text-on-surface-variant">Building </span>
+            <span className="text-accent">intelligent</span>
+            <br />
+            <span className="text-on-surface-variant">systems.</span>
+          </h1>
         </motion.div>
 
-        {/* Name */}
-        <motion.h1 variants={item} className="text-5xl sm:text-6xl md:text-7xl font-bold tracking-tight">
-          <span className="gradient-text">Bibhanshu Raj</span>
-        </motion.h1>
-
-        {/* Title */}
-        <motion.div variants={item} className="mt-4 flex items-center gap-3">
-          <div className="h-px w-8 bg-gradient-to-r from-transparent to-cyan/50" />
-          <p className="text-base sm:text-lg text-cyan font-mono font-medium tracking-wide">
-            AI / ML Engineer
-          </p>
-          <div className="h-px w-8 bg-gradient-to-l from-transparent to-purple/50" />
-        </motion.div>
-
-        {/* Typewriter tagline */}
-        <motion.div variants={item} className="mt-6 h-8">
-          <p className="text-sm sm:text-base text-text-muted font-mono">
-            <span className="text-cyan/40">&gt; </span>
-            {tagline}
-            <span className="animate-[blink_1s_step-end_infinite] text-cyan ml-0.5">|</span>
+        {/* Subtitle */}
+        <motion.div variants={item} className="max-w-2xl mb-10">
+          <p className="text-lg sm:text-xl text-on-surface-variant leading-relaxed">
+            Machine learning engineer based in India, specializing in voice AI,
+            RAG systems, and production ML pipelines. Crafting high-performance
+            digital experiences with structural integrity and aesthetic precision.
           </p>
         </motion.div>
 
-        {/* Bio */}
-        <motion.p
-          variants={item}
-          className="text-sm text-text-dim mt-4 max-w-md leading-relaxed"
-        >
-          Machine learning engineer based in India, specializing in voice AI,
-          RAG systems, and production ML pipelines. Let&apos;s build something extraordinary.
-        </motion.p>
-
-        {/* Email */}
-        <motion.div variants={item} className="mt-6">
-          <a
-            href="mailto:bibhanshuraj@icloud.com"
-            className="group inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-bg-secondary border border-border hover:border-cyan/30 transition-all duration-300 hover:shadow-[0_0_20px_-4px_var(--glow-cyan)]"
-          >
-            <svg className="w-3.5 h-3.5 text-cyan" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
+        {/* CTA Buttons */}
+        <motion.div variants={item} className="flex flex-wrap items-center gap-4 mb-12">
+          <a href="#projects" className="gradient-cta text-base font-display">
+            View My Work
+            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
             </svg>
-            <span className="text-xs font-mono text-text-muted group-hover:text-cyan transition-colors">
-              bibhanshuraj@icloud.com
-            </span>
+          </a>
+          <a href="#contact" className="glass-cta text-base font-label">
+            Get in Touch
+            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
           </a>
         </motion.div>
 
-        {/* Socials */}
-        <motion.div variants={item} className="flex items-center gap-2 mt-8">
+        {/* Role Badge + Email */}
+        <motion.div variants={item} className="flex flex-wrap items-center gap-4 mb-8">
+          <span className="font-label text-sm font-semibold text-accent tracking-wider uppercase">
+            AI / ML Engineer
+          </span>
+          <span className="text-outline">·</span>
+          <a
+            href="mailto:bibhanshuraj@icloud.com"
+            className="font-label text-sm text-on-surface-variant hover:text-accent transition-colors"
+          >
+            bibhanshuraj@icloud.com
+          </a>
+        </motion.div>
+
+        {/* Social Icons */}
+        <motion.div variants={item} className="flex items-center gap-3">
           {socials.map((social) => (
             <Link
               key={social.label}
               href={social.href}
               target="_blank"
               aria-label={social.label}
-              className="w-9 h-9 rounded-lg bg-bg-secondary flex items-center justify-center transition-all duration-300 border border-border-subtle hover:border-cyan/30 text-text-dim hover:text-cyan hover:shadow-[0_0_16px_-4px_var(--glow-cyan)] hover:scale-110 hover:-translate-y-0.5"
+              className="w-10 h-10 rounded-lg bg-surface-container-high flex items-center justify-center transition-all duration-300 text-on-surface-variant hover:text-accent hover:bg-accent/10 hover:scale-110 hover:-translate-y-0.5"
             >
               {social.icon}
             </Link>
@@ -175,11 +127,11 @@ export default function Hero({ inView, descRef }: { inView: boolean; descRef: an
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 2, duration: 1 }}
-        className="flex flex-col items-center mt-20 gap-2"
+        transition={{ delay: 2.5, duration: 1 }}
+        className="flex flex-col items-center mt-24 gap-3"
       >
-        <span className="text-[10px] font-mono text-text-dim uppercase tracking-[0.2em]">Scroll</span>
-        <div className="w-px h-12 bg-gradient-to-b from-cyan/40 to-transparent" />
+        <span className="font-label text-xs text-on-surface-variant/50 uppercase tracking-[0.3em]">Scroll</span>
+        <div className="w-px h-16 bg-gradient-to-b from-accent/30 to-transparent" />
       </motion.div>
     </section>
   );

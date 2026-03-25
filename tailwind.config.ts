@@ -9,50 +9,71 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Space Grotesk', 'Inter', '-apple-system', 'sans-serif'],
-        mono: ['JetBrains Mono', 'monospace'],
+        sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
         display: ['Space Grotesk', 'sans-serif'],
+        mono: ['JetBrains Mono', 'monospace'],
+        label: ['Manrope', 'sans-serif'],
       },
       colors: {
-        bg: {
-          DEFAULT: '#050508',
-          secondary: '#0c0c12',
-          tertiary: '#14141e',
-          card: '#0a0a14',
+        surface: {
+          DEFAULT: '#0e0e0e',
+          dim: '#0e0e0e',
+          bright: '#2c2c2c',
+          container: '#1a1919',
+          'container-low': '#131313',
+          'container-high': '#201f1f',
+          'container-highest': '#262626',
+          'container-lowest': '#000000',
+          variant: '#262626',
         },
-        border: {
-          DEFAULT: 'rgba(56, 189, 248, 0.12)',
-          subtle: 'rgba(56, 189, 248, 0.06)',
-          glow: 'rgba(56, 189, 248, 0.25)',
+        primary: {
+          DEFAULT: '#a1faff',
+          container: '#00f4fe',
+          dim: '#00e5ee',
         },
-        text: {
-          DEFAULT: '#e8eaed',
-          muted: '#8b8fa3',
-          dim: '#5a5e73',
+        secondary: {
+          DEFAULT: '#00e3fe',
+          container: '#006876',
+          dim: '#00d4ee',
         },
-        cyan: {
-          DEFAULT: '#38bdf8',
-          bright: '#7dd3fc',
-          neon: 'rgba(56, 189, 248, 0.6)',
-          glow: 'rgba(56, 189, 248, 0.08)',
+        tertiary: {
+          DEFAULT: '#64b3ff',
+          container: '#45a6fa',
+          dim: '#41a3f7',
         },
-        purple: {
-          DEFAULT: '#a78bfa',
-          bright: '#c4b5fd',
-          neon: 'rgba(167, 139, 250, 0.6)',
-          glow: 'rgba(167, 139, 250, 0.08)',
+        error: {
+          DEFAULT: '#ff716c',
+          container: '#9f0519',
+          dim: '#d7383b',
         },
+        on: {
+          surface: '#ffffff',
+          'surface-variant': '#adaaaa',
+          primary: '#006165',
+          'primary-container': '#00575b',
+          secondary: '#004d58',
+          background: '#ffffff',
+        },
+        outline: {
+          DEFAULT: '#767575',
+          variant: '#484847',
+        },
+        accent: '#00F5FF',
         emerald: {
           DEFAULT: '#34d399',
           dim: 'rgba(52, 211, 153, 0.15)',
         },
-        amber: {
-          DEFAULT: '#fbbf24',
-        },
+      },
+      maxWidth: {
+        '7xl': '80rem',
       },
       borderRadius: {
-        '2xl': '1rem',
-        '3xl': '1.5rem',
+        'sm': '4px',
+        'md': '8px',
+        'lg': '12px',
+        'xl': '16px',
+        '2xl': '20px',
+        '3xl': '24px',
       },
       keyframes: {
         'fade-up': {
@@ -67,18 +88,25 @@ const config: Config = {
           '0%': { opacity: '0', transform: 'translateX(-20px)' },
           '100%': { opacity: '1', transform: 'translateX(0)' },
         },
-        wave: {
-          '0%': { transform: 'rotate(0deg)' },
-          '25%': { transform: 'rotate(-20deg)' },
-          '75%': { transform: 'rotate(20deg)' },
-          '100%': { transform: 'rotate(0deg)' },
+        'gradient-shift': {
+          '0%, 100%': { backgroundPosition: '0% 50%' },
+          '50%': { backgroundPosition: '100% 50%' },
+        },
+        'glow-pulse': {
+          '0%, 100%': { boxShadow: '0 0 20px -4px rgba(0, 245, 255, 0.08)' },
+          '50%': { boxShadow: '0 0 50px -4px rgba(0, 245, 255, 0.15)' },
+        },
+        blink: {
+          '0%, 100%': { opacity: '1' },
+          '50%': { opacity: '0' },
         },
       },
       animation: {
         'fade-up': 'fade-up 0.6s cubic-bezier(0.22, 1, 0.36, 1)',
         'fade-in': 'fade-in 0.4s ease-out',
         'slide-in-left': 'slide-in-left 0.5s cubic-bezier(0.22, 1, 0.36, 1)',
-        wave: 'wave 0.8s linear',
+        'gradient-shift': 'gradient-shift 4s ease infinite',
+        'glow-pulse': 'glow-pulse 3s ease-in-out infinite',
       },
     },
   },

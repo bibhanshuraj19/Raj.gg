@@ -1,7 +1,6 @@
 import { motion } from "framer-motion";
 import Divider from "@/components/Divider";
 import TechBadge from "@/components/TechBadge";
-import Marquee from "react-fast-marquee";
 import { Tech } from "../../typings";
 
 interface AboutCardProps {
@@ -26,28 +25,24 @@ export default function AboutCard({ title, description, tech, direction, span, d
       viewport={{ amount: 0.1, once: true }}
       className="h-full"
     >
-      <div className="neon-card h-full p-5 rounded-2xl group">
-        <div className="flex items-center gap-2 mb-3">
-          <div className="w-1.5 h-1.5 rounded-full bg-cyan shadow-[0_0_6px_var(--neon-cyan)]" />
-          <h3 className="font-semibold text-sm font-mono text-text group-hover:text-cyan transition-colors duration-300 uppercase tracking-wider">
+      <div className="surface-card h-full p-6 group">
+        <div className="flex items-center gap-2.5 mb-4">
+          <div className="w-2 h-2 rounded-full bg-accent/60" />
+          <h3 className="font-display font-semibold text-sm text-on-surface group-hover:text-accent transition-colors duration-300 uppercase tracking-wider">
             {title}
           </h3>
         </div>
-        <p className="text-sm text-text-muted leading-relaxed">
+        <p className="text-sm text-on-surface-variant leading-relaxed">
           {description}
         </p>
         {tech && (
           <>
-            <div className="my-3">
-              <Divider />
+            <div className="my-4 surface-separator" />
+            <div className="flex flex-wrap gap-2">
+              {tech.map((t) => (
+                <TechBadge key={t.title} title={t.title} icon={t.icon} link={t.link} />
+              ))}
             </div>
-            <Marquee pauseOnHover speed={40} className="py-1">
-              <div className="flex gap-2 pr-2">
-                {tech.map((t) => (
-                  <TechBadge key={t.title} title={t.title} icon={t.icon} link={t.link} />
-                ))}
-              </div>
-            </Marquee>
           </>
         )}
       </div>

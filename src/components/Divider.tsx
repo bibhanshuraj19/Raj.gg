@@ -1,3 +1,3 @@
 export default function Divider() {
-  return <div className="hud-line" />;
+  return <div className="surface-separator" />;
 }

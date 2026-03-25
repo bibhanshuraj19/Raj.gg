@@ -85,34 +85,34 @@ export default function About() {
     },
   ];
 
-  const tabs: { key: TabType; label: string; icon: string }[] = [
-    { key: "experience", label: "Experience", icon: ">" },
-    { key: "education", label: "Education", icon: ">" },
-    { key: "extracurricular", label: "Extra", icon: ">" },
+  const tabs: { key: TabType; label: string }[] = [
+    { key: "experience", label: "Experience" },
+    { key: "education", label: "Education" },
+    { key: "extracurricular", label: "Extra" },
   ];
 
   return (
-    <section id="about" className="max-w-3xl w-full mx-auto px-6">
+    <section id="about" className="max-w-6xl w-full mx-auto px-6">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
         viewport={{ once: true }}
-        className="mb-10"
+        className="mb-12"
       >
-        <div className="flex items-center gap-3 mb-3">
-          <div className="h-px flex-1 bg-gradient-to-r from-cyan/30 to-transparent" />
-          <h2 className="text-[11px] font-mono font-medium text-cyan uppercase tracking-[0.25em]">
-            // About
-          </h2>
-          <div className="h-px flex-1 bg-gradient-to-l from-purple/30 to-transparent" />
-        </div>
-        <h3 className="text-3xl sm:text-4xl font-bold text-center">
-          <span className="gradient-text-static">What I Build</span>
-        </h3>
+        <span className="section-number">01 // About Me</span>
+        <h2 className="font-display text-4xl sm:text-5xl font-bold mt-4 mb-4">
+          <span className="gradient-text-static">Bridging the gap between</span>
+          <br />
+          <span className="text-on-surface">Logic and Artistry.</span>
+        </h2>
+        <p className="text-lg text-on-surface-variant max-w-2xl leading-relaxed">
+          My journey in tech began with a curiosity about how intelligent systems are built.
+          Today, I specialize in building scalable AI systems, from classical ML to cutting-edge LLMs and voice AI.
+        </p>
       </motion.div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div className="md:col-span-2">
           <AboutCard
             title="AI/ML Journey"
@@ -151,48 +151,37 @@ export default function About() {
       </div>
 
       {/* Experience / Education tabs */}
-      <div id="experience" className="mt-24">
+      <div id="experience" className="mt-28">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
           viewport={{ once: true }}
-          className="mb-8"
+          className="mb-10"
         >
-          <div className="flex items-center gap-3 mb-3">
-            <div className="h-px flex-1 bg-gradient-to-r from-cyan/30 to-transparent" />
-            <h2 className="text-[11px] font-mono font-medium text-cyan uppercase tracking-[0.25em]">
-              // Background
-            </h2>
-            <div className="h-px flex-1 bg-gradient-to-l from-purple/30 to-transparent" />
-          </div>
+          <span className="section-number">02 // Background</span>
         </motion.div>
 
         {/* Tab bar */}
-        <div className="flex gap-0.5 p-1 rounded-xl bg-bg-secondary border border-border-subtle mb-8 w-fit">
+        <div className="flex gap-1 p-1 rounded-xl bg-surface-container ghost-border mb-10 w-fit">
           {tabs.map((tab) => (
             <button
               key={tab.key}
               onClick={() => setActiveTab(tab.key)}
-              className={`relative px-4 py-2 rounded-lg text-xs font-mono transition-all duration-300 ${
+              className={`relative px-5 py-2.5 rounded-lg text-sm font-label font-medium transition-all duration-300 ${
                 activeTab === tab.key
-                  ? "text-cyan"
-                  : "text-text-dim hover:text-text-muted"
+                  ? "text-accent"
+                  : "text-on-surface-variant hover:text-on-surface"
               }`}
             >
               {activeTab === tab.key && (
                 <motion.div
                   layoutId="activeTab"
-                  className="absolute inset-0 rounded-lg bg-cyan/5 border border-cyan/15"
+                  className="absolute inset-0 rounded-lg bg-accent/8"
                   transition={{ type: "spring", bounce: 0.15, duration: 0.5 }}
                 />
               )}
-              <span className="relative z-10 flex items-center gap-1.5">
-                <span className={`text-[10px] ${activeTab === tab.key ? "text-cyan/50" : "text-text-dim/30"}`}>
-                  {tab.icon}
-                </span>
-                {tab.label}
-              </span>
+              <span className="relative z-10">{tab.label}</span>
             </button>
           ))}
         </div>
@@ -205,7 +194,7 @@ export default function About() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -16 }}
               transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-              className="space-y-3"
+              className="space-y-4"
             >
               {experiences.map((experience, index) => (
                 <ExperienceCard key={index} experience={experience} index={index} />
@@ -234,12 +223,11 @@ export default function About() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -16 }}
               transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-              className="flex items-center justify-center py-20"
+              className="flex items-center justify-center py-24"
             >
               <div className="text-center">
-                <p className="text-text-dim text-sm font-mono">
-                  <span className="text-cyan/40">$ </span>loading...
-                  <span className="animate-[blink_1s_step-end_infinite] text-cyan ml-0.5">|</span>
+                <p className="text-on-surface-variant text-sm font-label">
+                  Coming soon...
                 </p>
               </div>
             </motion.div>
