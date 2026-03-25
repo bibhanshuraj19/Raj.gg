@@ -12,7 +12,17 @@ export default function IndexPage() {
   const { ref: descRef, inView } = useInView({ triggerOnce: true, threshold: 0.1 });
 
   return (
-    <div className="relative min-h-screen bg-surface">
+    <div className="relative min-h-screen bg-surface noise-overlay">
+      {/* Aurora ambient background */}
+      <div className="aurora-bg">
+        <div className="aurora-blob aurora-blob-1" />
+        <div className="aurora-blob aurora-blob-2" />
+        <div className="aurora-blob aurora-blob-3" />
+      </div>
+
+      {/* Dot grid pattern */}
+      <div className="fixed inset-0 dot-grid pointer-events-none z-0 opacity-60" />
+
       <Navbar />
       <main className="relative z-10">
         <Hero inView={inView} descRef={descRef} />

@@ -6,7 +6,7 @@ import {
   Calendar,
   Building2,
   ExternalLink,
-  ArrowRight,
+  ArrowUpRight,
 } from "lucide-react";
 
 interface TechIcon {
@@ -21,6 +21,7 @@ interface Project {
   location: string;
   technologies: TechIcon[];
   highlights: string[];
+  impact?: string;
   projectUrl?: string;
   githubUrl?: string;
 }
@@ -33,6 +34,7 @@ export default function Projects() {
       role: "AI Engineer & Lead Developer",
       date: "2025",
       location: "Makunai Global",
+      impact: "Sub-second latency in production",
       technologies: [
         { name: "Python" },
         { name: "Deepgram" },
@@ -43,9 +45,9 @@ export default function Projects() {
         { name: "Redis" },
       ],
       highlights: [
-        "Production-grade voice agent with real-time STT/TTS via Deepgram and OpenAI response generation",
-        "RAG pipeline with Pinecone for context-aware, knowledge-grounded voice conversations",
-        "Sub-second response latency using FastAPI + WebSockets backend",
+        "Real-time STT/TTS voice agent with Deepgram + OpenAI response generation",
+        "RAG pipeline with Pinecone for context-aware voice conversations",
+        "FastAPI + WebSockets backend with sub-second response times",
         "Led end-to-end architecture from speech recognition to deployment",
       ],
     },
@@ -55,6 +57,7 @@ export default function Projects() {
       role: "ML Developer",
       date: "2024",
       location: "Academic Project",
+      impact: "95% accuracy, 60% time saved",
       technologies: [
         { name: "Python" },
         { name: "OpenAI" },
@@ -72,6 +75,7 @@ export default function Projects() {
       role: "AI Engineer",
       date: "2024",
       location: "Research Project",
+      impact: "500+ docs, 95% retrieval accuracy",
       technologies: [
         { name: "Python" },
         { name: "LangChain" },
@@ -79,8 +83,8 @@ export default function Projects() {
         { name: "PostgreSQL" },
       ],
       highlights: [
-        "Contextual Q&A over 500+ academic documents with 95% retrieval accuracy",
-        "40% improvement in user satisfaction through intelligent claim validation",
+        "Contextual Q&A over 500+ academic documents with 95% accuracy",
+        "40% improvement in user satisfaction through claim validation",
         "Vector similarity search for efficient document retrieval",
       ],
     },
@@ -90,6 +94,7 @@ export default function Projects() {
       role: "ML Engineer",
       date: "2025",
       location: "Academic Project",
+      impact: "NeMo Guardrails + RAGAS metrics",
       technologies: [
         { name: "Python" },
         { name: "LangChain" },
@@ -98,11 +103,13 @@ export default function Projects() {
       ],
       highlights: [
         "RAG architecture for precise answers from research papers",
-        "NVIDIA NeMo Guardrails for content safety and quality control",
-        "Custom RAGAS metrics for evaluating response quality and relevance",
+        "NVIDIA NeMo Guardrails for content safety and quality",
+        "Custom RAGAS metrics for response quality evaluation",
       ],
     },
   ];
+
+  const [hoveredId, setHoveredId] = useState<string | null>(null);
 
   return (
     <section id="projects" className="max-w-6xl w-full mx-auto px-6 mt-28">
@@ -127,37 +134,47 @@ export default function Projects() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, delay: index * 0.08 }}
             viewport={{ once: true }}
-            className="surface-card p-6 group"
+            onMouseEnter={() => setHoveredId(project.id)}
+            onMouseLeave={() => setHoveredId(null)}
+            className="surface-card p-6 sm:p-7 group cursor-default"
           >
-            {/* Header */}
-            <div className="flex items-start justify-between mb-4">
-              <div>
-                <h3 className="font-display text-lg font-bold text-on-surface group-hover:text-accent transition-colors">
-                  {project.title}
-                </h3>
-                <div className="flex items-center gap-3 mt-1.5 text-xs font-label text-on-surface-variant">
-                  <span>{project.role}</span>
-                  <span className="text-outline-variant">·</span>
-                  <span className="flex items-center gap-1">
-                    <Building2 className="w-3 h-3" />
-                    {project.location}
-                  </span>
-                  <span className="flex items-center gap-1">
-                    <Calendar className="w-3 h-3" />
-                    {project.date}
-                  </span>
-                </div>
-              </div>
-              {(project.projectUrl || project.githubUrl) && (
-                <div className="flex gap-2">
-                  {project.githubUrl && (
-                    <Link href={project.githubUrl} target="_blank" className="text-on-surface-variant hover:text-accent transition-colors">
-                      <ExternalLink className="w-4 h-4" />
-                    </Link>
-                  )}
-                </div>
-              )}
+            {/* Header row */}
+            <div className="flex items-start justify-between gap-4 mb-1">
+              <h3 className="font-display text-lg sm:text-xl font-bold text-on-surface group-hover:text-accent transition-colors duration-300">
+                {project.title}
+              </h3>
+              <ArrowUpRight
+                className={`w-5 h-5 shrink-0 transition-all duration-300 ${
+                  hoveredId === project.id
+                    ? "text-accent translate-x-0.5 -translate-y-0.5"
+                    : "text-on-surface-variant/30"
+                }`}
+              />
             </div>
+
+            {/* Meta */}
+            <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs font-label text-on-surface-variant/70 mb-4">
+              <span>{project.role}</span>
+              <span className="text-outline-variant/30">·</span>
+              <span className="flex items-center gap-1">
+                <Building2 className="w-3 h-3" />
+                {project.location}
+              </span>
+              <span className="text-outline-variant/30">·</span>
+              <span className="flex items-center gap-1">
+                <Calendar className="w-3 h-3" />
+                {project.date}
+              </span>
+            </div>
+
+            {/* Impact badge */}
+            {project.impact && (
+              <div className="mb-4">
+                <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-label font-semibold bg-accent/8 text-accent">
+                  ⚡ {project.impact}
+                </span>
+              </div>
+            )}
 
             {/* Tech */}
             <div className="flex flex-wrap gap-1.5 mb-4">
@@ -168,8 +185,16 @@ export default function Projects() {
               ))}
             </div>
 
-            {/* Highlights */}
-            <ul className="space-y-2">
+            {/* Highlights — reveal on hover for non-featured */}
+            <motion.ul
+              className="space-y-2 overflow-hidden"
+              initial={false}
+              animate={{
+                height: hoveredId === project.id || index === 0 ? "auto" : index === 0 ? "auto" : 0,
+                opacity: hoveredId === project.id || index === 0 ? 1 : 0,
+              }}
+              transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+            >
               {project.highlights.map((highlight, i) => (
                 <li key={i} className="flex items-start gap-2">
                   <ChevronRight className="w-3 h-3 mt-1.5 shrink-0 text-accent/40" />
@@ -178,7 +203,18 @@ export default function Projects() {
                   </span>
                 </li>
               ))}
-            </ul>
+            </motion.ul>
+
+            {/* Links */}
+            {(project.projectUrl || project.githubUrl) && (
+              <div className="flex items-center gap-3 mt-4 pt-3 border-t border-outline-variant/10">
+                {project.githubUrl && (
+                  <Link href={project.githubUrl} target="_blank" className="font-label text-xs text-on-surface-variant hover:text-accent transition-colors flex items-center gap-1">
+                    GitHub <ExternalLink className="w-3 h-3" />
+                  </Link>
+                )}
+              </div>
+            )}
           </motion.div>
         ))}
       </div>

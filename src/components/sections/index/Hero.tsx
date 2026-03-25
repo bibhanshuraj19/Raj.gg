@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
 const socials = [
   {
@@ -19,9 +20,44 @@ const socials = [
   },
 ];
 
+// Stat counter component
+function StatCounter({ value, label, delay }: { value: string; label: string; delay: number }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 12 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, delay }}
+      className="text-center"
+    >
+      <div className="font-display text-2xl sm:text-3xl font-bold text-accent">{value}</div>
+      <div className="font-label text-xs text-on-surface-variant/60 mt-1">{label}</div>
+    </motion.div>
+  );
+}
+
+function useTypewriter(text: string, speed = 30, delay = 1500) {
+  const [displayed, setDisplayed] = useState("");
+  useEffect(() => {
+    let i = 0;
+    const timeout = setTimeout(() => {
+      const interval = setInterval(() => {
+        if (i < text.length) {
+          setDisplayed(text.slice(0, i + 1));
+          i++;
+        } else {
+          clearInterval(interval);
+        }
+      }, speed);
+      return () => clearInterval(interval);
+    }, delay);
+    return () => clearTimeout(timeout);
+  }, [text, speed, delay]);
+  return displayed;
+}
+
 const container = {
   hidden: { opacity: 0 },
-  show: { opacity: 1, transition: { staggerChildren: 0.1, delayChildren: 0.2 } },
+  show: { opacity: 1, transition: { staggerChildren: 0.1, delayChildren: 0.15 } },
 };
 
 const item = {
@@ -30,64 +66,82 @@ const item = {
 };
 
 export default function Hero({ inView, descRef }: { inView: boolean; descRef: any }) {
+  const statusText = useTypewriter("building voice agents @ makunai global", 25, 1800);
+
   return (
-    <section className="relative max-w-6xl w-full mx-auto px-6 pt-36 pb-20" ref={descRef}>
+    <section className="relative max-w-6xl w-full mx-auto px-6 pt-36 pb-16" ref={descRef}>
+      {/* Hero ambient glow */}
+      <div className="absolute top-20 left-1/2 -translate-x-1/2 w-[600px] h-[400px] bg-accent/[0.03] rounded-full blur-[150px] pointer-events-none" />
+
       <motion.div
         variants={container}
         initial="hidden"
         animate="show"
         className="relative"
       >
-        {/* Role Badge */}
-        <motion.div variants={item} className="mb-6">
-          <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-label font-semibold bg-accent/8 text-accent tracking-wider uppercase">
-            <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
-            AI / ML Engineer
-          </span>
+        {/* Status line with typing effect */}
+        <motion.div variants={item} className="mb-8">
+          <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-surface-container ghost-border">
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald opacity-75" />
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald" />
+            </span>
+            <span className="font-mono text-xs text-on-surface-variant">
+              {statusText}
+              <span className="animate-[blink_1s_step-end_infinite] text-accent ml-0.5">|</span>
+            </span>
+          </div>
         </motion.div>
 
-        {/* Name + Headline */}
-        <motion.div variants={item} className="mb-6">
-          <h1 className="font-display text-5xl sm:text-6xl md:text-7xl font-bold tracking-tight leading-[1.1]">
-            <span className="gradient-text">Bibhanshu Raj</span>
+        {/* Name — big dramatic display */}
+        <motion.div variants={item} className="mb-4">
+          <h1 className="font-display text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-bold tracking-tight leading-[0.95]">
+            <span className="gradient-text">Bibhanshu</span>
           </h1>
         </motion.div>
 
-        <motion.div variants={item} className="mb-8 max-w-2xl">
-          <p className="text-xl sm:text-2xl text-on-surface-variant leading-relaxed font-display font-light">
-            Building intelligent systems that{" "}
-            <span className="text-accent">think</span>,{" "}
-            <span className="text-accent">speak</span>, and{" "}
-            <span className="text-accent">learn</span>.
+        <motion.div variants={item} className="mb-8">
+          <h1 className="font-display text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-bold tracking-tight leading-[0.95]">
+            <span className="text-on-surface/80">Raj</span>
+            <span className="text-accent">.</span>
+          </h1>
+        </motion.div>
+
+        {/* Tagline */}
+        <motion.div variants={item} className="mb-10 max-w-xl">
+          <p className="text-lg sm:text-xl text-on-surface-variant leading-relaxed">
+            I build{" "}
+            <span className="text-accent font-medium">production AI systems</span>{" "}
+            — voice agents, RAG pipelines, and ML infrastructure that
+            work at scale.
           </p>
         </motion.div>
 
-        {/* Bio */}
-        <motion.p
-          variants={item}
-          className="text-base text-on-surface-variant/70 max-w-xl leading-relaxed mb-10"
-        >
-          Machine learning engineer specializing in production voice AI, RAG systems,
-          and end-to-end ML pipelines. Currently building at Makunai Global.
-        </motion.p>
-
-        {/* CTA Buttons */}
-        <motion.div variants={item} className="flex flex-wrap items-center gap-3 mb-10">
+        {/* CTAs */}
+        <motion.div variants={item} className="flex flex-wrap items-center gap-3 mb-16">
           <a href="#projects" className="gradient-cta text-sm font-display">
             View Projects
             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
             </svg>
           </a>
-          <a
-            href="mailto:bibhanshuraj@icloud.com"
-            className="glass-cta text-sm font-label"
-          >
+          <a href="mailto:bibhanshuraj@icloud.com" className="glass-cta text-sm font-label">
             Get in Touch
           </a>
         </motion.div>
 
-        {/* Social Icons */}
+        {/* Stats row */}
+        <motion.div variants={item} className="mb-12">
+          <div className="inline-flex items-center gap-8 sm:gap-12 px-6 py-4 rounded-2xl bg-surface-container-low/50 ghost-border">
+            <StatCounter value="3+" label="AI Projects" delay={1.2} />
+            <div className="w-px h-8 bg-outline-variant/20" />
+            <StatCounter value="1yr" label="Production AI" delay={1.4} />
+            <div className="w-px h-8 bg-outline-variant/20" />
+            <StatCounter value="BITS" label="CS Student" delay={1.6} />
+          </div>
+        </motion.div>
+
+        {/* Socials */}
         <motion.div variants={item} className="flex items-center gap-2">
           {socials.map((social) => (
             <Link
@@ -95,7 +149,7 @@ export default function Hero({ inView, descRef }: { inView: boolean; descRef: an
               href={social.href}
               target="_blank"
               aria-label={social.label}
-              className="w-9 h-9 rounded-lg bg-surface-container-high flex items-center justify-center transition-all duration-300 text-on-surface-variant hover:text-accent hover:bg-accent/10"
+              className="w-9 h-9 rounded-lg bg-surface-container-high flex items-center justify-center transition-all duration-300 text-on-surface-variant hover:text-accent hover:bg-accent/10 hover:scale-110 hover:-translate-y-0.5 hover:shadow-[0_4px_16px_rgba(0,245,255,0.1)]"
             >
               {social.icon}
             </Link>
