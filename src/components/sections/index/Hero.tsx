@@ -20,22 +20,21 @@ const socials = [
   },
 ];
 
-// Stat counter component
 function StatCounter({ value, label, delay }: { value: string; label: string; delay: number }) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 12 }}
+      initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, delay }}
+      transition={{ duration: 0.7, delay, ease: [0.16, 1, 0.3, 1] }}
       className="text-center"
     >
-      <div className="font-display text-2xl sm:text-3xl font-bold text-accent">{value}</div>
-      <div className="font-label text-xs text-on-surface-variant/60 mt-1">{label}</div>
+      <div className="font-display text-2xl sm:text-3xl font-bold text-on-surface">{value}</div>
+      <div className="font-label text-xs text-on-surface-variant/50 mt-1">{label}</div>
     </motion.div>
   );
 }
 
-function useTypewriter(text: string, speed = 30, delay = 1500) {
+function useTypewriter(text: string, speed = 35, delay = 1500) {
   const [displayed, setDisplayed] = useState("");
   useEffect(() => {
     let i = 0;
@@ -57,21 +56,21 @@ function useTypewriter(text: string, speed = 30, delay = 1500) {
 
 const container = {
   hidden: { opacity: 0 },
-  show: { opacity: 1, transition: { staggerChildren: 0.1, delayChildren: 0.15 } },
+  show: { opacity: 1, transition: { staggerChildren: 0.12, delayChildren: 0.1 } },
 };
 
 const item = {
-  hidden: { opacity: 0, y: 24 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] } },
+  hidden: { opacity: 0, y: 20 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } },
 };
 
 export default function Hero({ inView, descRef }: { inView: boolean; descRef: any }) {
-  const statusText = useTypewriter("building voice agents @ makunai global", 25, 1800);
+  const statusText = useTypewriter("building voice agents @ makunai global", 30, 1800);
 
   return (
     <section className="relative max-w-6xl w-full mx-auto px-6 pt-36 pb-16" ref={descRef}>
-      {/* Hero ambient glow */}
-      <div className="absolute top-20 left-1/2 -translate-x-1/2 w-[600px] h-[400px] bg-accent/[0.03] rounded-full blur-[150px] pointer-events-none" />
+      {/* Subtle ambient glow */}
+      <div className="absolute top-20 left-1/2 -translate-x-1/2 w-[500px] h-[350px] bg-white/[0.015] rounded-full blur-[150px] pointer-events-none" />
 
       <motion.div
         variants={container}
@@ -79,7 +78,7 @@ export default function Hero({ inView, descRef }: { inView: boolean; descRef: an
         animate="show"
         className="relative"
       >
-        {/* Status line with typing effect */}
+        {/* Status bar */}
         <motion.div variants={item} className="mb-8">
           <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-surface-container ghost-border">
             <span className="relative flex h-2 w-2">
@@ -88,12 +87,12 @@ export default function Hero({ inView, descRef }: { inView: boolean; descRef: an
             </span>
             <span className="font-mono text-xs text-on-surface-variant">
               {statusText}
-              <span className="animate-[blink_1s_step-end_infinite] text-accent ml-0.5">|</span>
+              <span className="animate-[blink_1s_step-end_infinite] text-on-surface ml-0.5">|</span>
             </span>
           </div>
         </motion.div>
 
-        {/* Name — big dramatic display */}
+        {/* Name */}
         <motion.div variants={item} className="mb-4">
           <h1 className="font-display text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-bold tracking-tight leading-[0.95]">
             <span className="gradient-text">Bibhanshu</span>
@@ -102,8 +101,8 @@ export default function Hero({ inView, descRef }: { inView: boolean; descRef: an
 
         <motion.div variants={item} className="mb-8">
           <h1 className="font-display text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-bold tracking-tight leading-[0.95]">
-            <span className="text-on-surface/80">Raj</span>
-            <span className="text-accent">.</span>
+            <span className="text-on-surface/60">Raj</span>
+            <span className="text-on-surface">.</span>
           </h1>
         </motion.div>
 
@@ -111,7 +110,7 @@ export default function Hero({ inView, descRef }: { inView: boolean; descRef: an
         <motion.div variants={item} className="mb-10 max-w-xl">
           <p className="text-lg sm:text-xl text-on-surface-variant leading-relaxed">
             I build{" "}
-            <span className="text-accent font-medium">production AI systems</span>{" "}
+            <span className="text-on-surface font-medium">production AI systems</span>{" "}
             — voice agents, RAG pipelines, and ML infrastructure that
             work at scale.
           </p>
@@ -130,14 +129,14 @@ export default function Hero({ inView, descRef }: { inView: boolean; descRef: an
           </a>
         </motion.div>
 
-        {/* Stats row */}
+        {/* Stats */}
         <motion.div variants={item} className="mb-12">
           <div className="inline-flex items-center gap-8 sm:gap-12 px-6 py-4 rounded-2xl bg-surface-container-low/50 ghost-border">
-            <StatCounter value="3+" label="AI Projects" delay={1.2} />
-            <div className="w-px h-8 bg-outline-variant/20" />
-            <StatCounter value="1yr" label="Production AI" delay={1.4} />
-            <div className="w-px h-8 bg-outline-variant/20" />
-            <StatCounter value="BITS" label="CS Student" delay={1.6} />
+            <StatCounter value="3+" label="AI Projects" delay={1.4} />
+            <div className="w-px h-8 bg-outline-variant/30" />
+            <StatCounter value="1yr" label="Production AI" delay={1.6} />
+            <div className="w-px h-8 bg-outline-variant/30" />
+            <StatCounter value="BITS" label="CS Student" delay={1.8} />
           </div>
         </motion.div>
 
@@ -149,7 +148,7 @@ export default function Hero({ inView, descRef }: { inView: boolean; descRef: an
               href={social.href}
               target="_blank"
               aria-label={social.label}
-              className="w-9 h-9 rounded-lg bg-surface-container-high flex items-center justify-center transition-all duration-300 text-on-surface-variant hover:text-accent hover:bg-accent/10 hover:scale-110 hover:-translate-y-0.5 hover:shadow-[0_4px_16px_rgba(0,245,255,0.1)]"
+              className="w-9 h-9 rounded-lg bg-surface-container-high flex items-center justify-center transition-all duration-500 ease-smooth text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest hover:-translate-y-0.5"
             >
               {social.icon}
             </Link>

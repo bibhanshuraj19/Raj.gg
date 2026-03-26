@@ -26,9 +26,9 @@ export default function Certifications() {
   return (
     <section id="certifications" className="max-w-6xl w-full mx-auto px-6 mt-28">
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
+        initial={{ opacity: 0, y: 16 }}
         whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
+        transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
         viewport={{ once: true }}
         className="mb-8"
       >
@@ -41,7 +41,7 @@ export default function Certifications() {
             key={cert.id}
             initial={{ opacity: 0, y: 12 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.3, delay: index * 0.08 }}
+            transition={{ duration: 0.5, delay: index * 0.06, ease: [0.16, 1, 0.3, 1] }}
             viewport={{ once: true }}
           >
             <Link
@@ -53,14 +53,14 @@ export default function Certifications() {
                 <img src={cert.issuerLogo} alt={cert.issuer} className="w-full h-full object-contain" />
               </div>
               <div className="flex-1 min-w-0">
-                <h4 className="text-sm font-semibold text-on-surface group-hover:text-accent transition-colors font-display truncate">
+                <h4 className="text-sm font-semibold text-on-surface group-hover:text-white transition-colors duration-400 font-display truncate">
                   {cert.title}
                 </h4>
-                <p className="font-label text-xs text-on-surface-variant mt-0.5">
+                <p className="font-label text-xs text-on-surface-variant/60 mt-0.5">
                   {cert.issuer} &middot; {cert.issueDate}
                 </p>
               </div>
-              <ExternalLink className="w-3.5 h-3.5 text-on-surface-variant group-hover:text-accent transition-colors shrink-0" />
+              <ExternalLink className="w-3.5 h-3.5 text-on-surface-variant/30 group-hover:text-on-surface transition-colors duration-400 shrink-0" />
             </Link>
           </motion.div>
         ))}

@@ -16,14 +16,13 @@ export default function ExperienceCard({ experience, index }: { experience: Expe
   return (
     <motion.div
       className="group"
-      initial={{ opacity: 0, y: 20 }}
+      initial={{ opacity: 0, y: 16 }}
       whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, delay: index * 0.1, ease: [0.22, 1, 0.36, 1] }}
+      transition={{ duration: 0.6, delay: index * 0.08, ease: [0.16, 1, 0.3, 1] }}
       viewport={{ amount: 0.2, once: true }}
     >
       <div className="surface-card p-6 relative overflow-hidden">
         <div className="relative">
-          {/* Header */}
           <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-4">
             <div className="flex-1">
               <div className="flex items-center gap-3 flex-wrap">
@@ -37,31 +36,29 @@ export default function ExperienceCard({ experience, index }: { experience: Expe
                   </span>
                 )}
               </div>
-              <p className="text-sm font-medium text-accent mt-1 font-label">
+              <p className="text-sm font-medium text-on-surface-variant mt-1 font-label">
                 {experience.company}
               </p>
             </div>
           </div>
 
-          {/* Meta */}
-          <div className="flex flex-wrap gap-4 text-xs text-on-surface-variant font-label mb-5">
+          <div className="flex flex-wrap gap-4 text-xs text-on-surface-variant/60 font-label mb-5">
             <span className="flex items-center gap-1.5">
-              <MapPin className="w-3 h-3 text-accent/50" />
+              <MapPin className="w-3 h-3" />
               {experience.location}
             </span>
             <span className="flex items-center gap-1.5">
-              <Calendar className="w-3 h-3 text-accent/50" />
+              <Calendar className="w-3 h-3" />
               {experience.startDate} — {experience.endDate}
             </span>
           </div>
 
           <div className="surface-separator mb-5" />
 
-          {/* Achievements */}
           <ul className="space-y-3">
             {experience.achievements.map((achievement, idx) => (
               <li key={idx} className="flex items-start gap-3">
-                <ChevronRight className="w-3 h-3 mt-1.5 shrink-0 text-accent/40" />
+                <ChevronRight className="w-3 h-3 mt-1.5 shrink-0 text-on-surface-variant/30" />
                 <span className="text-sm text-on-surface-variant leading-relaxed">{achievement}</span>
               </li>
             ))}

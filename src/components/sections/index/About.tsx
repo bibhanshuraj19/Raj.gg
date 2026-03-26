@@ -89,11 +89,10 @@ export default function About() {
 
   return (
     <section id="about" className="max-w-6xl w-full mx-auto px-6 mt-12">
-      {/* Tech Stack */}
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
+        initial={{ opacity: 0, y: 16 }}
         whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
+        transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
         viewport={{ once: true }}
         className="mb-10"
       >
@@ -132,12 +131,11 @@ export default function About() {
         </div>
       </div>
 
-      {/* Experience / Education */}
       <div id="experience" className="mt-28">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
           viewport={{ once: true }}
           className="mb-10"
         >
@@ -147,23 +145,22 @@ export default function About() {
           </h2>
         </motion.div>
 
-        {/* Tab bar */}
         <div className="flex gap-1 p-1 rounded-xl bg-surface-container ghost-border mb-8 w-fit">
           {tabs.map((tab) => (
             <button
               key={tab.key}
               onClick={() => setActiveTab(tab.key)}
-              className={`relative px-5 py-2 rounded-lg text-sm font-label font-medium transition-all duration-300 ${
+              className={`relative px-5 py-2 rounded-lg text-sm font-label font-medium transition-all duration-400 ease-smooth ${
                 activeTab === tab.key
-                  ? "text-accent"
+                  ? "text-on-surface"
                   : "text-on-surface-variant hover:text-on-surface"
               }`}
             >
               {activeTab === tab.key && (
                 <motion.div
                   layoutId="activeTab"
-                  className="absolute inset-0 rounded-lg bg-accent/8"
-                  transition={{ type: "spring", bounce: 0.15, duration: 0.5 }}
+                  className="absolute inset-0 rounded-lg bg-white/[0.06]"
+                  transition={{ type: "spring", bounce: 0.12, duration: 0.6 }}
                 />
               )}
               <span className="relative z-10">{tab.label}</span>
@@ -175,10 +172,10 @@ export default function About() {
           {activeTab === "experience" && (
             <motion.div
               key="experience"
-              initial={{ opacity: 0, y: 16 }}
+              initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -16 }}
-              transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+              exit={{ opacity: 0, y: -12 }}
+              transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
               className="space-y-4"
             >
               {experiences.map((experience, index) => (
@@ -190,10 +187,10 @@ export default function About() {
           {activeTab === "education" && (
             <motion.div
               key="education"
-              initial={{ opacity: 0, y: 16 }}
+              initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -16 }}
-              transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+              exit={{ opacity: 0, y: -12 }}
+              transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
             >
               {education.map((edu, index) => (
                 <EducationCard key={index} education={edu} index={index} />

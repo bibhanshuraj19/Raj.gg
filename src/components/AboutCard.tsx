@@ -19,20 +19,20 @@ export default function AboutCard({ title, description, tech, direction, span, d
 
   return (
     <motion.div
-      initial={{ transform: `translate${axis}(${sign}24px)`, opacity: 0 }}
+      initial={{ transform: `translate${axis}(${sign}20px)`, opacity: 0 }}
       whileInView={{ transform: `translate${axis}(0px)`, opacity: 1 }}
-      transition={{ duration: 0.6, delay, ease: [0.22, 1, 0.36, 1] }}
+      transition={{ duration: 0.7, delay, ease: [0.16, 1, 0.3, 1] }}
       viewport={{ amount: 0.1, once: true }}
       className="h-full"
     >
       <div className="surface-card h-full p-6 group">
         <div className="flex items-center gap-2.5 mb-4">
-          <div className="w-2 h-2 rounded-full bg-accent/60" />
-          <h3 className="font-display font-semibold text-sm text-on-surface group-hover:text-accent transition-colors duration-300 uppercase tracking-wider">
+          <div className="w-1.5 h-1.5 rounded-full bg-on-surface-variant/40 group-hover:bg-on-surface transition-colors duration-500" />
+          <h3 className="font-display font-semibold text-sm text-on-surface-variant group-hover:text-on-surface transition-colors duration-500 uppercase tracking-wider">
             {title}
           </h3>
         </div>
-        <p className="text-sm text-on-surface-variant leading-relaxed">
+        <p className="text-sm text-on-surface-variant/70 leading-relaxed">
           {description}
         </p>
         {tech && (

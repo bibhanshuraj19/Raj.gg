@@ -36,13 +36,8 @@ export default function Projects() {
       location: "Makunai Global",
       impact: "Sub-second latency in production",
       technologies: [
-        { name: "Python" },
-        { name: "Deepgram" },
-        { name: "OpenAI" },
-        { name: "FastAPI" },
-        { name: "WebSockets" },
-        { name: "Pinecone" },
-        { name: "Redis" },
+        { name: "Python" }, { name: "Deepgram" }, { name: "OpenAI" },
+        { name: "FastAPI" }, { name: "WebSockets" }, { name: "Pinecone" }, { name: "Redis" },
       ],
       highlights: [
         "Real-time STT/TTS voice agent with Deepgram + OpenAI response generation",
@@ -58,11 +53,7 @@ export default function Projects() {
       date: "2024",
       location: "Academic Project",
       impact: "95% accuracy, 60% time saved",
-      technologies: [
-        { name: "Python" },
-        { name: "OpenAI" },
-        { name: "FastAPI" },
-      ],
+      technologies: [{ name: "Python" }, { name: "OpenAI" }, { name: "FastAPI" }],
       highlights: [
         "95% grading accuracy across 200+ student submissions",
         "Automated 85% of evaluation steps, cutting grading time by 60%",
@@ -76,12 +67,7 @@ export default function Projects() {
       date: "2024",
       location: "Research Project",
       impact: "500+ docs, 95% retrieval accuracy",
-      technologies: [
-        { name: "Python" },
-        { name: "LangChain" },
-        { name: "OpenAI" },
-        { name: "PostgreSQL" },
-      ],
+      technologies: [{ name: "Python" }, { name: "LangChain" }, { name: "OpenAI" }, { name: "PostgreSQL" }],
       highlights: [
         "Contextual Q&A over 500+ academic documents with 95% accuracy",
         "40% improvement in user satisfaction through claim validation",
@@ -95,12 +81,7 @@ export default function Projects() {
       date: "2025",
       location: "Academic Project",
       impact: "NeMo Guardrails + RAGAS metrics",
-      technologies: [
-        { name: "Python" },
-        { name: "LangChain" },
-        { name: "NVIDIA NeMo" },
-        { name: "Hugging Face" },
-      ],
+      technologies: [{ name: "Python" }, { name: "LangChain" }, { name: "NVIDIA NeMo" }, { name: "Hugging Face" }],
       highlights: [
         "RAG architecture for precise answers from research papers",
         "NVIDIA NeMo Guardrails for content safety and quality",
@@ -114,9 +95,9 @@ export default function Projects() {
   return (
     <section id="projects" className="max-w-6xl w-full mx-auto px-6 mt-28">
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
+        initial={{ opacity: 0, y: 16 }}
         whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
+        transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
         viewport={{ once: true }}
         className="mb-10"
       >
@@ -130,53 +111,49 @@ export default function Projects() {
         {projects.map((project, index) => (
           <motion.div
             key={project.id}
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4, delay: index * 0.08 }}
+            transition={{ duration: 0.6, delay: index * 0.06, ease: [0.16, 1, 0.3, 1] }}
             viewport={{ once: true }}
             onMouseEnter={() => setHoveredId(project.id)}
             onMouseLeave={() => setHoveredId(null)}
             className="surface-card p-6 sm:p-7 group cursor-default"
           >
-            {/* Header row */}
             <div className="flex items-start justify-between gap-4 mb-1">
-              <h3 className="font-display text-lg sm:text-xl font-bold text-on-surface group-hover:text-accent transition-colors duration-300">
+              <h3 className="font-display text-lg sm:text-xl font-bold text-on-surface group-hover:text-white transition-colors duration-500">
                 {project.title}
               </h3>
               <ArrowUpRight
-                className={`w-5 h-5 shrink-0 transition-all duration-300 ${
+                className={`w-5 h-5 shrink-0 transition-all duration-500 ease-smooth ${
                   hoveredId === project.id
-                    ? "text-accent translate-x-0.5 -translate-y-0.5"
-                    : "text-on-surface-variant/30"
+                    ? "text-on-surface translate-x-0.5 -translate-y-0.5"
+                    : "text-on-surface-variant/20"
                 }`}
               />
             </div>
 
-            {/* Meta */}
-            <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs font-label text-on-surface-variant/70 mb-4">
+            <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs font-label text-on-surface-variant/60 mb-4">
               <span>{project.role}</span>
-              <span className="text-outline-variant/30">·</span>
+              <span className="text-outline-variant/40">·</span>
               <span className="flex items-center gap-1">
                 <Building2 className="w-3 h-3" />
                 {project.location}
               </span>
-              <span className="text-outline-variant/30">·</span>
+              <span className="text-outline-variant/40">·</span>
               <span className="flex items-center gap-1">
                 <Calendar className="w-3 h-3" />
                 {project.date}
               </span>
             </div>
 
-            {/* Impact badge */}
             {project.impact && (
               <div className="mb-4">
-                <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-label font-semibold bg-accent/8 text-accent">
+                <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-label font-semibold bg-white/[0.05] text-on-surface-variant border border-outline-variant/50">
                   ⚡ {project.impact}
                 </span>
               </div>
             )}
 
-            {/* Tech */}
             <div className="flex flex-wrap gap-1.5 mb-4">
               {project.technologies.map((tech) => (
                 <span key={tech.name} className="tech-chip !text-xs !py-1 !px-2.5">
@@ -185,36 +162,24 @@ export default function Projects() {
               ))}
             </div>
 
-            {/* Highlights — reveal on hover for non-featured */}
             <motion.ul
               className="space-y-2 overflow-hidden"
               initial={false}
               animate={{
-                height: hoveredId === project.id || index === 0 ? "auto" : index === 0 ? "auto" : 0,
+                height: hoveredId === project.id || index === 0 ? "auto" : 0,
                 opacity: hoveredId === project.id || index === 0 ? 1 : 0,
               }}
-              transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+              transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
             >
               {project.highlights.map((highlight, i) => (
                 <li key={i} className="flex items-start gap-2">
-                  <ChevronRight className="w-3 h-3 mt-1.5 shrink-0 text-accent/40" />
+                  <ChevronRight className="w-3 h-3 mt-1.5 shrink-0 text-on-surface-variant/30" />
                   <span className="text-sm text-on-surface-variant leading-relaxed">
                     {highlight}
                   </span>
                 </li>
               ))}
             </motion.ul>
-
-            {/* Links */}
-            {(project.projectUrl || project.githubUrl) && (
-              <div className="flex items-center gap-3 mt-4 pt-3 border-t border-outline-variant/10">
-                {project.githubUrl && (
-                  <Link href={project.githubUrl} target="_blank" className="font-label text-xs text-on-surface-variant hover:text-accent transition-colors flex items-center gap-1">
-                    GitHub <ExternalLink className="w-3 h-3" />
-                  </Link>
-                )}
-              </div>
-            )}
           </motion.div>
         ))}
       </div>

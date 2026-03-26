@@ -5,26 +5,24 @@ export default function Contact() {
   return (
     <section id="contact" className="max-w-6xl w-full mx-auto px-6 mt-32 mb-8">
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
+        initial={{ opacity: 0, y: 16 }}
         whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
+        transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
         viewport={{ once: true }}
         className="relative overflow-hidden rounded-2xl p-10 sm:p-14"
         style={{
-          background: "linear-gradient(135deg, rgba(0, 245, 255, 0.06) 0%, rgba(14, 14, 14, 0.8) 40%, rgba(100, 179, 255, 0.04) 100%)",
-          border: "1px solid rgba(0, 245, 255, 0.1)",
+          background: "linear-gradient(135deg, rgba(255, 255, 255, 0.03) 0%, rgba(6, 6, 6, 0.9) 40%, rgba(255, 255, 255, 0.015) 100%)",
+          border: "1px solid rgba(255, 255, 255, 0.06)",
         }}
       >
-        {/* Background glow */}
-        <div className="absolute top-0 right-0 w-[300px] h-[300px] bg-accent/[0.04] rounded-full blur-[100px] pointer-events-none" />
-        <div className="absolute bottom-0 left-0 w-[200px] h-[200px] bg-tertiary/[0.03] rounded-full blur-[80px] pointer-events-none" />
+        <div className="absolute top-0 right-0 w-[300px] h-[300px] bg-white/[0.015] rounded-full blur-[120px] pointer-events-none" />
 
         <div className="relative">
           <span className="section-number">05 // Contact</span>
           <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold mt-3 mb-4">
             <span className="text-on-surface">Let&apos;s work </span>
             <span className="gradient-text-static">together</span>
-            <span className="text-accent">.</span>
+            <span className="text-on-surface">.</span>
           </h2>
           <p className="text-base text-on-surface-variant max-w-lg leading-relaxed mb-8">
             Open to AI engineering roles, research collaborations, and interesting projects.
@@ -37,18 +35,10 @@ export default function Contact() {
               </svg>
               bibhanshuraj@icloud.com
             </a>
-            <Link
-              href="https://www.linkedin.com/in/bibhanshu-raj-64b547283/"
-              target="_blank"
-              className="glass-cta text-sm font-label"
-            >
+            <Link href="https://www.linkedin.com/in/bibhanshu-raj-64b547283/" target="_blank" className="glass-cta text-sm font-label">
               LinkedIn
             </Link>
-            <Link
-              href="https://github.com/bibhanshuraj19"
-              target="_blank"
-              className="glass-cta text-sm font-label"
-            >
+            <Link href="https://github.com/bibhanshuraj19" target="_blank" className="glass-cta text-sm font-label">
               GitHub
             </Link>
           </div>
