@@ -6,11 +6,8 @@ import {
   Building2,
   ArrowUpRight,
 } from "lucide-react";
-import { TextScramble, RevealOnScroll, ElasticCard } from "@/components/AnimationUtils";
 
-interface TechIcon {
-  name: string;
-}
+interface TechIcon { name: string; }
 
 interface Project {
   id: string;
@@ -21,11 +18,8 @@ interface Project {
   technologies: TechIcon[];
   highlights: string[];
   impact?: string;
-  projectUrl?: string;
-  githubUrl?: string;
 }
 
-/* ─── Project Card with Cursor Spotlight ─── */
 function ProjectCard({ project, index, isFirst }: { project: Project; index: number; isFirst: boolean }) {
   const [hovered, setHovered] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
@@ -40,119 +34,85 @@ function ProjectCard({ project, index, isFirst }: { project: Project; index: num
   };
 
   return (
-    <RevealOnScroll delay={index * 0.1}>
-      <ElasticCard>
-        <motion.div
-          ref={ref}
-          onMouseEnter={() => setHovered(true)}
-          onMouseLeave={() => setHovered(false)}
-          onMouseMove={handleMouse}
-          className="surface-card p-8 sm:p-10 group cursor-default relative overflow-hidden"
-          whileHover={{ borderColor: "rgba(255,255,255,0.1)" }}
-        >
-          {/* Cursor spotlight */}
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, delay: index * 0.08, ease: [0.16, 1, 0.3, 1] }}
+      viewport={{ once: true }}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      onMouseMove={handleMouse}
+      className="surface-card p-7 sm:p-8 group cursor-default relative overflow-hidden"
+    >
+      {/* Cursor spotlight */}
+      <motion.div
+        className="absolute pointer-events-none z-0 rounded-full"
+        style={{
+          x: spotlightX,
+          y: spotlightY,
+          translateX: "-50%",
+          translateY: "-50%",
+          width: 300,
+          height: 300,
+          background: "radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 70%)",
+          opacity: hovered ? 1 : 0,
+          transition: "opacity 0.4s",
+        }}
+      />
+
+      <div className="relative z-10">
+        <div className="flex items-start justify-between gap-4 mb-2">
+          <h3 className="font-display text-lg sm:text-xl font-bold text-on-surface group-hover:text-white transition-colors duration-300">
+            {project.title}
+          </h3>
           <motion.div
-            className="absolute pointer-events-none z-0"
-            style={{
-              x: spotlightX,
-              y: spotlightY,
-              translateX: "-50%",
-              translateY: "-50%",
-              width: 400,
-              height: 400,
-              background: "radial-gradient(circle, rgba(255,255,255,0.06) 0%, transparent 70%)",
-              opacity: hovered ? 1 : 0,
-              transition: "opacity 0.4s",
-            }}
-          />
+            animate={hovered ? { x: 2, y: -2, opacity: 1 } : { x: 0, y: 0, opacity: 0.15 }}
+            transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <ArrowUpRight className="w-5 h-5 shrink-0 text-on-surface" />
+          </motion.div>
+        </div>
 
-          <div className="relative z-10">
-            <div className="flex items-start justify-between gap-4 mb-2">
-              <h3 className="font-display text-xl sm:text-2xl font-bold text-on-surface group-hover:text-white transition-colors duration-500">
-                {project.title}
-              </h3>
-              <motion.div
-                animate={hovered ? { x: 3, y: -3, opacity: 1, rotate: 0 } : { x: 0, y: 0, opacity: 0.15, rotate: -45 }}
-                transition={{ type: "spring", stiffness: 300, damping: 18 }}
-              >
-                <ArrowUpRight className="w-6 h-6 shrink-0 text-on-surface" />
-              </motion.div>
-            </div>
+        <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs font-label text-on-surface-variant/60 mb-4">
+          <span>{project.role}</span>
+          <span className="text-outline-variant/40">·</span>
+          <span className="flex items-center gap-1"><Building2 className="w-3 h-3" />{project.location}</span>
+          <span className="text-outline-variant/40">·</span>
+          <span className="flex items-center gap-1"><Calendar className="w-3 h-3" />{project.date}</span>
+        </div>
 
-            <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-sm font-label text-on-surface-variant/60 mb-5">
-              <span>{project.role}</span>
-              <span className="text-outline-variant/40">·</span>
-              <span className="flex items-center gap-1">
-                <Building2 className="w-3.5 h-3.5" />
-                {project.location}
-              </span>
-              <span className="text-outline-variant/40">·</span>
-              <span className="flex items-center gap-1">
-                <Calendar className="w-3.5 h-3.5" />
-                {project.date}
-              </span>
-            </div>
-
-            {project.impact && (
-              <motion.div className="mb-5">
-                <motion.span
-                  className="inline-flex items-center px-4 py-1.5 rounded-full text-sm font-label font-semibold bg-white/[0.05] text-on-surface-variant border border-outline-variant/50"
-                  animate={hovered ? {
-                    borderColor: "rgba(255,255,255,0.2)",
-                    backgroundColor: "rgba(255,255,255,0.08)",
-                    boxShadow: "0 0 20px rgba(255,255,255,0.04)",
-                  } : {}}
-                  transition={{ duration: 0.4 }}
-                >
-                  ⚡ {project.impact}
-                </motion.span>
-              </motion.div>
-            )}
-
-            <div className="flex flex-wrap gap-2 mb-5">
-              {project.technologies.map((tech, i) => (
-                <motion.span
-                  key={tech.name}
-                  className="tech-chip !text-sm !py-1.5 !px-3"
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.3, delay: index * 0.05 + i * 0.04 }}
-                  viewport={{ once: true }}
-                  whileHover={{ scale: 1.08, y: -2 }}
-                >
-                  {tech.name}
-                </motion.span>
-              ))}
-            </div>
-
-            <motion.ul
-              className="space-y-3 overflow-hidden"
-              initial={false}
-              animate={{
-                height: hovered || isFirst ? "auto" : 0,
-                opacity: hovered || isFirst ? 1 : 0,
-              }}
-              transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-            >
-              {project.highlights.map((highlight, i) => (
-                <motion.li
-                  key={i}
-                  className="flex items-start gap-3"
-                  initial={{ opacity: 0, x: -12 }}
-                  animate={hovered || isFirst ? { opacity: 1, x: 0 } : { opacity: 0, x: -12 }}
-                  transition={{ duration: 0.4, delay: i * 0.08, ease: [0.16, 1, 0.3, 1] }}
-                >
-                  <ChevronRight className="w-3.5 h-3.5 mt-1.5 shrink-0 text-on-surface-variant/30" />
-                  <span className="text-base text-on-surface-variant leading-relaxed">
-                    {highlight}
-                  </span>
-                </motion.li>
-              ))}
-            </motion.ul>
+        {project.impact && (
+          <div className="mb-4">
+            <span className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-label font-semibold border transition-all duration-300 ${
+              hovered ? "bg-white/[0.08] text-on-surface border-white/15" : "bg-white/[0.05] text-on-surface-variant border-outline-variant/50"
+            }`}>
+              ⚡ {project.impact}
+            </span>
           </div>
-        </motion.div>
-      </ElasticCard>
-    </RevealOnScroll>
+        )}
+
+        <div className="flex flex-wrap gap-1.5 mb-4">
+          {project.technologies.map((tech) => (
+            <span key={tech.name} className="tech-chip !text-xs !py-1 !px-2.5">{tech.name}</span>
+          ))}
+        </div>
+
+        <motion.ul
+          className="space-y-2 overflow-hidden"
+          initial={false}
+          animate={{ height: hovered || isFirst ? "auto" : 0, opacity: hovered || isFirst ? 1 : 0 }}
+          transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+        >
+          {project.highlights.map((highlight, i) => (
+            <li key={i} className="flex items-start gap-2">
+              <ChevronRight className="w-3 h-3 mt-1.5 shrink-0 text-on-surface-variant/30" />
+              <span className="text-sm text-on-surface-variant leading-relaxed">{highlight}</span>
+            </li>
+          ))}
+        </motion.ul>
+      </div>
+    </motion.div>
   );
 }
 
@@ -221,19 +181,21 @@ export default function Projects() {
   ];
 
   return (
-    <section id="projects" className="max-w-7xl w-full mx-auto px-8 mt-36">
-      <RevealOnScroll>
-        <motion.div className="mb-12">
-          <span className="section-number">
-            <TextScramble text="03 // PROJECTS" delay={200} speed={25} />
-          </span>
-          <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold mt-4">
-            <span className="text-on-surface">What I&apos;ve built</span>
-          </h2>
-        </motion.div>
-      </RevealOnScroll>
+    <section id="projects" className="max-w-7xl w-full mx-auto px-6 sm:px-8 mt-32">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+        viewport={{ once: true }}
+        className="mb-10"
+      >
+        <span className="section-number">03 // Projects</span>
+        <h2 className="font-display text-4xl sm:text-5xl font-bold mt-3">
+          <span className="text-on-surface">What I&apos;ve built</span>
+        </h2>
+      </motion.div>
 
-      <div className="space-y-6">
+      <div className="space-y-4">
         {projects.map((project, index) => (
           <ProjectCard key={project.id} project={project} index={index} isFirst={index === 0} />
         ))}

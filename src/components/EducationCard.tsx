@@ -13,8 +13,8 @@ export interface Education {
 export default function EducationCard({ education, index }: { education: Education; index: number }) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20, filter: "blur(4px)" }}
-      whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, delay: index * 0.08, ease: [0.16, 1, 0.3, 1] }}
       viewport={{ amount: 0.3, once: true }}
     >

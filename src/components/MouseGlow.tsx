@@ -31,8 +31,7 @@ export default function MouseGlow() {
           translateX: "-50%",
           translateY: "-50%",
           background:
-            "radial-gradient(circle, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.01) 30%, transparent 70%)",
-          filter: "blur(40px)",
+            "radial-gradient(circle, rgba(255,255,255,0.025) 0%, rgba(255,255,255,0.008) 35%, transparent 65%)",
         }}
       />
     </motion.div>

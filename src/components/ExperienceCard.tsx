@@ -54,14 +54,12 @@ export default function ExperienceCard({ experience, index }: { experience: Expe
                     {experience.role}
                   </h3>
                   {isCurrent && (
-                    <motion.span
+                    <span
                       className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-label font-medium bg-emerald-dim text-emerald"
-                      animate={{ boxShadow: ["0 0 0 rgba(52,211,153,0)", "0 0 12px rgba(52,211,153,0.15)", "0 0 0 rgba(52,211,153,0)"] }}
-                      transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
                     >
                       <Zap className="w-2.5 h-2.5" />
                       Active
-                    </motion.span>
+                    </span>
                   )}
                 </div>
                 <p className="text-sm font-medium text-on-surface-variant mt-1 font-label">
