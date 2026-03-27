@@ -13,17 +13,25 @@ export interface Education {
 export default function EducationCard({ education, index }: { education: Education; index: number }) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 16 }}
-      whileInView={{ opacity: 1, y: 0 }}
+      initial={{ opacity: 0, y: 20, filter: "blur(4px)" }}
+      whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
       transition={{ duration: 0.6, delay: index * 0.08, ease: [0.16, 1, 0.3, 1] }}
       viewport={{ amount: 0.3, once: true }}
     >
-      <div className="surface-card p-6 relative overflow-hidden">
+      <motion.div
+        className="surface-card p-6 relative overflow-hidden"
+        whileHover={{ y: -2, borderColor: "rgba(255,255,255,0.08)" }}
+        transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+      >
         <div className="relative">
           <div className="flex items-start gap-3 mb-4">
-            <div className="w-11 h-11 rounded-xl bg-white/[0.05] flex items-center justify-center shrink-0">
+            <motion.div
+              className="w-11 h-11 rounded-xl bg-white/[0.05] flex items-center justify-center shrink-0"
+              whileHover={{ rotate: 10, scale: 1.1 }}
+              transition={{ type: "spring", stiffness: 300, damping: 15 }}
+            >
               <GraduationCap className="w-5 h-5 text-on-surface-variant" />
-            </div>
+            </motion.div>
             <div>
               <h3 className="text-base font-semibold text-on-surface font-display">{education.degree}</h3>
               <p className="text-sm font-medium text-on-surface-variant mt-0.5 font-label">{education.institution}</p>
@@ -52,15 +60,25 @@ export default function EducationCard({ education, index }: { education: Educati
                   </span>
                 </div>
                 <div className="flex flex-wrap gap-2">
-                  {education.courses.map((course) => (
-                    <span key={course} className="tech-chip">{course}</span>
+                  {education.courses.map((course, i) => (
+                    <motion.span
+                      key={course}
+                      className="tech-chip"
+                      initial={{ opacity: 0, scale: 0.8, y: 8 }}
+                      whileInView={{ opacity: 1, scale: 1, y: 0 }}
+                      transition={{ duration: 0.35, delay: 0.3 + i * 0.04, ease: [0.16, 1, 0.3, 1] }}
+                      viewport={{ once: true }}
+                      whileHover={{ scale: 1.05, y: -1 }}
+                    >
+                      {course}
+                    </motion.span>
                   ))}
                 </div>
               </div>
             </>
           )}
         </div>
-      </div>
+      </motion.div>
     </motion.div>
   );
 }

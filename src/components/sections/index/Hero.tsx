@@ -1,6 +1,6 @@
-import { motion } from "framer-motion";
+import { motion, useMotionValue, useSpring, useScroll, useTransform } from "framer-motion";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef, useCallback } from "react";
 
 const socials = [
   {
@@ -20,20 +20,94 @@ const socials = [
   },
 ];
 
-function StatCounter({ value, label, delay }: { value: string; label: string; delay: number }) {
+/* ─── Magnetic Icon ─── */
+function MagneticIcon({ children, href, label }: { children: React.ReactNode; href: string; label: string }) {
+  const ref = useRef<HTMLAnchorElement>(null);
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+  const springX = useSpring(x, { stiffness: 300, damping: 20 });
+  const springY = useSpring(y, { stiffness: 300, damping: 20 });
+
+  const handleMouse = (e: React.MouseEvent) => {
+    const rect = ref.current?.getBoundingClientRect();
+    if (!rect) return;
+    const cx = rect.left + rect.width / 2;
+    const cy = rect.top + rect.height / 2;
+    x.set((e.clientX - cx) * 0.3);
+    y.set((e.clientY - cy) * 0.3);
+  };
+
+  const handleLeave = () => {
+    x.set(0);
+    y.set(0);
+  };
+
+  return (
+    <motion.a
+      ref={ref}
+      href={href}
+      target="_blank"
+      aria-label={label}
+      style={{ x: springX, y: springY }}
+      onMouseMove={handleMouse}
+      onMouseLeave={handleLeave}
+      whileHover={{ scale: 1.15 }}
+      whileTap={{ scale: 0.95 }}
+      className="w-10 h-10 rounded-xl bg-surface-container-high flex items-center justify-center transition-colors duration-500 ease-smooth text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest"
+    >
+      {children}
+    </motion.a>
+  );
+}
+
+/* ─── Animated Counter ─── */
+function AnimatedStat({ value, label, delay }: { value: string; label: string; delay: number }) {
+  const [displayed, setDisplayed] = useState("");
+  const [started, setStarted] = useState(false);
+
+  useEffect(() => {
+    const timeout = setTimeout(() => setStarted(true), delay * 1000);
+    return () => clearTimeout(timeout);
+  }, [delay]);
+
+  useEffect(() => {
+    if (!started) return;
+    const numMatch = value.match(/(\d+)/);
+    if (!numMatch) {
+      setDisplayed(value);
+      return;
+    }
+    const target = parseInt(numMatch[1]);
+    const suffix = value.replace(numMatch[1], "");
+    let current = 0;
+    const step = Math.max(1, Math.floor(target / 20));
+    const interval = setInterval(() => {
+      current += step;
+      if (current >= target) {
+        current = target;
+        clearInterval(interval);
+      }
+      setDisplayed(`${current}${suffix}`);
+    }, 40);
+    return () => clearInterval(interval);
+  }, [started, value]);
+
   return (
     <motion.div
-      initial={{ opacity: 0, y: 10 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.7, delay, ease: [0.16, 1, 0.3, 1] }}
+      initial={{ opacity: 0, y: 15, filter: "blur(4px)" }}
+      animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+      transition={{ duration: 0.8, delay, ease: [0.16, 1, 0.3, 1] }}
       className="text-center"
     >
-      <div className="font-display text-2xl sm:text-3xl font-bold text-on-surface">{value}</div>
+      <div className="font-display text-2xl sm:text-3xl font-bold text-on-surface">
+        {started ? displayed : ""}
+      </div>
       <div className="font-label text-xs text-on-surface-variant/50 mt-1">{label}</div>
     </motion.div>
   );
 }
 
+/* ─── Typewriter ─── */
 function useTypewriter(text: string, speed = 35, delay = 1500) {
   const [displayed, setDisplayed] = useState("");
   useEffect(() => {
@@ -54,23 +128,65 @@ function useTypewriter(text: string, speed = 35, delay = 1500) {
   return displayed;
 }
 
+/* ─── Split Text Reveal ─── */
+function SplitTextReveal({ text, className, delay = 0 }: { text: string; className?: string; delay?: number }) {
+  const chars = text.split("");
+  return (
+    <span className={className} aria-label={text}>
+      {chars.map((char, i) => (
+        <motion.span
+          key={i}
+          initial={{ opacity: 0, y: 40, rotateX: -90 }}
+          animate={{ opacity: 1, y: 0, rotateX: 0 }}
+          transition={{
+            duration: 0.6,
+            delay: delay + i * 0.04,
+            ease: [0.16, 1, 0.3, 1],
+          }}
+          style={{ display: "inline-block", transformOrigin: "bottom" }}
+        >
+          {char === " " ? "\u00A0" : char}
+        </motion.span>
+      ))}
+    </span>
+  );
+}
+
 const container = {
   hidden: { opacity: 0 },
-  show: { opacity: 1, transition: { staggerChildren: 0.12, delayChildren: 0.1 } },
+  show: { opacity: 1, transition: { staggerChildren: 0.1, delayChildren: 0.05 } },
 };
 
 const item = {
-  hidden: { opacity: 0, y: 20 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } },
+  hidden: { opacity: 0, y: 25, filter: "blur(4px)" },
+  show: { opacity: 1, y: 0, filter: "blur(0px)", transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } },
 };
 
 export default function Hero({ inView, descRef }: { inView: boolean; descRef: any }) {
   const statusText = useTypewriter("building voice agents @ makunai global", 30, 1800);
+  const sectionRef = useRef<HTMLElement | null>(null);
+
+  const setRefs = useCallback((el: HTMLElement | null) => {
+    sectionRef.current = el;
+    if (typeof descRef === 'function') descRef(el);
+    else if (descRef && typeof descRef === 'object') (descRef as React.MutableRefObject<HTMLElement | null>).current = el;
+  }, [descRef]);
+
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start start", "end start"],
+  });
+  const nameY = useTransform(scrollYProgress, [0, 1], [0, 80]);
+  const nameOpacity = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
 
   return (
-    <section className="relative max-w-6xl w-full mx-auto px-6 pt-36 pb-16" ref={descRef}>
+    <section className="relative max-w-6xl w-full mx-auto px-6 pt-36 pb-16" ref={setRefs}>
       {/* Subtle ambient glow */}
-      <div className="absolute top-20 left-1/2 -translate-x-1/2 w-[500px] h-[350px] bg-white/[0.015] rounded-full blur-[150px] pointer-events-none" />
+      <motion.div
+        className="absolute top-20 left-1/2 -translate-x-1/2 w-[500px] h-[350px] bg-white/[0.015] rounded-full blur-[150px] pointer-events-none"
+        animate={{ scale: [1, 1.05, 1], opacity: [0.8, 1, 0.8] }}
+        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+      />
 
       <motion.div
         variants={container}
@@ -80,7 +196,11 @@ export default function Hero({ inView, descRef }: { inView: boolean; descRef: an
       >
         {/* Status bar */}
         <motion.div variants={item} className="mb-8">
-          <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-surface-container ghost-border">
+          <motion.div
+            className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-surface-container ghost-border"
+            whileHover={{ scale: 1.02, borderColor: "rgba(255,255,255,0.12)" }}
+            transition={{ type: "spring", stiffness: 400, damping: 25 }}
+          >
             <span className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald opacity-75" />
               <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald" />
@@ -89,20 +209,27 @@ export default function Hero({ inView, descRef }: { inView: boolean; descRef: an
               {statusText}
               <span className="animate-[blink_1s_step-end_infinite] text-on-surface ml-0.5">|</span>
             </span>
-          </div>
+          </motion.div>
         </motion.div>
 
-        {/* Name */}
-        <motion.div variants={item} className="mb-4">
+        {/* Name — with parallax */}
+        <motion.div style={{ y: nameY, opacity: nameOpacity }} className="mb-4">
           <h1 className="font-display text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-bold tracking-tight leading-[0.95]">
-            <span className="gradient-text">Bibhanshu</span>
+            <SplitTextReveal text="Bibhanshu" className="gradient-text" delay={0.3} />
           </h1>
         </motion.div>
 
-        <motion.div variants={item} className="mb-8">
+        <motion.div style={{ y: nameY, opacity: nameOpacity }} className="mb-8">
           <h1 className="font-display text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-bold tracking-tight leading-[0.95]">
-            <span className="text-on-surface/60">Raj</span>
-            <span className="text-on-surface">.</span>
+            <SplitTextReveal text="Raj" className="text-on-surface/60" delay={0.7} />
+            <motion.span
+              className="text-on-surface"
+              initial={{ opacity: 0, scale: 0 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 1.1, type: "spring", stiffness: 500, damping: 15 }}
+            >
+              .
+            </motion.span>
           </h1>
         </motion.div>
 
@@ -110,7 +237,20 @@ export default function Hero({ inView, descRef }: { inView: boolean; descRef: an
         <motion.div variants={item} className="mb-10 max-w-xl">
           <p className="text-lg sm:text-xl text-on-surface-variant leading-relaxed">
             I build{" "}
-            <span className="text-on-surface font-medium">production AI systems</span>{" "}
+            <motion.span
+              className="text-on-surface font-medium"
+              initial={{ backgroundSize: "0% 2px" }}
+              whileInView={{ backgroundSize: "100% 2px" }}
+              transition={{ duration: 1, delay: 1.2, ease: [0.16, 1, 0.3, 1] }}
+              viewport={{ once: true }}
+              style={{
+                backgroundImage: "linear-gradient(90deg, rgba(255,255,255,0.3), rgba(255,255,255,0.1))",
+                backgroundRepeat: "no-repeat",
+                backgroundPosition: "bottom",
+              }}
+            >
+              production AI systems
+            </motion.span>{" "}
             — voice agents, RAG pipelines, and ML infrastructure that
             work at scale.
           </p>
@@ -118,40 +258,58 @@ export default function Hero({ inView, descRef }: { inView: boolean; descRef: an
 
         {/* CTAs */}
         <motion.div variants={item} className="flex flex-wrap items-center gap-3 mb-16">
-          <a href="#projects" className="gradient-cta text-sm font-display">
+          <motion.a
+            href="#projects"
+            className="gradient-cta text-sm font-display"
+            whileHover={{ scale: 1.04, y: -2 }}
+            whileTap={{ scale: 0.97 }}
+            transition={{ type: "spring", stiffness: 400, damping: 20 }}
+          >
             View Projects
-            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+            <motion.svg
+              className="w-4 h-4"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth={2}
+              animate={{ y: [0, 3, 0] }}
+              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+            >
               <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
-            </svg>
-          </a>
-          <a href="mailto:bibhanshuraj@icloud.com" className="glass-cta text-sm font-label">
+            </motion.svg>
+          </motion.a>
+          <motion.a
+            href="mailto:bibhanshuraj@icloud.com"
+            className="glass-cta text-sm font-label"
+            whileHover={{ scale: 1.04, y: -1 }}
+            whileTap={{ scale: 0.97 }}
+            transition={{ type: "spring", stiffness: 400, damping: 20 }}
+          >
             Get in Touch
-          </a>
+          </motion.a>
         </motion.div>
 
         {/* Stats */}
         <motion.div variants={item} className="mb-12">
-          <div className="inline-flex items-center gap-8 sm:gap-12 px-6 py-4 rounded-2xl bg-surface-container-low/50 ghost-border">
-            <StatCounter value="3+" label="AI Projects" delay={1.4} />
+          <motion.div
+            className="inline-flex items-center gap-8 sm:gap-12 px-6 py-4 rounded-2xl bg-surface-container-low/50 ghost-border shimmer"
+            whileHover={{ borderColor: "rgba(255,255,255,0.1)" }}
+            transition={{ duration: 0.5 }}
+          >
+            <AnimatedStat value="3+" label="AI Projects" delay={1.4} />
             <div className="w-px h-8 bg-outline-variant/30" />
-            <StatCounter value="1yr" label="Production AI" delay={1.6} />
+            <AnimatedStat value="1yr" label="Production AI" delay={1.6} />
             <div className="w-px h-8 bg-outline-variant/30" />
-            <StatCounter value="BITS" label="CS Student" delay={1.8} />
-          </div>
+            <AnimatedStat value="BITS" label="CS Student" delay={1.8} />
+          </motion.div>
         </motion.div>
 
-        {/* Socials */}
-        <motion.div variants={item} className="flex items-center gap-2">
+        {/* Socials — Magnetic */}
+        <motion.div variants={item} className="flex items-center gap-3">
           {socials.map((social) => (
-            <Link
-              key={social.label}
-              href={social.href}
-              target="_blank"
-              aria-label={social.label}
-              className="w-9 h-9 rounded-lg bg-surface-container-high flex items-center justify-center transition-all duration-500 ease-smooth text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest hover:-translate-y-0.5"
-            >
+            <MagneticIcon key={social.label} href={social.href} label={social.label}>
               {social.icon}
-            </Link>
+            </MagneticIcon>
           ))}
         </motion.div>
       </motion.div>

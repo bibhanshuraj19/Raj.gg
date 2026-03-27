@@ -40,6 +40,10 @@
 *::-webkit-scrollbar-track { background: transparent; }
 *::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.08); border-radius: 3px; }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   background-color: var(--surface);
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -88,6 +92,7 @@ body {
   padding: 1px;
   background: linear-gradient(135deg, rgba(255, 255, 255, 0.12), transparent 40%, transparent 60%, rgba(255, 255, 255, 0.06));
   -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
   pointer-events: none;
@@ -164,7 +169,7 @@ body {
 }
 
 .gradient-cta:hover {
-  box-shadow: 0 8px 32px rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px rgba(255, 255, 255, 0.15), 0 0 60px rgba(255, 255, 255, 0.05);
   transform: translateY(-2px);
 }
 
@@ -187,6 +192,7 @@ body {
   border-color: rgba(255, 255, 255, 0.2);
   background: rgba(255, 255, 255, 0.03);
   transform: translateY(-1px);
+  box-shadow: 0 4px 20px rgba(255, 255, 255, 0.05);
 }
 
 /* ─── Section Number ─── */
@@ -293,6 +299,93 @@ body {
   opacity: 0.35;
 }
 
+/* ─── Shimmer Effect ─── */
+.shimmer {
+  position: relative;
+  overflow: hidden;
+}
+
+.shimmer::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.04) 50%,
+    transparent 100%
+  );
+  animation: shimmer-slide 3s ease-in-out infinite;
+  pointer-events: none;
+}
+
+/* ─── Gradient Border Rotate (Contact card) ─── */
+.gradient-border-rotate {
+  position: relative;
+  border-radius: 18px;
+  overflow: hidden;
+}
+
+.gradient-border-rotate::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  padding: 1px;
+  border-radius: inherit;
+  background: conic-gradient(
+    from var(--border-angle, 0deg),
+    transparent 0%,
+    rgba(255, 255, 255, 0.15) 10%,
+    transparent 20%,
+    transparent 50%,
+    rgba(255, 255, 255, 0.08) 60%,
+    transparent 70%,
+    transparent 100%
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  animation: border-rotate 6s linear infinite;
+}
+
+/* ─── Pulse Glow ─── */
+.pulse-glow {
+  animation: pulse-glow 3s ease-in-out infinite;
+}
+
+/* ─── Scroll Progress Bar ─── */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  z-index: 100;
+  transform-origin: left;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.15));
+}
+
+/* ─── Cursor Spotlight (for cards) ─── */
+.card-spotlight {
+  position: relative;
+  overflow: hidden;
+}
+
+.card-spotlight-inner {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.card-spotlight:hover .card-spotlight-inner {
+  opacity: 1;
+}
+
 /* ─── Keyframes ─── */
 @keyframes gradient-shift {
   0%, 100% { background-position: 0% 50%; }
@@ -317,4 +410,31 @@ body {
   50% { transform: translateY(-6px); }
 }
 
+@keyframes shimmer-slide {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+@keyframes border-rotate {
+  0% { --border-angle: 0deg; }
+  100% { --border-angle: 360deg; }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 0 rgba(255, 255, 255, 0); }
+  50% { box-shadow: 0 0 20px rgba(255, 255, 255, 0.06); }
+}
+
+@keyframes draw-line {
+  0% { transform: scaleX(0); }
+  100% { transform: scaleX(1); }
+}
+
+@property --border-angle {
+  syntax: '<angle>';
+  inherits: false;
+  initial-value: 0deg;
+}
+
 .animate-float { animation: float 6s ease-in-out infinite; }
+.animate-draw-line { animation: draw-line 1s cubic-bezier(0.16, 1, 0.3, 1) forwards; transform-origin: center; }

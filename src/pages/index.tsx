@@ -1,6 +1,7 @@
 import { useInView } from "react-intersection-observer";
 
 import Navbar from "@/components/Navbar";
+import MouseGlow from "@/components/MouseGlow";
 import Hero from "@/components/sections/index/Hero";
 import About from "@/components/sections/index/About";
 import Projects from "@/components/sections/index/Projects";
@@ -22,6 +23,9 @@ export default function IndexPage() {
 
       {/* Dot grid pattern */}
       <div className="fixed inset-0 dot-grid pointer-events-none z-0 opacity-60" />
+
+      {/* Cursor glow */}
+      <MouseGlow />
 
       <Navbar />
       <main className="relative z-10">
