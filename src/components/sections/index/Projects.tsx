@@ -1,13 +1,6 @@
 import { motion, useMotionValue } from "framer-motion";
-import { useState, useRef } from "react";
-import {
-  ChevronRight,
-  Calendar,
-  Building2,
-  ArrowUpRight,
-} from "lucide-react";
-
-interface TechIcon { name: string; }
+import { useRef, useState } from "react";
+import { ChevronRight, Calendar, Building2, ArrowUpRight } from "lucide-react";
 
 interface Project {
   id: string;
@@ -15,12 +8,12 @@ interface Project {
   role: string;
   date: string;
   location: string;
-  technologies: TechIcon[];
+  technologies: { name: string }[];
   highlights: string[];
   impact?: string;
 }
 
-function ProjectCard({ project, index, isFirst }: { project: Project; index: number; isFirst: boolean }) {
+function ProjectCard({ project, index }: { project: Project; index: number }) {
   const [hovered, setHovered] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
   const spotlightX = useMotionValue(0);
@@ -36,26 +29,22 @@ function ProjectCard({ project, index, isFirst }: { project: Project; index: num
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, y: 20 }}
+      initial={{ opacity: 0, y: 16 }}
       whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6, delay: index * 0.08, ease: [0.16, 1, 0.3, 1] }}
+      transition={{ duration: 0.5, delay: index * 0.06, ease: [0.16, 1, 0.3, 1] }}
       viewport={{ once: true }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       onMouseMove={handleMouse}
       className="surface-card p-7 sm:p-8 group cursor-default relative overflow-hidden"
     >
-      {/* Cursor spotlight */}
       <motion.div
         className="absolute pointer-events-none z-0 rounded-full"
         style={{
-          x: spotlightX,
-          y: spotlightY,
-          translateX: "-50%",
-          translateY: "-50%",
-          width: 300,
-          height: 300,
-          background: "radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 70%)",
+          x: spotlightX, y: spotlightY,
+          translateX: "-50%", translateY: "-50%",
+          width: 300, height: 300,
+          background: "radial-gradient(circle, rgba(255,255,255,0.04) 0%, transparent 70%)",
           opacity: hovered ? 1 : 0,
           transition: "opacity 0.4s",
         }}
@@ -76,41 +65,34 @@ function ProjectCard({ project, index, isFirst }: { project: Project; index: num
 
         <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs font-label text-on-surface-variant/60 mb-4">
           <span>{project.role}</span>
-          <span className="text-outline-variant/40">·</span>
+          <span className="opacity-30">·</span>
           <span className="flex items-center gap-1"><Building2 className="w-3 h-3" />{project.location}</span>
-          <span className="text-outline-variant/40">·</span>
+          <span className="opacity-30">·</span>
           <span className="flex items-center gap-1"><Calendar className="w-3 h-3" />{project.date}</span>
         </div>
 
         {project.impact && (
           <div className="mb-4">
-            <span className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-label font-semibold border transition-all duration-300 ${
-              hovered ? "bg-white/[0.08] text-on-surface border-white/15" : "bg-white/[0.05] text-on-surface-variant border-outline-variant/50"
-            }`}>
-              ⚡ {project.impact}
+            <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-label font-medium bg-white/[0.04] text-on-surface-variant border border-white/[0.06] group-hover:bg-white/[0.07] group-hover:text-on-surface transition-all duration-300">
+              {project.impact}
             </span>
           </div>
         )}
 
-        <div className="flex flex-wrap gap-1.5 mb-4">
+        <div className="flex flex-wrap gap-1.5 mb-5">
           {project.technologies.map((tech) => (
             <span key={tech.name} className="tech-chip !text-xs !py-1 !px-2.5">{tech.name}</span>
           ))}
         </div>
 
-        <motion.ul
-          className="space-y-2 overflow-hidden"
-          initial={false}
-          animate={{ height: hovered || isFirst ? "auto" : 0, opacity: hovered || isFirst ? 1 : 0 }}
-          transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-        >
+        <ul className="space-y-2">
           {project.highlights.map((highlight, i) => (
             <li key={i} className="flex items-start gap-2">
-              <ChevronRight className="w-3 h-3 mt-1.5 shrink-0 text-on-surface-variant/30" />
+              <ChevronRight className="w-3 h-3 mt-1.5 shrink-0 text-on-surface-variant/25" />
               <span className="text-sm text-on-surface-variant leading-relaxed">{highlight}</span>
             </li>
           ))}
-        </motion.ul>
+        </ul>
       </div>
     </motion.div>
   );
@@ -181,23 +163,20 @@ export default function Projects() {
   ];
 
   return (
-    <section id="projects" className="max-w-7xl w-full mx-auto px-6 sm:px-8 mt-32">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
+    <section id="projects" className="max-w-5xl w-full mx-auto px-6 sm:px-8 mt-28">
+      <motion.h2
+        initial={{ opacity: 0, y: 16 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
         viewport={{ once: true }}
-        className="mb-10"
+        className="font-display text-3xl sm:text-4xl tracking-tight mb-8"
       >
-        <span className="section-number">03 // Projects</span>
-        <h2 className="font-display text-4xl sm:text-5xl font-bold mt-3">
-          <span className="text-on-surface">What I&apos;ve built</span>
-        </h2>
-      </motion.div>
+        What I&apos;ve built
+      </motion.h2>
 
       <div className="space-y-4">
         {projects.map((project, index) => (
-          <ProjectCard key={project.id} project={project} index={index} isFirst={index === 0} />
+          <ProjectCard key={project.id} project={project} index={index} />
         ))}
       </div>
     </section>

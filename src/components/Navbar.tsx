@@ -1,6 +1,6 @@
 import { motion, useScroll, useSpring, AnimatePresence } from "framer-motion";
 import Link from "next/link";
-import { Download, ExternalLink, Menu, X } from "lucide-react";
+import { Download, Menu, X } from "lucide-react";
 import { useState, useEffect } from "react";
 
 export default function Navbar() {
@@ -14,16 +14,11 @@ export default function Navbar() {
   useEffect(() => {
     const onScroll = () => {
       setScrolled(window.scrollY > 20);
-
-      // Detect active section
       const sections = ["about", "projects", "experience", "contact"];
       let current = "";
       for (const id of sections) {
         const el = document.getElementById(id);
-        if (el) {
-          const rect = el.getBoundingClientRect();
-          if (rect.top <= 150) current = id;
-        }
+        if (el && el.getBoundingClientRect().top <= 150) current = id;
       }
       setActiveSection(current);
     };
@@ -49,15 +44,11 @@ export default function Navbar() {
 
   return (
     <>
-      {/* Scroll Progress Bar */}
-      <motion.div
-        className="scroll-progress"
-        style={{ scaleX }}
-      />
+      <motion.div className="scroll-progress" style={{ scaleX }} />
 
       <header className="fixed top-0 left-0 right-0 z-50 flex justify-center px-6 pt-4">
         <motion.nav
-          className={`flex h-14 max-w-6xl w-full rounded-xl px-6 transition-all duration-500 ease-smooth ${
+          className={`flex h-14 max-w-5xl w-full rounded-xl px-6 transition-all duration-500 ease-smooth ${
             scrolled
               ? "glass-strong shadow-[0_4px_24px_rgba(0,0,0,0.4)] border border-white/[0.04]"
               : "bg-transparent"
@@ -85,17 +76,17 @@ export default function Navbar() {
                   transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
                 />
               </div>
-              <span className="font-display font-semibold text-sm text-on-surface tracking-wide">
+              <span className="font-display text-sm text-on-surface tracking-wide">
                 Raj.gg
               </span>
             </motion.div>
 
-            <div className="hidden sm:flex items-center gap-1 relative">
+            <div className="hidden sm:flex items-center gap-1">
               {navLinks.map((link) => (
                 <button
                   key={link.id}
                   onClick={() => scrollTo(link.id)}
-                  className={`relative px-3 py-1.5 text-sm font-label transition-all duration-400 ease-smooth rounded-md ${
+                  className={`relative px-3 py-1.5 text-sm font-label transition-all duration-300 ease-smooth rounded-md ${
                     activeSection === link.id
                       ? "text-on-surface"
                       : "text-on-surface-variant hover:text-on-surface hover:bg-white/[0.04]"
@@ -113,27 +104,16 @@ export default function Navbar() {
               ))}
             </div>
 
-            <div className="hidden sm:flex items-center gap-2">
+            <div className="hidden sm:flex items-center">
               <motion.div whileHover={{ y: -1 }} transition={{ type: "spring", stiffness: 400, damping: 25 }}>
                 <Link
                   draggable={false}
                   href="/Resume.pdf"
                   download="Raj_Resume.pdf"
-                  className="flex items-center gap-1.5 px-3 py-1.5 text-sm font-label text-on-surface-variant hover:text-on-surface transition-all duration-400 ease-smooth rounded-md hover:bg-white/[0.04]"
+                  className="flex items-center gap-1.5 px-3 py-1.5 text-sm font-label text-on-surface-variant hover:text-on-surface transition-all duration-300 ease-smooth rounded-md hover:bg-white/[0.04]"
                 >
                   <Download className="w-3.5 h-3.5" />
                   Resume
-                </Link>
-              </motion.div>
-              <motion.div whileHover={{ y: -1 }} transition={{ type: "spring", stiffness: 400, damping: 25 }}>
-                <Link
-                  draggable={false}
-                  href="https://github.com/bibhanshuraj19/raj.gg"
-                  target="_blank"
-                  className="flex items-center gap-1.5 px-3 py-1.5 text-sm font-label text-on-surface-variant/60 hover:text-on-surface transition-all duration-400 ease-smooth rounded-md hover:bg-white/[0.04]"
-                >
-                  <ExternalLink className="w-3.5 h-3.5" />
-                  Source
                 </Link>
               </motion.div>
             </div>
@@ -144,23 +124,11 @@ export default function Navbar() {
             >
               <AnimatePresence mode="wait">
                 {mobileOpen ? (
-                  <motion.div
-                    key="close"
-                    initial={{ rotate: -90, opacity: 0 }}
-                    animate={{ rotate: 0, opacity: 1 }}
-                    exit={{ rotate: 90, opacity: 0 }}
-                    transition={{ duration: 0.2 }}
-                  >
+                  <motion.div key="close" initial={{ rotate: -90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: 90, opacity: 0 }} transition={{ duration: 0.2 }}>
                     <X className="w-5 h-5" />
                   </motion.div>
                 ) : (
-                  <motion.div
-                    key="menu"
-                    initial={{ rotate: 90, opacity: 0 }}
-                    animate={{ rotate: 0, opacity: 1 }}
-                    exit={{ rotate: -90, opacity: 0 }}
-                    transition={{ duration: 0.2 }}
-                  >
+                  <motion.div key="menu" initial={{ rotate: 90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: -90, opacity: 0 }} transition={{ duration: 0.2 }}>
                     <Menu className="w-5 h-5" />
                   </motion.div>
                 )}
@@ -172,16 +140,13 @@ export default function Navbar() {
         <AnimatePresence>
           {mobileOpen && (
             <>
-              {/* Backdrop */}
               <motion.div
                 className="fixed inset-0 bg-black/40 backdrop-blur-sm sm:hidden z-40"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
+                initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
                 onClick={() => setMobileOpen(false)}
               />
               <motion.div
-                className="fixed inset-x-6 top-20 glass-strong rounded-xl p-4 sm:hidden z-50 border border-outline-variant"
+                className="fixed inset-x-6 top-20 glass-strong rounded-xl p-4 sm:hidden z-50 border border-white/[0.04]"
                 initial={{ opacity: 0, y: -12, scale: 0.95 }}
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, y: -12, scale: 0.95 }}
@@ -201,20 +166,14 @@ export default function Navbar() {
                     </motion.button>
                   ))}
                   <div className="surface-separator my-2" />
-                  <motion.div
-                    initial={{ opacity: 0, x: -10 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.2, duration: 0.3 }}
+                  <Link
+                    href="/Resume.pdf"
+                    download="Raj_Resume.pdf"
+                    className="flex items-center gap-2 px-4 py-3 text-sm font-label text-on-surface-variant hover:text-on-surface hover:bg-white/[0.04] rounded-lg transition-all duration-300"
                   >
-                    <Link
-                      href="/Resume.pdf"
-                      download="Raj_Resume.pdf"
-                      className="flex items-center gap-2 px-4 py-3 text-sm font-label text-on-surface-variant hover:text-on-surface hover:bg-white/[0.04] rounded-lg transition-all duration-300"
-                    >
-                      <Download className="w-3.5 h-3.5" />
-                      Resume
-                    </Link>
-                  </motion.div>
+                    <Download className="w-3.5 h-3.5" />
+                    Resume
+                  </Link>
                 </div>
               </motion.div>
             </>

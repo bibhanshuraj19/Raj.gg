@@ -1,5 +1,4 @@
-import { motion, useMotionValue, useSpring, useScroll, useTransform } from "framer-motion";
-import Link from "next/link";
+import { motion, useMotionValue, useSpring } from "framer-motion";
 import { useEffect, useState, useRef, useCallback } from "react";
 
 const socials = [
@@ -50,44 +49,6 @@ function MagneticIcon({ children, href, label }: { children: React.ReactNode; hr
   );
 }
 
-function AnimatedStat({ value, label, delay }: { value: string; label: string; delay: number }) {
-  const [displayed, setDisplayed] = useState("");
-  const [started, setStarted] = useState(false);
-
-  useEffect(() => {
-    const timeout = setTimeout(() => setStarted(true), delay * 1000);
-    return () => clearTimeout(timeout);
-  }, [delay]);
-
-  useEffect(() => {
-    if (!started) return;
-    const numMatch = value.match(/(\d+)/);
-    if (!numMatch) { setDisplayed(value); return; }
-    const target = parseInt(numMatch[1]);
-    const suffix = value.replace(numMatch[1], "");
-    let current = 0;
-    const step = Math.max(1, Math.floor(target / 15));
-    const interval = setInterval(() => {
-      current += step;
-      if (current >= target) { current = target; clearInterval(interval); }
-      setDisplayed(`${current}${suffix}`);
-    }, 50);
-    return () => clearInterval(interval);
-  }, [started, value]);
-
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 12 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6, delay, ease: [0.16, 1, 0.3, 1] }}
-      className="text-center"
-    >
-      <div className="font-display text-3xl sm:text-4xl font-bold text-on-surface">{started ? displayed : ""}</div>
-      <div className="font-label text-xs text-on-surface-variant/50 mt-1.5 tracking-wide">{label}</div>
-    </motion.div>
-  );
-}
-
 function useTypewriter(text: string, speed = 35, delay = 1500) {
   const [displayed, setDisplayed] = useState("");
   useEffect(() => {
@@ -106,33 +67,22 @@ function useTypewriter(text: string, speed = 35, delay = 1500) {
 
 const container = {
   hidden: { opacity: 0 },
-  show: { opacity: 1, transition: { staggerChildren: 0.12, delayChildren: 0.1 } },
+  show: { opacity: 1, transition: { staggerChildren: 0.1, delayChildren: 0.1 } },
 };
 
 const item = {
-  hidden: { opacity: 0, y: 24 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } },
+  hidden: { opacity: 0, y: 20 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] } },
 };
 
 export default function Hero({ inView, descRef }: { inView: boolean; descRef: any }) {
-  const statusText = useTypewriter("building voice agents @ makunai global", 30, 1800);
-  const sectionRef = useRef<HTMLElement | null>(null);
-
-  const setRefs = useCallback((el: HTMLElement | null) => {
-    sectionRef.current = el;
-    if (typeof descRef === 'function') descRef(el);
-    else if (descRef && typeof descRef === 'object') (descRef as React.MutableRefObject<HTMLElement | null>).current = el;
-  }, [descRef]);
-
-  const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start start", "end start"] });
-  const nameY = useTransform(scrollYProgress, [0, 1], [0, 80]);
-  const nameOpacity = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
+  const statusText = useTypewriter("building voice agents @ makunai global", 30, 1200);
 
   return (
-    <section className="relative max-w-7xl w-full mx-auto px-6 sm:px-8 pt-40 pb-24" ref={setRefs}>
-      <motion.div variants={container} initial="hidden" animate="show" className="relative">
-        {/* Status bar */}
-        <motion.div variants={item} className="mb-10">
+    <section className="relative max-w-5xl w-full mx-auto px-6 sm:px-8 pt-36 sm:pt-44 pb-20" ref={descRef}>
+      <motion.div variants={container} initial="hidden" animate="show">
+        {/* Status */}
+        <motion.div variants={item} className="mb-8">
           <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-surface-container ghost-border">
             <span className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald opacity-75" />
@@ -145,41 +95,30 @@ export default function Hero({ inView, descRef }: { inView: boolean; descRef: an
           </div>
         </motion.div>
 
-        {/* Name — large with parallax */}
-        <motion.div style={{ y: nameY, opacity: nameOpacity }} className="mb-4">
-          <motion.h1
-            className="font-display text-7xl sm:text-8xl md:text-9xl lg:text-[11rem] font-bold tracking-tighter leading-[0.9]"
-            variants={item}
-          >
-            <span className="gradient-text">Bibhanshu</span>
-          </motion.h1>
-        </motion.div>
-
-        <motion.div style={{ y: nameY, opacity: nameOpacity }} className="mb-12">
-          <motion.h1
-            className="font-display text-7xl sm:text-8xl md:text-9xl lg:text-[11rem] font-bold tracking-tighter leading-[0.9]"
-            variants={item}
-          >
-            <span className="text-on-surface/60">Raj</span>
-            <span className="text-on-surface">.</span>
-          </motion.h1>
-        </motion.div>
+        {/* Name */}
+        <motion.h1
+          variants={item}
+          className="font-display text-6xl sm:text-7xl md:text-8xl lg:text-9xl tracking-tight leading-[0.95] mb-6"
+        >
+          <span className="gradient-text">Bibhanshu</span>
+          <br />
+          <span className="text-on-surface/50">Raj</span>
+          <span className="text-on-surface">.</span>
+        </motion.h1>
 
         {/* Tagline */}
-        <motion.div variants={item} className="mb-12 max-w-2xl">
-          <p className="text-xl sm:text-2xl text-on-surface-variant leading-relaxed">
-            I build{" "}
-            <span className="text-on-surface font-medium">production AI systems</span>{" "}
-            — voice agents, RAG pipelines, and ML infrastructure that work at scale.
-          </p>
-        </motion.div>
+        <motion.p variants={item} className="text-lg sm:text-xl text-on-surface-variant leading-relaxed max-w-xl mb-10">
+          I build{" "}
+          <span className="text-on-surface font-medium">production AI systems</span>{" "}
+          — voice agents, RAG pipelines, and ML infrastructure that work at scale.
+        </motion.p>
 
         {/* CTAs */}
-        <motion.div variants={item} className="flex flex-wrap items-center gap-4 mb-20">
+        <motion.div variants={item} className="flex flex-wrap items-center gap-4 mb-16">
           <motion.a
             href="#projects"
-            className="gradient-cta text-sm font-display px-7 py-3.5"
-            whileHover={{ scale: 1.03 }}
+            className="gradient-cta text-sm font-medium px-7 py-3.5"
+            whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.97 }}
             transition={{ type: "spring", stiffness: 400, damping: 25 }}
           >
@@ -190,24 +129,13 @@ export default function Hero({ inView, descRef }: { inView: boolean; descRef: an
           </motion.a>
           <motion.a
             href="mailto:bibhanshuraj@icloud.com"
-            className="glass-cta text-sm font-label px-7 py-3.5"
-            whileHover={{ scale: 1.03 }}
+            className="glass-cta text-sm font-medium px-7 py-3.5"
+            whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.97 }}
             transition={{ type: "spring", stiffness: 400, damping: 25 }}
           >
             Get in Touch
           </motion.a>
-        </motion.div>
-
-        {/* Stats */}
-        <motion.div variants={item} className="mb-14">
-          <div className="inline-flex items-center gap-10 sm:gap-14 px-8 py-5 rounded-2xl bg-surface-container-low/50 ghost-border">
-            <AnimatedStat value="3+" label="AI Projects" delay={1.4} />
-            <div className="w-px h-9 bg-outline-variant/30" />
-            <AnimatedStat value="1yr" label="Production AI" delay={1.6} />
-            <div className="w-px h-9 bg-outline-variant/30" />
-            <AnimatedStat value="BITS" label="CS Student" delay={1.8} />
-          </div>
         </motion.div>
 
         {/* Socials */}

@@ -51,9 +51,9 @@ export default function About() {
       startDate: "Jan 2025",
       endDate: "Present",
       achievements: [
-        "Architecting and leading development of production-grade voice agent systems, overseeing end-to-end pipeline design from speech recognition to response generation",
-        "Building scalable backend infrastructure powering real-time voice AI interactions using FastAPI, WebSockets, and cloud-native services",
-        "Driving technical direction as lead developer, coordinating cross-functional efforts across ML, backend, and product teams to ship reliable voice agent products",
+        "Architecting production-grade voice agent systems — end-to-end pipeline from speech recognition to response generation",
+        "Building scalable backend powering real-time voice AI using FastAPI, WebSockets, and cloud-native services",
+        "Leading cross-functional efforts across ML, backend, and product teams to ship reliable voice agent products",
       ],
     },
     {
@@ -63,8 +63,8 @@ export default function About() {
       startDate: "May 2024",
       endDate: "Jul 2024",
       achievements: [
-        "Engineered a warehouse inventory system using Python and PostgreSQL, replacing manual Excel sheets and reducing parts logging time by an estimated 40%",
-        "Tested and validated a computer vision-based PCB error detection tool using live camera feeds, improving accuracy and reliability of automated defect identification",
+        "Engineered a warehouse inventory system using Python and PostgreSQL, reducing parts logging time by ~40%",
+        "Validated a computer vision-based PCB error detection tool using live camera feeds",
       ],
     },
   ];
@@ -73,7 +73,7 @@ export default function About() {
     {
       institution: "BITS Pilani",
       location: "Pilani, India",
-      degree: "Bachelor of Computer Science and Information Technology",
+      degree: "B.Sc. Computer Science & Information Technology",
       major: "Computer Science and Information Technology",
       graduationDate: "Aug 2022 - Present",
       courses: [
@@ -81,10 +81,8 @@ export default function About() {
         "Machine Learning",
         "Operating Systems",
         "Computer Architecture",
-        "Foundation of Data Science",
-        "Data Structures and Algorithms",
+        "Data Structures & Algorithms",
         "Database Systems",
-        "Object-Oriented Programming",
       ],
     },
   ];
@@ -95,32 +93,25 @@ export default function About() {
   ];
 
   return (
-    <section id="about" className="max-w-7xl w-full mx-auto px-6 sm:px-8 mt-16">
-      <motion.div {...fadeUp} className="mb-10">
-        <span className="section-number">01 // Tech Stack</span>
-        <h2 className="font-display text-4xl sm:text-5xl font-bold mt-3 mb-2">
-          <span className="text-on-surface">Tools I work with</span>
-        </h2>
-      </motion.div>
+    <section id="about" className="max-w-5xl w-full mx-auto px-6 sm:px-8 mt-12">
+      <motion.h2 {...fadeUp} className="font-display text-3xl sm:text-4xl tracking-tight mb-8">
+        Tools I work with
+      </motion.h2>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <AboutCard title="Languages" description="Core programming languages for ML and data engineering." tech={programmingTech} direction="left" span={1} delay={0.1} />
-        <AboutCard title="ML / DL Frameworks" description="Frameworks for building, training, and deploying models and AI applications." tech={mlFrameworksTech} direction="right" span={1} delay={0.15} />
+        <AboutCard title="Languages" tech={programmingTech} direction="left" span={1} delay={0.05} />
+        <AboutCard title="ML / DL Frameworks" tech={mlFrameworksTech} direction="right" span={1} delay={0.1} />
         <div className="md:col-span-2">
-          <AboutCard title="Infrastructure & MLOps" description="Tools for data processing, deployment, CI/CD, and production infrastructure." tech={dataMLOpsTech} direction="bottom" span={2} delay={0.1} />
+          <AboutCard title="Infrastructure & MLOps" tech={dataMLOpsTech} direction="bottom" span={2} delay={0.05} />
         </div>
       </div>
 
-      {/* Separator */}
-      <div className="accent-line my-24" />
+      <div className="accent-line my-20" />
 
       <div id="experience">
-        <motion.div {...fadeUp} className="mb-10">
-          <span className="section-number">02 // Background</span>
-          <h2 className="font-display text-4xl sm:text-5xl font-bold mt-3">
-            <span className="text-on-surface">Experience & Education</span>
-          </h2>
-        </motion.div>
+        <motion.h2 {...fadeUp} className="font-display text-3xl sm:text-4xl tracking-tight mb-8">
+          Experience & Education
+        </motion.h2>
 
         <div className="flex gap-1 p-1 rounded-xl bg-surface-container ghost-border mb-8 w-fit">
           {tabs.map((tab) => (

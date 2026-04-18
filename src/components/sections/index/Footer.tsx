@@ -2,20 +2,13 @@ import { motion } from "framer-motion";
 
 export default function Footer() {
   return (
-    <footer className="max-w-7xl w-full mx-auto px-6 sm:px-8 pt-16 pb-8">
-      <motion.div
-        className="accent-line mb-6"
-        initial={{ scaleX: 0 }}
-        whileInView={{ scaleX: 1 }}
-        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-        viewport={{ once: true }}
-        style={{ transformOrigin: "center" }}
-      />
+    <footer className="max-w-5xl w-full mx-auto px-6 sm:px-8 pt-12 pb-8">
+      <div className="accent-line mb-6" />
       <motion.div
         className="flex flex-col sm:flex-row items-center justify-between gap-4"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
-        transition={{ duration: 0.5, delay: 0.3 }}
+        transition={{ duration: 0.5, delay: 0.2 }}
         viewport={{ once: true }}
       >
         <p className="font-label text-xs text-on-surface-variant/30">

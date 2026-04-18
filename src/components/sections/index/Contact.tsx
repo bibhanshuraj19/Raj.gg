@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export default function Contact() {
   return (
-    <section id="contact" className="max-w-7xl w-full mx-auto px-6 sm:px-8 mt-36 mb-8">
+    <section id="contact" className="max-w-5xl w-full mx-auto px-6 sm:px-8 mt-28 mb-8">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -11,16 +11,14 @@ export default function Contact() {
         viewport={{ once: true }}
         className="relative overflow-hidden rounded-2xl p-10 sm:p-14 lg:p-16"
         style={{
-          background: "linear-gradient(135deg, rgba(255, 255, 255, 0.03) 0%, rgba(6, 6, 6, 0.9) 40%, rgba(255, 255, 255, 0.015) 100%)",
-          border: "1px solid rgba(255, 255, 255, 0.06)",
+          background: "linear-gradient(135deg, rgba(255, 255, 255, 0.025) 0%, rgba(6, 6, 6, 0.9) 40%, rgba(255, 255, 255, 0.01) 100%)",
+          border: "1px solid rgba(255, 255, 255, 0.05)",
         }}
       >
-        {/* Ambient glow — CSS only, no JS animation */}
-        <div className="absolute top-0 right-0 w-[300px] h-[300px] bg-white/[0.015] rounded-full blur-[120px] pointer-events-none" />
+        <div className="absolute top-0 right-0 w-[300px] h-[300px] bg-white/[0.01] rounded-full blur-[120px] pointer-events-none" />
 
         <div className="relative">
-          <span className="section-number">05 // Contact</span>
-          <h2 className="font-display text-4xl sm:text-5xl md:text-6xl font-bold mt-3 mb-4">
+          <h2 className="font-display text-3xl sm:text-4xl md:text-5xl tracking-tight mb-4">
             <span className="text-on-surface">Let&apos;s work </span>
             <span className="gradient-text-static">together</span>
             <span className="text-on-surface">.</span>
@@ -32,8 +30,8 @@ export default function Contact() {
           <div className="flex flex-wrap items-center gap-3">
             <motion.a
               href="mailto:bibhanshuraj@icloud.com"
-              className="gradient-cta text-sm font-display"
-              whileHover={{ scale: 1.03 }}
+              className="gradient-cta text-sm font-medium"
+              whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.97 }}
               transition={{ type: "spring", stiffness: 400, damping: 25 }}
             >
@@ -42,10 +40,10 @@ export default function Contact() {
               </svg>
               bibhanshuraj@icloud.com
             </motion.a>
-            <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }} transition={{ type: "spring", stiffness: 400, damping: 25 }}>
+            <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.97 }} transition={{ type: "spring", stiffness: 400, damping: 25 }}>
               <Link href="https://www.linkedin.com/in/bibhanshu-raj-64b547283/" target="_blank" className="glass-cta text-sm font-label">LinkedIn</Link>
             </motion.div>
-            <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }} transition={{ type: "spring", stiffness: 400, damping: 25 }}>
+            <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.97 }} transition={{ type: "spring", stiffness: 400, damping: 25 }}>
               <Link href="https://github.com/bibhanshuraj19" target="_blank" className="glass-cta text-sm font-label">GitHub</Link>
             </motion.div>
           </div>
