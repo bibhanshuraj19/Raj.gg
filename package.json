@@ -1,12 +1,47 @@
 {
-  "name": "raj.gg",
-  "version": "0.1.0",
+  "name": "raj-gg",
+  "version": "1.0.0",
   "private": true,
+  "main": "./dist-electron/main.js",
   "scripts": {
     "dev": "next dev -p 3070",
     "build": "next build",
     "start": "next start -p 3070",
-    "lint": "next lint"
+    "lint": "next lint",
+    "electron:compile": "tsc -p electron/tsconfig.json",
+    "electron:dev": "npm run electron:compile && cross-env NODE_ENV=development electron .",
+    "electron:build": "npm run build && npm run electron:compile && electron-builder",
+    "app:dev": "concurrently \"npm run dev\" \"wait-on http://localhost:3070 && npm run electron:dev\"",
+    "app:build": "npm run electron:build"
+  },
+  "build": {
+    "appId": "com.rajgg.portfolio",
+    "productName": "Raj.gg",
+    "files": [
+      "out/**/*",
+      "dist-electron/**/*",
+      "package.json"
+    ],
+    "directories": {
+      "output": "release",
+      "buildResources": "assets"
+    },
+    "mac": {
+      "category": "public.app-category.productivity",
+      "target": [
+        {
+          "target": "dmg",
+          "arch": ["arm64", "x64"]
+        }
+      ],
+      "darkModeSupport": true
+    },
+    "dmg": {
+      "contents": [
+        { "x": 130, "y": 220 },
+        { "x": 410, "y": 220, "type": "link", "path": "/Applications" }
+      ]
+    }
   },
   "dependencies": {
     "@headlessui/react": "^1.7.18",
@@ -28,10 +63,15 @@
     "@types/react": "^18.3.28",
     "@types/react-dom": "^18",
     "autoprefixer": "^10.4.17",
+    "concurrently": "^9.1.0",
+    "cross-env": "^7.0.3",
+    "electron": "^33.2.0",
+    "electron-builder": "^25.1.8",
     "eslint": "^9",
     "eslint-config-next": "^16.1.1",
     "postcss": "^8.4.33",
     "tailwindcss": "^3.4.1",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "wait-on": "^8.0.1"
   }
 }
