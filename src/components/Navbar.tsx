@@ -22,9 +22,11 @@ export default function Navbar() {
   };
 
   const navLinks = [
-    { label: "Work", id: "projects" },
     { label: "About", id: "about" },
-    { label: "Stack", id: "stack" },
+    { label: "Projects", id: "projects" },
+    { label: "Skills", id: "skills" },
+    { label: "Experience", id: "experience" },
+    { label: "Contact", id: "contact" },
   ];
 
   return (
@@ -35,23 +37,23 @@ export default function Navbar() {
           : "bg-transparent"
       }`}
     >
-      <nav className="max-w-5xl w-full mx-auto flex h-14 px-6 sm:px-8 items-center justify-between">
-        {/* Logo / Name */}
+      <nav className="max-w-6xl w-full mx-auto flex h-16 px-6 sm:px-8 items-center justify-between">
+        {/* Logo */}
         <span
-          className="font-semibold text-sm tracking-wide cursor-pointer"
+          className="font-bold text-base tracking-wider cursor-pointer"
           style={{ color: "var(--text-primary)" }}
           onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
         >
-          RAJ.GG
+          raj.gg
         </span>
 
         {/* Center Nav Links */}
-        <div className="hidden sm:flex items-center gap-1">
+        <div className="hidden md:flex items-center gap-1">
           {navLinks.map((link) => (
             <button
               key={link.id}
               onClick={() => scrollTo(link.id)}
-              className="px-3 py-1.5 text-sm rounded-md transition-colors duration-200"
+              className="px-3.5 py-2 text-[13px] font-medium rounded-lg transition-colors duration-200"
               style={{ color: "var(--text-secondary)" }}
               onMouseEnter={(e) =>
                 (e.currentTarget.style.color = "var(--text-primary)")
@@ -65,13 +67,13 @@ export default function Navbar() {
           ))}
         </div>
 
-        {/* Right Side - Contact CTA */}
-        <div className="hidden sm:flex items-center gap-3">
+        {/* Right Side */}
+        <div className="hidden md:flex items-center gap-4">
           <Link
             draggable={false}
             href="/Resume.pdf"
             download="Bibhanshu_Raj_Resume.pdf"
-            className="flex items-center gap-1.5 text-sm transition-colors duration-200"
+            className="flex items-center gap-1.5 text-[13px] font-medium transition-colors duration-200"
             style={{ color: "var(--text-secondary)" }}
             onMouseEnter={(e) =>
               (e.currentTarget.style.color = "var(--text-primary)")
@@ -83,24 +85,12 @@ export default function Navbar() {
             <Download className="w-3.5 h-3.5" />
             Resume
           </Link>
-          <button
-            onClick={() => scrollTo("contact")}
-            className="px-4 py-1.5 text-sm rounded-md font-medium transition-all duration-200"
-            style={{
-              color: "var(--accent)",
-              cursor: "pointer",
-            }}
-            onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.8")}
-            onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
-          >
-            Contact
-          </button>
         </div>
 
         {/* Mobile menu button */}
         <button
           onClick={() => setMobileOpen(!mobileOpen)}
-          className="sm:hidden p-2 transition-colors duration-200"
+          className="md:hidden p-2 transition-colors duration-200"
           style={{ color: "var(--text-secondary)" }}
         >
           {mobileOpen ? (
@@ -115,10 +105,10 @@ export default function Navbar() {
       {mobileOpen && (
         <>
           <div
-            className="fixed inset-0 bg-black/60 backdrop-blur-sm sm:hidden z-40"
+            className="fixed inset-0 bg-black/60 backdrop-blur-sm md:hidden z-40"
             onClick={() => setMobileOpen(false)}
           />
-          <div className="fixed inset-x-0 top-14 p-4 sm:hidden z-50 bg-[#0a0a0a] border-b border-[#1a1a1a]">
+          <div className="fixed inset-x-0 top-16 p-4 md:hidden z-50 bg-[#0a0a0a] border-b border-[#1a1a1a]">
             <div className="flex flex-col gap-1">
               {navLinks.map((link) => (
                 <button
@@ -130,13 +120,6 @@ export default function Navbar() {
                   {link.label}
                 </button>
               ))}
-              <button
-                onClick={() => scrollTo("contact")}
-                className="px-4 py-3 text-left text-sm rounded-lg transition-colors duration-200 hover:bg-white/[0.04]"
-                style={{ color: "var(--accent)" }}
-              >
-                Contact
-              </button>
               <div className="separator my-2" />
               <Link
                 href="/Resume.pdf"

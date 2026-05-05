@@ -1,45 +1,34 @@
 interface Project {
   id: string;
   title: string;
-  date: string;
-  technologies: { name: string }[];
-  highlights: string[];
+  description: string;
+  technologies: string[];
 }
 
 function ProjectCard({ project }: { project: Project }) {
   return (
-    <div className="py-8 border-b border-[var(--border)] group">
-      <div className="flex items-start justify-between gap-4 mb-3">
-        <h3
-          className="text-lg sm:text-xl font-bold"
-          style={{ color: "var(--text-primary)" }}
-        >
-          {project.title}
-        </h3>
-        <span
-          className="text-xs font-mono shrink-0 mt-1.5"
-          style={{ color: "var(--text-muted)" }}
-        >
-          {project.date}
-        </span>
-      </div>
+    <div
+      className="group py-8 transition-colors duration-200"
+      style={{ borderBottom: "1px solid var(--border)" }}
+    >
+      <h3
+        className="text-lg sm:text-xl font-semibold mb-3"
+        style={{ color: "var(--text-primary)" }}
+      >
+        {project.title}
+      </h3>
 
-      <div className="space-y-2 mb-4">
-        {project.highlights.map((h, i) => (
-          <p
-            key={i}
-            className="text-sm leading-relaxed"
-            style={{ color: "var(--text-secondary)" }}
-          >
-            {h}
-          </p>
-        ))}
-      </div>
+      <p
+        className="text-sm leading-relaxed mb-5 max-w-3xl"
+        style={{ color: "var(--text-secondary)" }}
+      >
+        {project.description}
+      </p>
 
       <div className="flex flex-wrap gap-2">
         {project.technologies.map((tech) => (
-          <span key={tech.name} className="chip">
-            {tech.name}
+          <span key={tech} className="chip">
+            {tech}
           </span>
         ))}
       </div>
@@ -52,74 +41,49 @@ export default function Projects() {
     {
       id: "voice-agent",
       title: "Production Voice Agent Platform",
-      date: "2025 - Present",
-      technologies: [
-        { name: "Python" },
-        { name: "Deepgram" },
-        { name: "OpenAI" },
-        { name: "FastAPI" },
-        { name: "WebSockets" },
-        { name: "Pinecone" },
-      ],
-      highlights: [
-        "Real-time STT/TTS voice agent with Deepgram + OpenAI response generation.",
-        "RAG pipeline with Pinecone for context-aware voice conversations. FastAPI + WebSockets backend with sub-second response times.",
-      ],
+      description:
+        "Real-time STT/TTS voice agent with Deepgram + OpenAI response generation. RAG pipeline with Pinecone for context-aware voice conversations. FastAPI + WebSockets backend with sub-second response times. Handles concurrent sessions at scale.",
+      technologies: ["Python", "Deepgram", "OpenAI", "FastAPI", "WebSockets", "Pinecone", "Redis"],
     },
     {
       id: "ai-evaluation-bot",
       title: "AI-Powered Evaluation Bot",
-      date: "2024",
-      technologies: [
-        { name: "Python" },
-        { name: "OpenAI" },
-        { name: "FastAPI" },
-      ],
-      highlights: [
-        "95% grading accuracy across 200+ student submissions.",
-        "Automated 85% of evaluation steps, cutting grading time by 60%. Intelligent rubric matching and automated feedback generation.",
-      ],
+      description:
+        "95% grading accuracy across 200+ student submissions. Automated 85% of evaluation steps, cutting grading time by 60%. Intelligent rubric matching and automated feedback generation.",
+      technologies: ["Python", "OpenAI", "FastAPI"],
     },
     {
       id: "rag-chatbot",
       title: "Multi-Document RAG Chatbot",
-      date: "2024",
-      technologies: [
-        { name: "Python" },
-        { name: "LangChain" },
-        { name: "OpenAI" },
-        { name: "PostgreSQL" },
-      ],
-      highlights: [
-        "Contextual Q&A over 500+ academic documents with 95% accuracy.",
-        "40% improvement in user satisfaction through claim validation. Vector similarity search for efficient document retrieval.",
-      ],
+      description:
+        "Contextual Q&A over 500+ academic documents with 95% retrieval accuracy. 40% improvement in user satisfaction through claim validation. Vector similarity search for efficient document retrieval.",
+      technologies: ["Python", "LangChain", "OpenAI", "PostgreSQL"],
     },
     {
       id: "learning-agent",
       title: "LLM-Powered Learning Agent",
-      date: "2025",
-      technologies: [
-        { name: "Python" },
-        { name: "LangChain" },
-        { name: "NVIDIA NeMo" },
-        { name: "Hugging Face" },
-      ],
-      highlights: [
-        "RAG architecture for precise answers from research papers.",
-        "NVIDIA NeMo Guardrails for content safety and quality. Custom RAGAS metrics for response quality evaluation.",
-      ],
+      description:
+        "RAG architecture for precise answers from research papers. NVIDIA NeMo Guardrails for content safety and quality. Custom RAGAS metrics for response quality evaluation.",
+      technologies: ["Python", "LangChain", "NVIDIA NeMo", "Hugging Face"],
     },
   ];
 
   return (
-    <section id="projects" className="max-w-5xl w-full mx-auto px-6 sm:px-8">
+    <section id="projects" className="max-w-6xl w-full mx-auto px-6 sm:px-8 py-20">
+      <div className="separator mb-20" />
+
       <h2
-        className="text-2xl sm:text-3xl font-bold tracking-tight mb-2"
+        className="text-2xl sm:text-3xl font-bold tracking-tight mb-4"
         style={{ color: "var(--text-primary)" }}
       >
-        Selected Work
+        What I&apos;ve Built
       </h2>
+      <p
+        className="text-sm mb-6"
+        style={{ color: "var(--text-muted)" }}
+      >
+        A selection of AI-powered products and tools.
+      </p>
 
       <div>
         {projects.map((p) => (
