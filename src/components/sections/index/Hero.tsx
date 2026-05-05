@@ -30,80 +30,32 @@ const socials = [
 
 export default function Hero() {
   return (
-    <section className="max-w-5xl w-full mx-auto px-6 sm:px-8 pt-36 sm:pt-44 pb-20">
-      {/* Status */}
-      <div className="mb-8 fade-in fade-in-delay-1">
-        <div
-          className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full border"
-          style={{ background: "var(--surface-card)", borderColor: "var(--border)" }}
+    <section className="max-w-5xl w-full mx-auto px-6 sm:px-8 pt-32 sm:pt-40 pb-16">
+      {/* Name + Title */}
+      <div className="mb-6 fade-in fade-in-delay-1">
+        <h1 className="text-5xl sm:text-6xl md:text-7xl font-bold tracking-tight leading-[1.05]">
+          <span style={{ color: "var(--text-primary)" }}>Bibhanshu</span>
+        </h1>
+        <h2
+          className="text-5xl sm:text-6xl md:text-7xl font-bold tracking-tight leading-[1.05]"
+          style={{ color: "var(--accent)" }}
         >
-          <span className="status-dot" />
-          <span className="font-mono text-xs" style={{ color: "var(--text-secondary)" }}>
-            building voice agents @ makunai global
-          </span>
-        </div>
+          AI Engineer
+        </h2>
       </div>
 
-      {/* Name */}
-      <h1 className="fade-in fade-in-delay-2 text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-bold tracking-tight leading-[0.95] mb-6">
-        <span style={{ color: "var(--text-primary)" }}>Bibhanshu</span>
-        <br />
-        <span style={{ color: "var(--text-tertiary)" }}>Raj</span>
-        <span style={{ color: "var(--text-primary)" }}>.</span>
-      </h1>
-
-      {/* Tagline */}
+      {/* Description */}
       <p
-        className="fade-in fade-in-delay-3 text-lg sm:text-xl leading-relaxed max-w-xl mb-10"
+        className="fade-in fade-in-delay-2 text-base sm:text-lg leading-relaxed max-w-lg mb-8"
         style={{ color: "var(--text-secondary)" }}
       >
-        I build{" "}
-        <span style={{ color: "var(--text-primary)" }} className="font-medium">
-          production AI systems
-        </span>{" "}
-        — voice agents, RAG pipelines, and ML infrastructure that work at scale.
+        Building robust, scalable AI systems and precise, production-grade
+        voice agents. Focused on performance, reliability, and clean
+        architecture.
       </p>
 
-      {/* CTAs */}
-      <div className="fade-in fade-in-delay-4 flex flex-wrap items-center gap-4 mb-16">
-        <a href="#projects" className="btn-primary">
-          View Projects
-          <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-            <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
-          </svg>
-        </a>
-        <a href="mailto:bibhanshuraj@icloud.com" className="btn-secondary">
-          Get in Touch
-        </a>
-      </div>
-
-      {/* Socials */}
-      <div className="fade-in fade-in-delay-5 flex items-center gap-3">
-        {socials.map((s) => (
-          <a
-            key={s.label}
-            href={s.href}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label={s.label}
-            className="w-10 h-10 rounded-xl flex items-center justify-center transition-colors duration-200"
-            style={{
-              background: "var(--surface-card)",
-              color: "var(--text-secondary)",
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.color = "var(--text-primary)";
-              e.currentTarget.style.background = "var(--surface-hover)";
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.color = "var(--text-secondary)";
-              e.currentTarget.style.background = "var(--surface-card)";
-            }}
-          >
-            {s.icon}
-          </a>
-        ))}
-      </div>
+      {/* Separator */}
+      <div className="separator fade-in fade-in-delay-3 mb-16" />
     </section>
   );
 }

@@ -7,7 +7,7 @@ import Footer from "@/components/sections/index/Footer";
 
 export default function IndexPage() {
   return (
-    <div className="relative min-h-screen" style={{ background: "var(--surface)" }}>
+    <div className="relative min-h-screen" style={{ background: "var(--bg)" }}>
       <Navbar />
       <main>
         <Hero />
